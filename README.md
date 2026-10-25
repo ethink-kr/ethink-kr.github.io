@@ -24,7 +24,7 @@ Ethink(에씽크) 사이트입니다. 대표 코너는 「윤리로 읽는 뉴�
 2. 앞머리 `date`를 `2026-10-24 09:00:00 +0900`처럼 발행 시각으로 적습니다. 미리 올려 두어도 그 시각 전에는 사이트에 보이지 않습니다.
 3. 올리면(Commit·Push) GitHub Actions가 사이트를 다시 만듭니다. 화·목·토 09:00과 09:30에도 자동으로 다시 만들어서, 예약한 글이 그때 나타납니다. (저장소 Settings → Pages의 Source가 「GitHub Actions」여야 합니다.)
 4. 홈 「최신 글」에 카드로 보입니다. `question`이 카드의 두 번째 줄에 나오니 꼭 채웁니다.
-5. 인스타그램(@ethink.kr)에는 글마다 카드 뉴스(여러 장)를 올립니다. 문안 `_items/날짜/ig-cards-N.yml`을 `_tools/ig-cards.cjs`로 이미지로 만들고(`assets/ig/`), 문안에 `approved: true`가 있어야 자동 게시됩니다. 규칙은 `_tools/WRITING_GUIDE.md` 6절에 있습니다.
+5. 인스타그램(@ethink.kr)에는 글마다 카드 뉴스(여러 장)를 올립니다. 문안 `_items/날짜/ig-cards-N.yml`을 `_tools/ig-cards.cjs`로 이미지로 만들고(`assets/ig/`), 문안에 `approved: true`가 있어야 자동 게시되며, 웹 글이 나간 다음 날 아침 9시(수·금·일)에 올라갑니다. 웹 글은 그 사이에 고칠 수 있고, 인스타그램은 올리면 지우고 다시 올려야 하기 때문입니다. 규칙은 `_tools/WRITING_GUIDE.md` 6절에 있습니다.
 
 ## 검색 등록
 

@@ -8,6 +8,8 @@ on:
   schedule:
     - cron: '0 0 * * 2,4,6'    # 화·목·토 09:00 KST (UTC 00:00)
     - cron: '30 0 * * 2,4,6'   # 09:30 KST 한 번 더 (GitHub 예약 실행이 늦어질 때 대비)
+    - cron: '0 0 * * 0,3,5'    # 수·금·일 09:00 KST: 전날 웹에 낸 글의 인스타그램 카드 뉴스를 올립니다
+    - cron: '30 0 * * 0,3,5'   # 09:30 KST 한 번 더
   workflow_dispatch:
 permissions:
   contents: read
@@ -52,7 +54,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: 인스타그램에 오늘 글 올리기
+      - name: 인스타그램에 어제 웹에 낸 글 올리기
         env:
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
