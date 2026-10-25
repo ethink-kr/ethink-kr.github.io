@@ -63,13 +63,3 @@ title: 소개
   </div>
 </section>
 
-<section class="section" id="credits">
-  <h2 class="section-title">이미지 출처</h2>
-  <div class="prose">
-    <p>글에 쓴 책 표지는 알라딘·예스24·교보문고의 도서 정보 이미지이고, 권리는 각 출판사에 있습니다. 인용문 옆의 사상가 초상은 위키미디어 공용에서 가져왔습니다.</p>
-    <ul class="credits">
-      {% for f in site.data.faces %}{% if f.img %}<li><img class="face" src="{{ f.img | relative_url }}" alt="" width="28" height="28" loading="lazy"> {{ f.name }} — <a href="{{ f.url }}" target="_blank" rel="noopener">{{ f.credit }}</a>, {% if f.license_url %}<a href="{{ f.license_url }}" target="_blank" rel="noopener">{{ f.license }}</a>{% else %}{{ f.license }}{% endif %}</li>{% endif %}
-      {% endfor %}
-    </ul>
-  </div>
-</section>
