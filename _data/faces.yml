@@ -12,6 +12,15 @@
   credit: 플라톤 흉상(카피톨리니 박물관), 사진 Marie-Lan Nguyen
   license: 퍼블릭 도메인
   url: https://commons.wikimedia.org/wiki/File:Plato_Silanion_Musei_Capitolini_MC1377.png
+- name: 소크라테스
+  match: ["소크라테스,", "소크라테스 ·"]
+  img: /assets/faces/socrates.jpg
+  credit: 소크라테스 흉상(바티칸 피오 클레멘티노 박물관), 사진 Jastrow
+  license: 퍼블릭 도메인
+  url: https://commons.wikimedia.org/wiki/File:Socrates_Pio-Clementino_Inv314.jpg
+- name: 글라우콘
+  match: ["글라우콘,", "글라우콘 ·"]
+  initial: 글
 - name: 벤담
   match: ["벤담,", "벤담 ·"]
   img: /assets/faces/bentham.jpg
