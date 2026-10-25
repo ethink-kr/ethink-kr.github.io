@@ -180,5 +180,11 @@ function render(c, i) {
     const out = path.join(dir, `${name}-${String(i + 1).padStart(2, '0')}.jpg`);
     await p.screenshot({ path: out, type: 'jpeg', quality: 90 }); console.log(out);
   }
+  // 스토리용(1080×1920): 표지 카드를 가운데에 놓고 위아래는 카드 바탕색으로 채운다(스토리 화면 위·아래 가려지는 영역을 피함).
+  const sp = await b.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
+  const cover = path.join(dir, `${name}-01.jpg`);
+  await sp.setContent(`<!doctype html><html><body style="margin:0;width:1080px;height:1920px;background:${T.bg};display:flex;align-items:center;justify-content:center"><img src="data:image/jpeg;base64,${fs.readFileSync(cover).toString('base64')}" style="width:1080px;height:1350px;display:block"></body></html>`);
+  await sp.waitForTimeout(500);
+  const sout = path.join(dir, `${name}-story.jpg`); await sp.screenshot({ path: sout, type: 'jpeg', quality: 90 }); console.log(sout);
   await b.close();
 })();

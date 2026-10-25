@@ -55,7 +55,7 @@
   - 생존 인물은 사이트와 같이 머리글자 원으로 둔다(faces.yml).
   - **승인**: 문안 파일 첫 줄 근처 `approved: false`로 만든다. 재형 님께 카드 이미지 전부와 캡션을 보여 드리고 승인을 받은 뒤에만 `approved: true`로 바꿔 main에 넣는다. `approved: true`가 아니면 자동 게시 도구가 올리지 않는다.
   - 캡션(`_items/YYYY-MM-DD/ig.txt`, 글이 둘 이상이면 `ig-N.txt`)은 첫 줄에 질문, 2~3문장 요지, "전문은 프로필 링크(ethink.kr)에서", 해시태그 5~8개(#윤리수업 #통합사회 #현대사회와윤리 #도덕수업 #시사윤리 + 소재 태그). 인스타그램 프로필 링크는 https://ethink.kr/?from=insta.
-  - **웹 발행 하루 뒤에 올린다.** 웹 글(화·목·토 9시)을 먼저 내고, 하루 동안 웹에서 고칠 것을 고친 뒤, 다음 날(수·금·일) 9시 빌드 뒤 GitHub Actions가 승인된 카드를 캐러셀로 @ethink.kr에 올린다(`_tools/ig-post.cjs`). 캡션 첫 줄(질문)이 같으면 두 번 올리지 않는다. 예전 한 장짜리 카드 도구 `_tools/ig-card.cjs`는 더 쓰지 않는다.
+  - **웹 발행 하루 뒤에 올린다.** 웹 글(화·목·토 9시)을 먼저 내고, 하루 동안 웹에서 고칠 것을 고친 뒤, 다음 날(수·금·일) 9시 빌드 뒤 GitHub Actions가 승인된 카드를 캐러셀로 @ethink.kr에 올린다(`_tools/ig-post.cjs`). 게시물을 올린 직후 표지를 스토리(1080×1920, `이름-story.jpg`, ig-cards.cjs가 함께 만든다)로도 자동으로 올린다(링크 스티커는 API로 달 수 없다). 스토리가 실패해도 게시물은 그대로다. 캡션 첫 줄(질문)이 같으면 두 번 올리지 않는다. 예전 한 장짜리 카드 도구 `_tools/ig-card.cjs`는 더 쓰지 않는다.
 
 ## 7. 볼트 사본
 - 재형 님 옵시디언 볼트 `Vault/윤리로 읽는 뉴스/`에 항목마다 `nw_YYYY-MM-DD-N 제목.md`(앞머리: series, corner, issue, num, section, kicker, title, status(초안/확정/발행), published, url, question, caution, subjects, lenses, sources)와 `00 홈.md`의 호 목록을 갱신한다. 기존 파일 형식을 그대로 따른다.

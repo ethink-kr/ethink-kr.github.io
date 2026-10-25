@@ -28,6 +28,20 @@ async function api(p, opt = {}) {
 }
 function firstLine(s) { return String(s || '').split('\n').map(x => x.trim()).find(Boolean) || ''; }
 
+// 게시물을 올린 직후 표지를 스토리(9:16)로도 올립니다. 스토리가 실패해도 게시물은 이미 올라간 것이므로 오류만 기록하고 넘어갑니다.
+async function postStory(name, label) {
+  const url = `${SITE}/assets/ig/${name}-story.jpg`;
+  try {
+    let ok = false;
+    for (let i = 0; i < 6; i++) { ok = await fetch(url, { method: 'HEAD' }).then(r => r.ok).catch(() => false); if (ok) break; await sleep(20000); }
+    if (!ok) { console.log(`${label}: 스토리 이미지(${name}-story.jpg)가 없어 스토리는 건너뜁니다.`); return; }
+    const c = await api(`/${USER}/media`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ image_url: url, media_type: 'STORIES' }) });
+    for (let i = 0; i < 24; i++) { const st = await api(`/${c.id}?fields=status_code`); if (st.status_code === 'FINISHED') break; if (st.status_code === 'ERROR') throw new Error('스토리 컨테이너 오류'); await sleep(5000); }
+    const pub = await api(`/${USER}/media_publish`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ creation_id: c.id }) });
+    console.log(`${label}: 스토리에도 올렸습니다. ID ${pub.id}`);
+  } catch (e) { console.log(`${label}: 스토리 게시 실패(게시물은 올라갔습니다) — ${e.message}`); }
+}
+
 async function publish(imgs, caption, label) {
   let ok = false;
   for (let i = 0; i < 10; i++) {
@@ -56,7 +70,7 @@ async function postNote(file, done) {
   if (!count || count > 10) { console.log(`${name}: 카드 수(${count})가 1~10장이 아닙니다.`); return 0; }
   const imgs = Array.from({ length: count }, (_, i) => `${SITE}/assets/ig/${name}-${String(i + 1).padStart(2, '0')}.jpg`);
   const id = await publish(imgs, caption, name);
-  if (id) console.log(`${name}: 인스타그램에 올렸습니다. 게시물 ID ${id} — 편집자 노트`);
+  if (id) { console.log(`${name}: 인스타그램에 올렸습니다. 게시물 ID ${id} — 편집자 노트`); await postStory(name, name); }
   return id ? 1 : 0;
 }
 (async () => {
@@ -110,6 +124,7 @@ async function postNote(file, done) {
     await waitReady(c.id);
     const pub = await api(`/${USER}/media_publish`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ creation_id: c.id }) });
     console.log(`${day}/${n}: 인스타그램에 올렸습니다. 게시물 ID ${pub.id} — ${title}`);
+    await postStory(`${day}-${n}`, `${day}/${n}`);
     posted++;
   }
   // 장기 토큰 갱신(발급 24시간 뒤부터 가능, 60일 연장). 새 토큰은 GH_PAT가 있을 때만 저장소 비밀에 다시 넣습니다.
