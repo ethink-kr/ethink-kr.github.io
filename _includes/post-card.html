@@ -9,6 +9,6 @@
   <span class="pcard-body">
     <span class="pcard-title">{{ p.title }}</span>
     {% if p.question %}<span class="pcard-q">{{ p.question }}</span>{% endif %}
-    <span class="pcard-meta mono">{{ p.date | date: "%Y. %-m. %-d." }}{% if p.issue %}{% assign pi = site.issues | where: "issue_id", p.issue | first %}{% if pi %} · {{ pi.num }}호{% endif %}{% endif %}</span>
+    <span class="pcard-meta mono">{{ p.date | date: "%Y. %-m. %-d." }}</span>
   </span>
 </a>

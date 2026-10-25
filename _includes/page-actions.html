@@ -119,7 +119,7 @@
       {% assign pa_iss = site.issues | where_exp: "i", "i.date <= site.time" | sort: "date" %}{% assign pa_latest = pa_iss | last %}var LATEST={{ pa_latest.url | default: "" | jsonify }};
       var c='기타';
       if(path==='/')c='홈';
-      else if(path.indexOf('/weekly/')===0)c=(LATEST&&path.indexOf(LATEST)===0)?'윤리로 읽는 뉴스 · 최신호':'윤리로 읽는 뉴스 · 지난 호';
+      else if(path.indexOf('/weekly/')===0)c='윤리로 읽는 뉴스';
       else if(path.indexOf('/reading/')===0)c='윤리로 읽는 책';
       else if(path.indexOf('/thinker/')===0)c='나와 닮은 사상가';
       else if(path.indexOf('/channel/')===0)c='윤리 채널';

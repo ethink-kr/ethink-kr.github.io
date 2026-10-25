@@ -3,13 +3,13 @@ layout: default
 ---
 {% assign items = site.items | where: "issue", page.issue_id | sort: "num" %}
 <section class="issue-hero">
-  <p class="issue-meta mono"><span>{{ site.news_title }}</span><span>{{ page.num }}호</span><span>{{ page.date | date: "%Y. %-m. %-d." }}</span><span>{{ items.size }}건</span></p>
+  <p class="issue-meta mono"><span>{{ site.news_title }}</span><span>{{ page.date | date: "%Y. %-m. %-d." }}</span><span>{{ items.size }}건</span></p>
   <h1 class="issue-title">{{ page.title }}</h1>
   <p class="issue-lead">{{ page.lead }}</p>
 </section>
 
-<nav class="toc" aria-label="이번 호 목차">
-  <p class="toc-label">이번 호에 담은 것</p>
+<nav class="toc" aria-label="목차">
+  <p class="toc-label">담은 글</p>
   <ol>
     {% for it in items %}<li><a href="#item-{{ it.num }}"><span class="toc-sec">{{ it.section }}</span>{{ it.title }}</a></li>{% endfor %}
   </ol>

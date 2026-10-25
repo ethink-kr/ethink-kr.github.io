@@ -3,9 +3,9 @@ layout: default
 ---
 {% assign issue = site.issues | where: "issue_id", page.issue %}{% assign issue = issue[0] %}
 <div class="item-tools no-print">
-  <p class="crumb mono">{% if issue %}<a href="{{ issue.url | relative_url }}">← {{ site.news_title }} {{ issue.num }}호 · {{ issue.date | date: "%Y. %-m. %-d." }}</a>{% else %}<a href="{{ '/' | relative_url }}">← {{ site.news_title }}</a> · {{ page.date | date: "%Y. %-m. %-d." }}{% endif %} · {{ page.section }}</p>
+  <p class="crumb mono"><a href="{{ '/' | relative_url }}">← {{ site.news_title }} · {{ page.date | date: "%Y. %-m. %-d." }}</a> · {{ page.section }}</p>
   <span class="tool-btns">{% include like-btn.html id=page.url %}{% include save-btn.html url=page.url title=page.title %}{% include share-btn.html url=page.url title=page.title %}<button type="button" class="btn-print" onclick="window.print()">인쇄 · PDF로 저장</button></span>
 </div>
-<p class="print-only print-head">{{ site.title }} · {{ site.news_title }}{% if issue %} {{ issue.num }}호{% endif %} · {{ page.date | date: "%Y. %-m. %-d." }}</p>
+<p class="print-only print-head">{{ site.title }} · {{ site.news_title }} · {{ page.date | date: "%Y. %-m. %-d." }}</p>
 {% include item-card.html item=page full=true %}
 <p class="print-only print-foot">출처: {{ site.title }} · {{ site.news_title }} · 글 {{ site.author }} · <span class="js-url"></span><br>저작권은 운영자에게 있습니다. 수업과 비상업적 공유에는 자유롭게 쓸 수 있고, 상업적 이용은 할 수 없습니다. © {{ site.time | date: "%Y" }} {{ site.author }}</p>

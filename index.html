@@ -4,7 +4,6 @@ layout: default
 {% assign news = site.items | where_exp: "i", "i.date <= site.time" %}
 {% assign reads = site.reads | where_exp: "r", "r.date <= site.time" %}
 {% assign posts = news | concat: reads | sort: "date" | reverse %}
-{% assign issues = site.issues | where_exp: "i", "i.date <= site.time" | sort: "date" | reverse %}
 <section class="hero">
   <h1 class="hero-title">{{ site.tagline }}</h1>
   <p class="hero-lead">{{ site.home_lead }}</p>
@@ -12,7 +11,6 @@ layout: default
   <div class="hero-btns">
     <a class="btn" href="#latest">최신 글 읽기</a>
     {% if site.newsletter %}<a class="btn btn-sub" href="{{ site.newsletter }}" target="_blank" rel="noopener">무료 뉴스레터 구독</a>{% endif %}
-    <a class="btn btn-ghost" href="#archive">지난 호 보기</a>
   </div>
 </section>
 
@@ -30,10 +28,3 @@ layout: default
   {% endif %}
 </section>
 
-<section class="archive" id="archive">
-  <h2 class="section-title">지난 호</h2>
-  <p class="feed-note">한 달에 두 번, 그 사이 올라온 글을 한 호로 묶습니다. 뉴스레터 구독자에게는 이 묶음이 갑니다.</p>
-  <ul class="archive-list">
-    {% for is in issues %}<li><a href="{{ is.url | relative_url }}"><span class="mono">{{ is.num }}호 · {{ is.date | date: "%Y. %-m. %-d." }}</span><span>{{ is.title }}</span></a></li>{% endfor %}
-  </ul>
-</section>
