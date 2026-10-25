@@ -12,6 +12,7 @@ email: hello@ethink.kr
 kakao_js_key: 0a95acfd573ca6aea3e90bbaba19a78f   # 카카오 개발자 앱 「Ethink」(ID 1612012) JavaScript 키 — 공개용 키
 kakao_channel: https://pf.kakao.com/_PVHxjn
 openchat:   # 비워 두면 오픈채팅 버튼이 사라집니다. 방 주소(https://open.kakao.com/o/gU5LAMTi)를 넣으면 글 아래와 하단에 「오픈채팅 참여」 버튼이 다시 나옵니다.
+instagram: https://www.instagram.com/ethink.kr/   # 에씽크 인스타그램(@ethink.kr). 상단 메뉴·하단에 로고 링크가 나옵니다.
 newsletter: https://page.stibee.com/subscriptions/525046   # 스티비 구독 페이지(무료 요금제, 격주 발송)
 likes_api: https://script.google.com/macros/s/AKfycbwTojtcr0qFjuk_4_NQOYjYAXSPMz8lo90nyYHcAkapkCEqkj1EvF9LkRhtX6BkCMBR/exec   # 좋아요 카운터(구글 Apps Script 웹 앱)
 description: 뉴스와 책, 사상가의 문장을 윤리의 눈으로 다시 읽습니다. 도덕·윤리 선생님에게는 수업 자료로, 인문교양 독자에게는 생각할 거리로 건넵니다. 길벗 윤리 교과서·청소년 인문교양서 편집자 박재형이 운영합니다.

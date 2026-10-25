@@ -380,3 +380,9 @@ html { scroll-behavior: smooth; }
 .src figcaption .who { display: block; text-align: left; }
 .src figcaption .from { display: block; text-align: right; }
 .src figcaption .who + .from { margin-top: 0.15rem; }
+
+/* 인스타그램 로고 링크 */
+.nav-ig { display: inline-flex; align-items: center; }
+.nav-ig svg { display: block; }
+.footer-ig { display: inline-flex; align-items: center; gap: 0.4rem; }
+.footer-ig svg { width: 18px; height: 18px; }
