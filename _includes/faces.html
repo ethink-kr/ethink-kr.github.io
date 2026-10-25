@@ -1,11 +1,11 @@
 {%- comment -%}인용문 출처(figcaption)가 인물 이름으로 시작하면 그 앞에 작은 초상(또는 머리글자 원)을 붙입니다. 목록은 _data/faces.yml.{%- endcomment -%}
 {%- assign h = include.html -%}
 {%- for f in site.data.faces -%}{%- for m in f.match -%}
-{%- capture from -%}<figcaption>{{ m }}{%- endcapture -%}
+{%- capture from -%}<figcaption><span class="who">{{ m }}</span>{%- endcapture -%}
 {%- if f.img -%}
-{%- capture to -%}<figcaption><img class="face" src="{{ f.img | relative_url }}" alt="" width="28" height="28" loading="lazy" title="{{ f.name }} · 이미지: {{ f.credit }} ({{ f.license }})">{{ m }}{%- endcapture -%}
+{%- capture to -%}<figcaption><span class="who"><img class="face" src="{{ f.img | relative_url }}" alt="" width="28" height="28" loading="lazy" title="{{ f.name }} · 이미지: {{ f.credit }} ({{ f.license }})">{{ m }}</span>{%- endcapture -%}
 {%- else -%}
-{%- capture to -%}<figcaption><span class="face face-initial" aria-hidden="true" title="{{ f.name }}">{{ f.initial }}</span>{{ m }}{%- endcapture -%}
+{%- capture to -%}<figcaption><span class="who"><span class="face face-initial" aria-hidden="true" title="{{ f.name }}">{{ f.initial }}</span>{{ m }}</span>{%- endcapture -%}
 {%- endif -%}
 {%- assign h = h | replace: from, to -%}
 {%- endfor -%}{%- endfor -%}

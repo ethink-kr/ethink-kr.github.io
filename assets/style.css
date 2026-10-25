@@ -375,3 +375,8 @@ html { scroll-behavior: smooth; }
 .face-initial { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; font-family: var(--font-display); font-weight: 700; font-size: 0.8rem; vertical-align: middle; margin: -3px 0.5rem 0 0; }
 .sub-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; margin: 0.9rem 0 0; }
 .sub-actions .openchat.form { border-color: var(--accent); }
+
+/* 인용 출처: 이름·얼굴은 왼쪽, 「출처: …」는 한 줄 아래 오른쪽 */
+.src figcaption .who { display: block; text-align: left; }
+.src figcaption .from { display: block; text-align: right; }
+.src figcaption .who + .from { margin-top: 0.15rem; }
