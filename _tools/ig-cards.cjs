@@ -5,12 +5,13 @@
 // 결과: assets/ig/<이름>-01.jpg, -02.jpg … (뉴스 글 이름은 YYYY-MM-DD-N, 책 글은 파일 이름)
 // 필요: playwright, js-yaml (npm i -g playwright js-yaml)
 //
-// 문안 파일(YAML) 형식 — 카드 한 장에 3~4줄을 넘기지 않는다.
+// 문안 파일(YAML) 형식 — 8~10장, 카드 한 장에 짧은 문단 3~4개. 사실·수치·사상가 풀이까지 담아 글을 안 읽어도 내용이 잡히게.
 //   approved: false            # 재형 님 승인 뒤 true. false면 자동 게시하지 않는다(_tools/ig-post.cjs).
 //   cards:
 //     - type: cover             # image(저작권이 풀린 그림·사상가 초상·직접 찍은 사진, /assets/art/…), focus(object-position), credit(그림 출처),
 //                               # hook(표지에 얹을 질문 한 줄, 25자 안팎), sub(작은 글씨 한 줄, 없으면 제목 뒷부분 또는 책 이름)
-//     - type: text              # label(작은 머리글), big(크게 보일 숫자나 말, 선택), big_note, lines(문장 목록)
+//     - type: text              # label(작은 머리글), big(크게 보일 숫자나 말, 선택), big_note, lines(문장 목록), image/focus/credit(그림, 선택)
+//                               # lines 안에서 **말**은 굵게(강조색) 보인다. quote 카드는 note(풀이 한두 문장)를 더할 수 있다.
 //     - type: quote             # who(사상가 이름, _data/faces.yml의 초상), text, source
 //     - type: flow              # label, steps: [[단계, 설명], …] (최대 4)
 //     - type: compare           # label, left: {head, text, note}, right: {head, text, note}
@@ -59,15 +60,15 @@ body{width:1080px;height:1350px;background:var(--bg);font-family:"IBM Plex Sans 
 .top{display:flex;justify-content:space-between;align-items:center}
 .cat{font-size:26px;font-weight:600;color:#fff;background:var(--ac);padding:10px 20px;border-radius:4px;letter-spacing:.03em}
 .page{font-family:"IBM Plex Mono",monospace;font-size:26px;color:var(--sub)}
-.label{font-family:"Gowun Batang",serif;font-weight:700;font-size:58px;line-height:1.3;color:var(--ink);margin-top:84px;word-break:keep-all}
-.label::after{content:"";display:block;width:72px;height:6px;background:var(--ac);margin-top:28px}
-.body{margin-top:48px;display:flex;flex-direction:column;gap:30px}
-.line{font-size:42px;line-height:1.62;word-break:keep-all}
+.label{font-family:"Gowun Batang",serif;font-weight:700;font-size:54px;line-height:1.3;color:var(--ink);margin-top:68px;word-break:keep-all}
+.label::after{content:"";display:block;width:72px;height:6px;background:var(--ac);margin-top:24px}
+.body{margin-top:40px;display:flex;flex-direction:column;gap:26px}
+.line{font-size:37px;line-height:1.62;word-break:keep-all}
 .big{font-family:"Gowun Batang",serif;font-weight:700;font-size:150px;line-height:1.15;color:var(--ac);letter-spacing:-.02em}
 .bignote{font-size:30px;color:var(--sub);margin-top:14px;line-height:1.5;word-break:keep-all}
 .hl{background:linear-gradient(transparent 58%,var(--hl) 58%,var(--hl) 92%,transparent 92%);-webkit-box-decoration-break:clone;box-decoration-break:clone}
-.quote{margin-top:56px;background:var(--card);border:2px solid var(--line);border-radius:10px;padding:52px 52px 44px;display:flex;flex-direction:column;gap:34px}
-.quote p.t{font-family:"Gowun Batang",serif;font-size:42px;line-height:1.7;word-break:keep-all}
+.quote{margin-top:44px;background:var(--card);border:2px solid var(--line);border-radius:10px;padding:52px 52px 44px;display:flex;flex-direction:column;gap:34px}
+.quote p.t{font-family:"Gowun Batang",serif;font-size:39px;line-height:1.7;word-break:keep-all}
 .who{display:flex;align-items:center;gap:22px;font-size:26px;color:var(--sub);line-height:1.5}
 .who b{color:var(--ink);font-size:30px;display:block}
 .face{width:96px;height:96px;border-radius:50%;object-fit:cover;flex:none;border:2px solid var(--line)}
@@ -87,15 +88,20 @@ body{width:1080px;height:1350px;background:var(--bg);font-family:"IBM Plex Sans 
 .ul{margin-top:56px;display:flex;flex-direction:column;gap:30px}
 .ul p{font-family:"Gowun Batang",serif;font-size:46px;line-height:1.72;word-break:keep-all}
 .ul .pg{font-family:"IBM Plex Mono",monospace;font-size:26px;color:var(--sub)}
-.notes{margin-top:48px;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:30px;counter-reset:n}
-.notes li{counter-increment:n;font-size:42px;line-height:1.6;word-break:keep-all;padding-left:64px;position:relative}
-.notes li::before{content:counter(n) ".";position:absolute;left:0;font-family:"IBM Plex Mono",monospace;color:var(--ac);font-size:36px}
+.notes{margin-top:40px;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:30px;counter-reset:n}
+.notes li{counter-increment:n;font-size:36px;line-height:1.6;word-break:keep-all;padding-left:64px;position:relative}
+.notes li::before{content:counter(n) ".";position:absolute;left:0;font-family:"IBM Plex Mono",monospace;color:var(--ac);font-size:34px}
+.notes li b,.line b,.qnote b{color:var(--ac);font-weight:600}
+.pic{margin-top:40px;position:relative}
+.pic img{width:100%;height:400px;object-fit:cover;border-radius:6px;display:block}
+.pic span{position:absolute;right:10px;bottom:10px;font-size:19px;color:#fff;background:rgba(0,0,0,.55);padding:3px 9px;border-radius:3px}
+.qnote{font-size:34px;line-height:1.6;margin-top:36px;word-break:keep-all}
 .book{margin-top:64px;display:flex;gap:48px;align-items:flex-start}
 .book img{width:300px;border-radius:4px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
 .book h2{font-family:"Gowun Batang",serif;font-size:54px;line-height:1.3;word-break:keep-all}
 .book p{font-size:30px;color:var(--sub);line-height:1.6;margin-top:18px}
 .book .credit{font-size:22px;margin-top:28px}
-.foot{display:flex;justify-content:space-between;align-items:baseline;margin-top:auto;padding-top:24px;border-top:2px solid var(--ink);font-size:26px;color:var(--sub)}
+.foot{display:flex;justify-content:space-between;align-items:baseline;margin-top:auto;padding-top:22px;border-top:1px solid var(--line);font-size:24px;color:var(--sub)}
 .foot .brand{font-family:"Gowun Batang",serif;font-weight:700;font-size:32px;color:var(--ink)}
 .foot .url{font-family:"IBM Plex Mono",monospace;color:var(--ac)}
 /* 표지: 위는 그림, 아래는 진한 색 바탕에 질문 한 줄 */
@@ -107,7 +113,7 @@ body{width:1080px;height:1350px;background:var(--bg);font-family:"IBM Plex Sans 
 .cv-q{font-family:"Gowun Batang",serif;font-weight:700;font-size:70px;line-height:1.36;word-break:keep-all;letter-spacing:-.01em}
 .cv-sub{font-size:28px;line-height:1.5;color:rgba(255,255,255,.78);margin-top:22px;word-break:keep-all}
 .cv-foot{display:flex;justify-content:space-between;align-items:baseline;margin-top:auto;font-size:26px;color:rgba(255,255,255,.8)}
-.cv-foot .brand{font-family:"Gowun Batang",serif;font-weight:700;font-size:32px;color:#fff}
+.cv-foot .url{font-family:"IBM Plex Mono",monospace;color:rgba(255,255,255,.85)}
 .cv-book{position:absolute;left:0;top:0;width:1080px;height:830px;display:grid;place-items:center;padding-top:60px}
 .cv-book img{height:600px;border-radius:4px;box-shadow:0 18px 40px rgba(0,0,0,.25)}
 /* 마지막 장: 이번 주 질문 */
@@ -119,7 +125,7 @@ body{width:1080px;height:1350px;background:var(--bg);font-family:"IBM Plex Sans 
 const total = cards.length;
 const head = i => `<div class="top"><span class="cat">${esc(corner)}</span><span class="page">${i + 1} / ${total}</span></div>`;
 function page(i, inner, footLeft) {
-  return `<div class="wrap">${head(i)}${inner}<div class="foot"><span class="brand">Ethink</span><span>${esc(footLeft || '')}</span><span class="url">ethink.kr</span></div></div>`;
+  return `<div class="wrap">${head(i)}${inner}<div class="foot"><span>${esc(footLeft || '')}</span><span class="url">ethink.kr</span></div></div>`;
 }
 function render(c, i) {
   const t = c.type;
@@ -128,11 +134,13 @@ function render(c, i) {
     const sub = c.sub || (isRead ? `『${fm.book}』 ${fm.writer}` : (fm.title || '').split(/,\s*/).slice(-1)[0]);
     const img = c.image ? `<img class="cv-img" src="${dataUri(c.image)}" style="object-position:${esc(c.focus || '50% 50%')}" alt="">`
       : (isRead && fm.cover ? `<div class="cv-book"><img src="${dataUri(fm.cover)}" alt=""></div>` : ''); // 그림이 없는 책 글은 표지를 종이 바탕 가운데에
-    return `${img}<div class="cv-top"><span class="cat">${esc(corner)}</span><span class="page">${i + 1} / ${total}</span></div>${c.credit ? `<span class="cv-credit">${esc(c.credit)}</span>` : ''}<div class="cv-panel"><p class="cv-q">${esc(q)}</p><p class="cv-sub">${esc(sub)}</p><div class="cv-foot"><span class="brand">Ethink</span><span>옆으로 넘겨 보세요 →</span></div></div>`;
+    return `${img}<div class="cv-top"><span class="cat">${esc(corner)}</span><span class="page">${i + 1} / ${total}</span></div>${c.credit ? `<span class="cv-credit">${esc(c.credit)}</span>` : ''}<div class="cv-panel"><p class="cv-q">${esc(q)}</p><p class="cv-sub">${esc(sub)}</p><div class="cv-foot"><span>옆으로 넘겨 보세요 →</span><span class="url">ethink.kr</span></div></div>`;
   }
-  if (t === 'text') return page(i, `<p class="label">${esc(c.label)}</p><div class="body">${c.big ? `<div><p class="big">${esc(c.big)}</p>${c.big_note ? `<p class="bignote">${esc(c.big_note)}</p>` : ''}</div>` : ''}${(c.lines || []).map(l => `<p class="line">${esc(l)}</p>`).join('')}</div>`);
-  if (t === 'notes') return page(i, `<p class="label">${esc(c.label)}</p><ol class="notes">${(c.lines || []).map(l => `<li>${esc(l)}</li>`).join('')}</ol>`);
-  if (t === 'quote') return page(i, `<p class="label">${esc(c.label || '사상가의 문장')}</p><div class="quote"><p class="t">${esc(c.text)}</p><div class="who">${face(c.who)}<div><b>${esc(c.who)}</b>${esc(c.source || '')}</div></div></div>`);
+  const pic = c.image ? `<div class="pic"><img src="${dataUri(c.image)}" style="object-position:${esc(c.focus || '50% 50%')}" alt="">${c.credit ? `<span>${esc(c.credit)}</span>` : ''}</div>` : '';
+  const rich = l => esc(l).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>'); // **굵게**
+  if (t === 'text') return page(i, `<p class="label">${esc(c.label)}</p>${pic}<div class="body">${c.big ? `<div><p class="big">${esc(c.big)}</p>${c.big_note ? `<p class="bignote">${esc(c.big_note)}</p>` : ''}</div>` : ''}${(c.lines || []).map(l => `<p class="line">${rich(l)}</p>`).join('')}</div>`);
+  if (t === 'notes') return page(i, `<p class="label">${esc(c.label)}</p>${pic}<ol class="notes">${(c.lines || []).map(l => `<li>${rich(l)}</li>`).join('')}</ol>`);
+  if (t === 'quote') return page(i, `<p class="label">${esc(c.label || '사상가의 문장')}</p><div class="quote"><p class="t">${esc(c.text)}</p><div class="who">${face(c.who)}<div><b>${esc(c.who)}</b>${esc(c.source || '')}</div></div></div>${c.note ? `<p class="qnote">${rich(c.note)}</p>` : ''}`);
   if (t === 'flow') return page(i, `<p class="label">${esc(c.label || '수업 흐름')}</p><ol class="flow">${(c.steps || []).slice(0, 4).map(([a, b]) => `<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join('')}</ol>`);
   if (t === 'compare') {
     const cell = (x, strong) => `<div class="cell${strong ? ' strong' : ''}"><h3>${esc(x.head)}</h3><p>${esc(x.text)}</p>${x.note ? `<p class="note">${esc(x.note)}</p>` : ''}</div>`;
