@@ -19,7 +19,8 @@
 //     - type: underline         # 책 글: lines(밑줄 문장 1~2개), page
 //     - type: book              # 책 글: 표지(작게)·책 이름·지은이. 표지 출처를 함께 적는다.
 //     - type: end               # '이번 주 질문'으로 질문을 다시 보여 주고 댓글을 청한다(ask로 문구 바꾸기)
-// 바탕색: 시사 글은 연한 녹색(#eef1ec), 책 글은 종이색(#f4ece0). 모든 카드 왼쪽 위에 같은 분류 표시.
+// 바탕색: 시사 글은 연한 녹색(#eef1ec), 책 글은 종이색(#f4ece0), 편집자 노트는 흰 종이(#fbfaf7)에 남색. 모든 카드 왼쪽 위에 같은 분류 표시.
+// 편집자 노트: node _tools/ig-cards.cjs _notes/YYYY-MM-DD-이름.yml  (no: '№1' 같은 번호, caption: 캡션, cards: …, cover는 kicker/hook/sub/by)
 const { chromium } = require('playwright');
 const yaml = require('js-yaml');
 const fs = require('fs'); const path = require('path');
@@ -28,10 +29,13 @@ const [,, postArg, cardsArg] = process.argv;
 if (!postArg) { console.error('usage: node _tools/ig-cards.cjs <글 파일> [카드 문안 파일]'); process.exit(1); }
 const postPath = path.resolve(postArg);
 const src = fs.readFileSync(postPath, 'utf8');
-const fm = yaml.load(src.split(/^---\s*$/m)[1]) || {};
+// 편집자 노트: _notes/YYYY-MM-DD-이름.yml 하나에 승인·캡션·카드가 모두 들어 있다(사이트에는 올리지 않는 인스타그램 전용 게시물).
+const isNote = postPath.includes(`${path.sep}_notes${path.sep}`) && /\.ya?ml$/.test(postPath);
+const fm = isNote ? {} : (yaml.load(src.split(/^---\s*$/m)[1]) || {});
 const isRead = postPath.includes(`${path.sep}_reads${path.sep}`);
 let name, defCards;
-if (isRead) { name = path.basename(postPath, '.md'); defCards = path.join(ROOT, '_reads', 'ig', name + '.yml'); }
+if (isNote) { name = path.basename(postPath).replace(/\.ya?ml$/, ''); defCards = postPath; }
+else if (isRead) { name = path.basename(postPath, '.md'); defCards = path.join(ROOT, '_reads', 'ig', name + '.yml'); }
 else { const day = path.basename(path.dirname(postPath)); const n = path.basename(postPath, '.md'); name = `${day}-${n}`; defCards = path.join(path.dirname(postPath), `ig-cards-${n}.yml`); }
 const cardsPath = path.resolve(cardsArg || defCards);
 const doc = yaml.load(fs.readFileSync(cardsPath, 'utf8')) || {};
@@ -45,12 +49,14 @@ function face(who) {
   if (f.img) return `<img class="face" src="${dataUri(f.img)}" alt="">`;
   return `<span class="face face-i">${esc(f.initial || who[0])}</span>`;
 }
-// 테마: 시사 글(뉴스)과 책 글은 바탕색으로 구분한다.
-const T = isRead
+// 테마: 시사 글(뉴스), 책 글, 편집자 노트는 바탕색으로 구분한다.
+const T = isNote
+  ? { bg: '#fbfaf7', card: '#ffffff', line: '#e3e1db', ink: '#22252b', sub: '#62666e', accent: '#2f4366', deep: '#24324d', hl: '#dfe6f3' }
+  : isRead
   ? { bg: '#f4ece0', card: '#fffaf2', line: '#e2d6c4', ink: '#2a211c', sub: '#6b5d52', accent: '#8a3b28', deep: '#5a2619', hl: '#f3d9a4' }
   : { bg: '#eef1ec', card: '#ffffff', line: '#d6ddd6', ink: '#1c2421', sub: '#5b6662', accent: '#23614f', deep: '#173f34', hl: '#f2df74' };
 // 모든 카드 왼쪽 위에 같은 자리로 들어가는 분류
-const corner = isRead ? `윤리로 읽는 책${fm.writer ? ' · ' + fm.writer : ''}` : `시사 윤리${fm.section ? ' · ' + fm.section : ''}`;
+const corner = isNote ? `편집자 노트${doc.no ? ' · ' + doc.no : ''}` : isRead ? `윤리로 읽는 책${fm.writer ? ' · ' + fm.writer : ''}` : `시사 윤리${fm.section ? ' · ' + fm.section : ''}`;
 const css = `
 @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap');
 :root{--bg:${T.bg};--card:${T.card};--line:${T.line};--ink:${T.ink};--sub:${T.sub};--ac:${T.accent};--deep:${T.deep};--hl:${T.hl}}
@@ -116,6 +122,11 @@ body{width:1080px;height:1350px;background:var(--bg);font-family:"IBM Plex Sans 
 .cv-foot .url{font-family:"IBM Plex Mono",monospace;color:rgba(255,255,255,.85)}
 .cv-book{position:absolute;left:0;top:0;width:1080px;height:830px;display:grid;place-items:center;padding-top:60px}
 .cv-book img{height:600px;border-radius:4px;box-shadow:0 18px 40px rgba(0,0,0,.25)}
+/* 편집자 노트 표지: 그림 없이 글로만 */
+.nc-kicker{margin-top:150px;font-size:30px;color:var(--ac);font-weight:600;letter-spacing:.04em}
+.nc-q{font-family:"Gowun Batang",serif;font-weight:700;font-size:84px;line-height:1.3;letter-spacing:-.01em;word-break:keep-all;margin-top:28px}
+.nc-sub{font-size:34px;line-height:1.6;color:var(--sub);margin-top:44px;word-break:keep-all}
+.nc-by{font-family:"Gowun Batang",serif;font-size:32px;margin-top:auto;margin-bottom:40px}
 /* 마지막 장: 이번 주 질문 */
 .wk{margin-top:96px;font-size:30px;font-weight:600;color:var(--ac);letter-spacing:.06em}
 .endq{font-family:"Gowun Batang",serif;font-weight:700;font-size:60px;line-height:1.45;word-break:keep-all;margin-top:26px}
@@ -132,6 +143,7 @@ function render(c, i) {
   if (t === 'cover') {
     const q = c.hook || c.question || fm.question;
     const sub = c.sub || (isRead ? `『${fm.book}』 ${fm.writer}` : (fm.title || '').split(/,\s*/).slice(-1)[0]);
+    if (!c.image && isNote) return `<div class="wrap">${head(i)}<p class="nc-kicker">${esc(c.kicker || '')}</p><p class="nc-q">${esc(c.hook || c.title)}</p><p class="nc-sub">${esc(c.sub || '')}</p><p class="nc-by">${esc(c.by || '글 박재형')}</p><div class="foot"><span>옆으로 넘겨 보세요 →</span><span class="url">ethink.kr</span></div></div>`;
     const img = c.image ? `<img class="cv-img" src="${dataUri(c.image)}" style="object-position:${esc(c.focus || '50% 50%')}" alt="">`
       : (isRead && fm.cover ? `<div class="cv-book"><img src="${dataUri(fm.cover)}" alt=""></div>` : ''); // 그림이 없는 책 글은 표지를 종이 바탕 가운데에
     return `${img}<div class="cv-top"><span class="cat">${esc(corner)}</span><span class="page">${i + 1} / ${total}</span></div>${c.credit ? `<span class="cv-credit">${esc(c.credit)}</span>` : ''}<div class="cv-panel"><p class="cv-q">${esc(q)}</p><p class="cv-sub">${esc(sub)}</p><div class="cv-foot"><span>옆으로 넘겨 보세요 →</span><span class="url">ethink.kr</span></div></div>`;
@@ -153,7 +165,7 @@ function render(c, i) {
   }
   if (t === 'end') {
     const q = c.question || fm.question;
-    return page(i, `<p class="wk">이번 주 질문</p><p class="endq"><span class="hl">${esc(q)}</span></p><p class="ask">${esc(c.ask || '여러분의 생각을 댓글로 남겨 주세요. 한 줄이어도 좋습니다.')}</p><p class="cta">전문과 수업 활동 예시는<br><b>프로필 링크 · ethink.kr</b>에서 읽을 수 있습니다.</p>`, '저장해 두고 다시 읽어 보세요');
+    return page(i, `<p class="wk">이번 주 질문</p><p class="endq"><span class="hl">${esc(q)}</span></p><p class="ask">${esc(c.ask || '여러분의 생각을 댓글로 남겨 주세요. 한 줄이어도 좋습니다.')}</p><p class="cta">${c.cta ? esc(c.cta).replace(/\n/g, '<br>') : '전문과 수업 활동 예시는<br><b>프로필 링크 · ethink.kr</b>에서 읽을 수 있습니다.'}</p>`, '저장해 두고 다시 읽어 보세요');
   }
   throw new Error('알 수 없는 카드 종류: ' + t);
 }

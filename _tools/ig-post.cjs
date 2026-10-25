@@ -12,9 +12,12 @@ const USER = process.env.IG_USER_ID, TOKEN = process.env.IG_ACCESS_TOKEN;
 if (!USER || !TOKEN) { console.log('IG_USER_ID 또는 IG_ACCESS_TOKEN이 없어 건너뜁니다.'); process.exit(0); }
 
 const kst = new Date(Date.now() + 9 * 3600 * 1000);
-const day = process.argv[2] || kst.toISOString().slice(0, 10);
-const dir = path.join(ROOT, '_items', day);
-if (!fs.existsSync(dir)) { console.log(`${day}: 올릴 글 폴더가 없습니다.`); process.exit(0); }
+const arg = process.argv[2] || '';
+// 편집자 노트: node _tools/ig-post.cjs _notes/YYYY-MM-DD-이름.yml  (yml 안에 approved·caption·cards)
+const noteFile = /\.ya?ml$/.test(arg) ? path.resolve(ROOT, arg) : null;
+const day = noteFile ? '' : (arg || kst.toISOString().slice(0, 10));
+const dir = noteFile ? path.dirname(noteFile) : path.join(ROOT, '_items', day);
+if (!fs.existsSync(noteFile || dir)) { console.log(`${arg || day}: 올릴 글이 없습니다.`); process.exit(0); }
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 async function api(p, opt = {}) {
@@ -25,12 +28,44 @@ async function api(p, opt = {}) {
 }
 function firstLine(s) { return String(s || '').split('\n').map(x => x.trim()).find(Boolean) || ''; }
 
+async function publish(imgs, caption, label) {
+  let ok = false;
+  for (let i = 0; i < 10; i++) {
+    const rs = await Promise.all(imgs.map(u => fetch(u, { method: 'HEAD' }).then(r => r.ok).catch(() => false)));
+    if (rs.every(Boolean)) { ok = true; break; } await sleep(30000);
+  }
+  if (!ok) { console.log(`${label}: 카드 이미지를 아직 받을 수 없습니다.`); return null; }
+  const post = async body => api(`/${USER}/media`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+  const waitReady = async id => { for (let i = 0; i < 24; i++) { const st = await api(`/${id}?fields=status_code`); if (st.status_code === 'FINISHED') return; if (st.status_code === 'ERROR') throw new Error(`${label}: 컨테이너 오류`); await sleep(5000); } };
+  let c;
+  if (imgs.length === 1) c = await post({ image_url: imgs[0], caption });
+  else { const kids = []; for (const u of imgs) { const k = await post({ image_url: u, is_carousel_item: true }); await waitReady(k.id); kids.push(k.id); } c = await post({ media_type: 'CAROUSEL', children: kids.join(','), caption }); }
+  await waitReady(c.id);
+  const pub = await api(`/${USER}/media_publish`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ creation_id: c.id }) });
+  return pub.id;
+}
+async function postNote(file, done) {
+  const yaml = require('js-yaml');
+  const doc = yaml.load(fs.readFileSync(file, 'utf8')) || {};
+  const name = path.basename(file).replace(/\.ya?ml$/, '');
+  if (doc.approved !== true) { console.log(`${name}: 아직 승인되지 않아(approved: false) 건너뜁니다.`); return 0; }
+  const caption = String(doc.caption || '').trim();
+  if (!caption) { console.log(`${name}: caption이 없어 건너뜁니다.`); return 0; }
+  if (done.has(firstLine(caption))) { console.log(`${name}: 이미 올라간 노트입니다.`); return 0; }
+  const count = (doc.cards || []).length;
+  if (!count || count > 10) { console.log(`${name}: 카드 수(${count})가 1~10장이 아닙니다.`); return 0; }
+  const imgs = Array.from({ length: count }, (_, i) => `${SITE}/assets/ig/${name}-${String(i + 1).padStart(2, '0')}.jpg`);
+  const id = await publish(imgs, caption, name);
+  if (id) console.log(`${name}: 인스타그램에 올렸습니다. 게시물 ID ${id} — 편집자 노트`);
+  return id ? 1 : 0;
+}
 (async () => {
   const recent = await api(`/${USER}/media?fields=caption,timestamp&limit=10`);
   const done = new Set((recent.data || []).map(m => firstLine(m.caption)));
-  const files = fs.readdirSync(dir).filter(f => /^\d+\.md$/.test(f)).sort((a, b) => parseInt(a) - parseInt(b));
+  const files = noteFile ? [path.basename(noteFile)] : fs.readdirSync(dir).filter(f => /^\d+\.md$/.test(f)).sort((a, b) => parseInt(a) - parseInt(b));
   let posted = 0;
   for (const f of files) {
+    if (noteFile) { posted += await postNote(noteFile, done); continue; }
     const n = f.replace('.md', '');
     const md = fs.readFileSync(path.join(dir, f), 'utf8');
     const fm = md.split('---')[1] || '';

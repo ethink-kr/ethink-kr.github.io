@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       post_day:
-        description: 올릴 글 날짜 YYYY-MM-DD
+        description: 올릴 글 날짜 YYYY-MM-DD, 또는 편집자 노트 파일 _notes/YYYY-MM-DD-이름.yml
         required: true
 permissions:
   contents: read
@@ -21,6 +21,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - name: js-yaml 설치(편집자 노트 읽기)
+        run: npm i --no-save js-yaml@4.1.0
       - name: 카드 뉴스 올리기
         run: node _tools/ig-post.cjs "${{ inputs.post_day }}"
       - name: 갱신된 토큰 저장(GH_PAT가 있을 때만)
