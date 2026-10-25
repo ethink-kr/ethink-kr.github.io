@@ -10,3 +10,7 @@
 {%- assign h = h | replace: from, to -%}
 {%- endfor -%}{%- endfor -%}
 {{- h -}}
+{%- comment -%}퍼블릭 도메인이 아닌 사진(license_url이 있는 항목)을 쓴 글은 맨 아래에 아주 작게 출처를 밝힙니다.{%- endcomment -%}
+{%- capture ic -%}{%- for f in site.data.faces -%}{%- if f.license_url and f.img -%}{%- capture key -%}title="{{ f.name }} ·{%- endcapture -%}{%- if h contains key -%}<span>{{ f.name }}: <a href="{{ f.url }}" target="_blank" rel="noopener">{{ f.credit }}</a>, <a href="{{ f.license_url }}" target="_blank" rel="noopener">{{ f.license }}</a></span> {% endif -%}{%- endif -%}{%- endfor -%}{%- endcapture -%}
+{%- assign ic = ic | strip -%}
+{%- if ic != "" -%}<p class="img-credit">사진 출처 · {{ ic }}</p>{%- endif -%}

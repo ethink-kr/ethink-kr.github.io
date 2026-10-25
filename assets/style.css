@@ -386,3 +386,8 @@ html { scroll-behavior: smooth; }
 .nav-ig svg { display: block; }
 .footer-ig { display: inline-flex; align-items: center; gap: 0.4rem; }
 .footer-ig svg { width: 18px; height: 18px; }
+
+/* 퍼블릭 도메인이 아닌 인물 사진의 출처(글 맨 아래, 아주 작게) */
+.img-credit { margin-top: 2.2rem; font-size: 0.68rem; line-height: 1.5; color: var(--muted); }
+.img-credit span + span::before { content: " · "; }
+.img-credit a { color: inherit; text-decoration: underline; }
