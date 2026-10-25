@@ -1,5 +1,5 @@
 # 인스타그램 카드 뉴스 문안 — 재형 님 검토 반영(10.25): 쉬운 문장, 사실 범위 구분, 인용 출처는 번역서까지만. 승인 전까지 approved: false.
-approved: false
+approved: true
 cards:
   - type: cover
     image: /assets/art/gyges-ferrara.jpg
