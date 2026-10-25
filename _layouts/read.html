@@ -50,6 +50,5 @@ layout: default
   <p class="byline">글 {{ site.author }}</p>
 
   <div class="talk no-print"><p>이 글에 대한 의견이나 수업에 써 본 후기를 들려주세요.</p><span class="chat-btns">{% include like-btn.html id=page.url %}{% include save-btn.html url=page.url title=page.title %}{% include share-btn.html url=page.url title=page.title %}{% if site.openchat %}<a class="openchat" href="{{ site.openchat }}" target="_blank" rel="noopener">오픈채팅 참여</a>{% endif %}</span></div>
-  {% include subscribe-box.html form=true %}
 </article>
 <p class="print-only print-foot">출처: {{ site.title }} · 윤리로 읽는 책 · 글 {{ site.author }} · <span class="js-url"></span><br>저작권은 운영자에게 있습니다. 수업과 비상업적 공유에는 자유롭게 쓸 수 있고, 상업적 이용은 할 수 없습니다. 밑줄 친 문장의 권리는 원저작자에게 있습니다. © {{ site.time | date: "%Y" }} {{ site.author }}</p>
