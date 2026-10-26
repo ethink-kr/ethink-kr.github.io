@@ -78,6 +78,7 @@ body{width:1080px;height:1350px;background:var(--bg);font-family:"IBM Plex Sans 
 .who{display:flex;align-items:center;gap:22px;font-size:26px;color:var(--sub);line-height:1.5}
 .who b{color:var(--ink);font-size:30px;display:block}
 .quote .from{margin-top:-30px;text-align:right;font-size:26px;color:var(--sub);line-height:1.5}
+.quote .t + .from{margin-top:0}
 .face{width:96px;height:96px;border-radius:50%;object-fit:cover;flex:none;border:2px solid var(--line)}
 .face-i{display:inline-flex;align-items:center;justify-content:center;background:var(--ac);color:#fff;font-family:"Gowun Batang",serif;font-weight:700;font-size:40px}
 .flow{list-style:none;padding:0;margin-top:48px;display:flex;flex-direction:column;gap:20px;counter-reset:s}
@@ -153,7 +154,7 @@ function render(c, i) {
   const rich = l => esc(l).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>'); // **굵게**
   if (t === 'text') return page(i, `<p class="label">${esc(c.label)}</p>${pic}<div class="body">${c.big ? `<div><p class="big">${esc(c.big)}</p>${c.big_note ? `<p class="bignote">${esc(c.big_note)}</p>` : ''}</div>` : ''}${(c.lines || []).map(l => `<p class="line">${rich(l)}</p>`).join('')}</div>`);
   if (t === 'notes') return page(i, `<p class="label">${esc(c.label)}</p>${pic}<ol class="notes">${(c.lines || []).map(l => `<li>${rich(l)}</li>`).join('')}</ol>`);
-  if (t === 'quote') return page(i, `<p class="label">${esc(c.label || '사상가의 문장')}</p><div class="quote"><p class="t"${String(c.text).length > 150 ? ' style="font-size:32px"' : String(c.text).length > 95 ? ' style="font-size:35px"' : ''}>${esc(c.text)}</p><div class="who">${face(c.who)}<b>${esc(c.who)}</b></div>${c.source ? `<p class="from">출처: ${esc(String(c.source).replace(/^출처:\s*/, ''))}</p>` : ''}</div>${c.note ? `<p class="qnote">${rich(c.note)}</p>` : ''}`);
+  if (t === 'quote') return page(i, `<p class="label">${esc(c.label || '사상가의 문장')}</p><div class="quote"><p class="t"${String(c.text).length > 150 ? ' style="font-size:32px"' : String(c.text).length > 95 ? ' style="font-size:35px"' : ''}>${esc(c.text)}</p>${c.who ? `<div class="who">${face(c.who)}<b>${esc(c.who)}</b></div>` : ''}${c.source ? `<p class="from">출처: ${esc(String(c.source).replace(/^출처:\s*/, ''))}</p>` : ''}</div>${c.note ? `<p class="qnote">${rich(c.note)}</p>` : ''}`);
   if (t === 'flow') return page(i, `<p class="label">${esc(c.label || '수업 흐름')}</p><ol class="flow">${(c.steps || []).slice(0, 4).map(([a, b]) => `<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join('')}</ol>`);
   if (t === 'compare') {
     const cell = (x, strong) => `<div class="cell${strong ? ' strong' : ''}"><h3>${esc(x.head)}</h3><p>${esc(x.text)}</p>${x.note ? `<p class="note">${esc(x.note)}</p>` : ''}</div>`;
