@@ -1,5 +1,5 @@
-# 인스타그램 카드 뉴스 문안 — 2026-10-27 초안. 재형 님 승인 전까지 approved: false.
-approved: false
+# 인스타그램 카드 뉴스 문안 — 2026-10-27, 재형 님 승인(10.27).
+approved: true
 cards:
   - type: cover
     image: /assets/art/qiu-ying-pass-list.jpg
