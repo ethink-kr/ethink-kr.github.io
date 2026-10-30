@@ -1,5 +1,5 @@
 {% if site.newsletter %}<aside class="sub-box no-print">
   <p class="sub-title">{{ include.title | default: "메일로 받아 보기" }}</p>
-  <p class="sub-text">{{ include.text | default: "화·목·토에 올라오는 글을 한 달에 두 번 메일로 모아 받습니다. 무료이고, 메일 아래 링크로 언제든 끊을 수 있습니다." }}</p>
+  <p class="sub-text">{{ include.text | default: "주 2~3회 올라오는 글을 한 달에 두 번 메일로 모아 받습니다. 무료이고, 메일 아래 링크로 언제든 끊을 수 있습니다." }}</p>
   <p class="sub-actions"><a class="sub-btn" href="{{ site.newsletter }}" target="_blank" rel="noopener">구독하기</a>{% if include.form %}<a class="openchat form" href="{{ '/board/' | relative_url }}">운영자에게 의견 보내기</a>{% endif %}</p>
 </aside>{% endif %}

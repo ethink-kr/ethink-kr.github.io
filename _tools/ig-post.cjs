@@ -1,9 +1,9 @@
-// 어제(한국 시간) 웹에 발행된 글을(웹 발행 하루 뒤에) 인스타그램(@ethink.kr)에 올립니다. GitHub Actions의 예약 빌드 뒤에 돌아갑니다.
+// 지정한 날짜의 웹 글 카드 뉴스를 인스타그램(@ethink.kr)에 올립니다. 「인스타그램 수동 작업」(ig-manual.yml)에서 재형 님이 지시할 때만 돌아갑니다(자동 게시 없음).
 // 필요한 환경 변수: IG_USER_ID(인스타그램 전문가 계정 ID), IG_ACCESS_TOKEN(장기 토큰, 60일).
 // 글 폴더 _items/YYYY-MM-DD/N.md 옆에 ig.txt(캡션)와 ig-cards-N.yml(카드 문안, approved: true)이 있고,
 // assets/ig/YYYY-MM-DD-N-01.jpg … (카드 뉴스, _tools/ig-cards.cjs로 만듦)이 있어야 합니다. 여러 장이면 캐러셀로 올립니다.
 // 같은 글을 두 번 올리지 않도록, 최근 올린 게시물의 캡션 첫 줄과 비교합니다.
-// 사용: node _tools/ig-post.cjs [YYYY-MM-DD]   (날짜를 주지 않으면 어제, Asia/Seoul — 웹 글이 하루 지나 수정이 끝난 뒤에 올린다)
+// 사용: node _tools/ig-post.cjs [YYYY-MM-DD]   (날짜를 주지 않으면 어제, Asia/Seoul)
 const fs = require('fs'); const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const SITE = 'https://ethink.kr';

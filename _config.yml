@@ -18,7 +18,7 @@ likes_api: https://script.google.com/macros/s/AKfycbwTojtcr0qFjuk_4_NQOYjYAXSPMz
 description: 뉴스와 책, 사상가의 문장을 윤리의 눈으로 다시 읽습니다. 도덕·윤리 선생님에게는 수업 자료로, 인문교양 독자에게는 생각할 거리로 건넵니다. 길벗 윤리 교과서·청소년 인문교양서 편집자 박재형이 운영합니다.
 news_description: 최근 뉴스에서 도덕·윤리 수업에 바로 쓸 소재를 골라 교과 연계와 수업 질문까지 정리합니다.   # 「윤리로 읽는 뉴스」 코너 설명
 home_lead: 뉴스 한 편, 책 한 권을 윤리의 눈으로 다시 읽습니다. 글마다 생각해 볼 질문 하나를 담았습니다. 수업 자료로 써도, 혼자 읽어도 좋습니다.   # 홈 첫 화면 한 줄
-home_when: 새 글은 화 · 목 · 토요일에 올라옵니다   # 홈 첫 화면 발행 안내
+home_when: 새 글은 주 2~3회 올라옵니다   # 홈 첫 화면 발행 안내
 lang: ko
 baseurl: ""            # 저장소 이름이 아이디.github.io가 아니면 "/저장소이름" 으로
 url: "https://ethink.kr"
