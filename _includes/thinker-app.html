@@ -212,12 +212,10 @@
         <p class="q" id="sample-q"></p>
         <div class="psrc"><span>누구의 문장일까요? <span class="hidden-name" aria-label="가려진 이름"></span></span><span id="sample-src"></span></div>
       </div>
-      <p class="sample-note" style="margin-top:.6rem">이런 문장이 16개 나옵니다. 시험처럼 정답을 맞히는 게 아니라, 마음이 가는 쪽을 고르면 됩니다. <button class="ghost" id="open-teacher">선생님 화면</button></p>
+      <p class="sample-note" style="margin-top:.6rem">이런 문장이 16개 나옵니다. 시험처럼 정답을 맞히는 게 아니라, 마음이 가는 쪽을 고르면 됩니다. {% if include.standalone %}<button class="ghost" id="open-teacher">선생님 화면</button>{% endif %}</p>
     </div>
 {% unless include.standalone %}    <div class="tools no-print">
       {% include share-btn.html url="/ethics-lab/thinker/" title="나와 닮은 사상가는? — 이름을 가린 문장 16개로 찾는 나의 철학 짝꿍" %}
-      <a class="btn-print" href="{{ '/ethics-lab/thinker/ethink-thinker.html' | relative_url }}" download="나와 닮은 사상가(Ethink).html">HTML 파일로 내려받기</a>
-      <span class="tools-note">내려받은 파일은 인터넷 없이도 열립니다. 수업 자료로 자유롭게 쓸 수 있습니다.</span>
     </div>
 {% endunless %}  </section>
 
@@ -295,12 +293,12 @@
     </div>
   </section>
 
-  <section class="teach" id="tk-teach" aria-label="선생님께">
+{% if include.standalone %}  <section class="teach" id="tk-teach" aria-label="선생님께">
     <div><h3>수업 도입 5분</h3><p>단원을 열기 전에 학생들이 각자 한 판씩 하고, 결과 코드를 채팅방에 붙이게 하세요. 「선생님 화면 → 우리 반 결과」에 모아 붙이면 반의 사상가 분포가 그려집니다. 같은 반 안에서도 결이 나뉘는 모습이 곧 오늘 수업의 질문이 됩니다.</p><p style="margin-top:.5rem"><button class="btn-print" id="open-teacher2" type="button">선생님 화면 열기</button></p></div>
     <div><h3>기출·교과서와 바로 연결</h3><p>기출 문장에는 원래 실린 시험과 문항 번호를, 교과서 문장에는 길벗 교과서와 쪽수를 밝혔습니다. 결과 화면의 「이번 판에 나온 문장과 사상가」를 그대로 사상가 맞히기 복습으로 쓸 수 있습니다.</p></div>
     <div><h3>사상가는 이렇게 골랐습니다</h3><p>통합사회 8종, 현대사회와 윤리 7종, 윤리와 사상 4종, 인문학과 윤리 4종, 윤리문제 탐구 5종을 살펴, 여러 과목과 여러 교과서에 함께 나오는 사상가를 앞에 두었습니다.</p></div>
   </section>
-
+{% endif %}
   <div class="credit">
     <span>문장은 2022~2026학년도 시행 수능·평가원·교육청 전국연합 학력평가 생활과 윤리·윤리와 사상 제시문, 교과서 본문에서 가져왔습니다. 긴 제시문은 일부만 실었습니다.</span>
 {% if include.standalone %}    <span class="credit-gap">최신 판과 다른 코너는 <a href="https://ethink.kr/ethics-lab/thinker/?from=download">ethink.kr/ethics-lab/thinker</a>에서 볼 수 있습니다.</span>
@@ -629,6 +627,8 @@ function tGuide(){return `<div style="display:grid;gap:1.25rem">
 <p>이름을 가린 사상가의 문장 16개를 둘씩 겨루어 끝까지 남은 문장의 주인을 확인하는 5~10분 체험입니다. 『윤리와 사상』·『인문학과 윤리』의 사상가 단원을 열 때, 또는 한 단원을 마치고 복습할 때 씁니다.</p>
 <div><h3>두 가지 운영 방식</h3><p class="small"><b>도입 5~10분</b> — 각자 한 판. 결과 코드를 채팅방에 붙이게 하고 ‘우리 반 결과’로 분포를 보며 발문 3·4로 수업을 엽니다.<br><b>한 차시(50분)</b> — 체험 10분 → 「이번 판에 나온 문장과 사상가」로 사상가 맞히기 복습 10분 → 결이 다른 두 학생이 같은 쟁점을 두고 말하기 15분 → 성찰 기록 15분.</p></div>
 <div><h3>링크로 범위 고정·반 표시</h3><p class="small">주소 끝에 <code>?scope=east</code>를 붙이면 동양 사상만 보이고, <code>?cls=2-3</code>을 붙이면 결과 코드 앞에 반 이름이 붙습니다. 예: <code>ethink.kr/ethics-lab/thinker/?scope=west&amp;cls=2-3</code></p></div>
+<div><h3>기출·교과서와 바로 연결</h3><p class="small">기출 문장에는 원래 실린 시험과 문항 번호를, 교과서 문장에는 길벗 교과서와 쪽수를 밝혔습니다. 결과 화면의 「이번 판에 나온 문장과 사상가」를 그대로 사상가 맞히기 복습으로 쓸 수 있습니다.</p></div>
+<div><h3>사상가는 이렇게 골랐습니다</h3><p class="small">통합사회 8종, 현대사회와 윤리 7종, 윤리와 사상 4종, 인문학과 윤리 4종, 윤리문제 탐구 5종을 살펴, 여러 과목과 여러 교과서에 함께 나오는 사상가를 앞에 두었습니다.</p></div>
 <div><h3>예상되는 오해와 대응</h3><p class="small">① 결과를 성격 검사처럼 받아들이는 경우 — 세 축은 이번 판에서 고른 문장의 무게일 뿐이며, 다른 날 다시 하면 바뀔 수 있다고 알려 줍니다.<br>② “내가 ○○주의자”라고 이름표를 붙이는 경우 — 사상가의 생각 가운데 동의하지 않는 점을 하나 쓰게 합니다(성찰 질문 2).<br>③ 특정 사상가가 ‘좋은 결과’로 여겨지는 분위기 — 모든 문장이 교과서와 시험에 실린 문장이라는 점을 짚어 줍니다.</p></div>
 <div><h3>기록과 안전</h3><p class="small">응답은 서버로 보내지지 않고 각 기기의 브라우저에만 저장됩니다. 결과 코드에는 남은 사상가, 세 축의 값, 범위, 결승 상대, 무작위 글자 4개만 담깁니다. 무작위 글자는 같은 판의 코드를 두 번 붙여도 한 번만 세는 데 쓰입니다. 공용 기기에서는 「다시 하기」로 기록을 지우게 하세요.</p></div></div>`}
 function tRun(){return `<div style="display:grid;gap:1.25rem">
@@ -685,9 +685,9 @@ function toggleFull(){const el=$('t-stage');if(!el)return;const fe=document.full
  if(fe){(document.exitFullscreen||document.webkitExitFullscreen).call(document)}else{(el.requestFullscreen||el.webkitRequestFullscreen).call(el)}}
 document.addEventListener('keydown',e=>{if($('v-teacher').hidden||TS.tab!=='run')return;const t=e.target;if(t&&/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))return;
  if(e.key==='ArrowRight'||e.key==='PageDown'){e.preventDefault();moveSlide(1)}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();moveSlide(-1)}});
-function openTeacher(on){$('tk-teach').hidden=!!on;if(on){renderTeacher();show('v-teacher');try{history.replaceState(null,'',location.pathname+location.search+'#teacher')}catch(e){}}else{show(curView);try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}}}
+function openTeacher(on){if($('tk-teach'))$('tk-teach').hidden=!!on;if(on){renderTeacher();show('v-teacher');try{history.replaceState(null,'',location.pathname+location.search+'#teacher')}catch(e){}}else{show(curView);try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}}}
 function tTick(){const left=Math.max(0,Math.ceil((TS.endAt-Date.now())/1000));if(left===TS.timer&&left>0)return;TS.timer=left;if(left===0){stopTimer();TS.done=true}updateRun()}
-$('open-teacher').onclick=()=>openTeacher(true);$('open-teacher2').onclick=()=>openTeacher(true);$('t-back').onclick=()=>openTeacher(false);
+['open-teacher','open-teacher2'].forEach(id=>{if($(id))$(id).onclick=()=>openTeacher(true)});$('t-back').onclick=()=>openTeacher(false);
 $('v-teacher').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
  if(b.dataset.tab){TS.tab=b.dataset.tab;renderTeacher()}
  if(b.dataset.timer){stopTimer();TS.done=false;TS.timer=+b.dataset.timer;updateRun()}

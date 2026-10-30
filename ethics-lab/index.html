@@ -27,6 +27,7 @@ og_image: /assets/og/lab.jpg
 .lab-card .lab-go .go{background:var(--ink);color:var(--paper);text-decoration:none;padding:.65rem 1.2rem;font-weight:700;border-radius:2px}
 .lab-card .lab-go .go:hover{background:var(--accent)}
 .lab-card .lab-go .btn-print{text-decoration:none}
+.lab-card .lab-note{font-size:var(--step--1);color:var(--muted);margin:0}
 .lab-note{margin:0;font-size:var(--step--1);color:var(--muted);text-align:justify;text-justify:inter-word;word-break:normal;line-break:strict}
 </style>
 
@@ -44,7 +45,8 @@ og_image: /assets/og/lab.jpg
     <p class="lab-lead">{{ l.lead }}</p>
     <p class="lab-desc">{{ l.lab_desc }}</p>
     <p class="lab-info"><span>{{ l.lab_info }}</span><span>{{ l.lab_subjects }}</span></p>
-    <p class="lab-go"><a class="go" href="{{ l.url | relative_url }}">체험하기</a><a class="btn-print" href="{{ l.url | relative_url }}#teacher">선생님 화면</a></p>
+    <p class="lab-go"><a class="go" href="{{ l.url | relative_url }}">체험하기</a><a class="btn-print" href="{{ l.url | relative_url }}#teacher">선생님 화면</a>{% if l.lab_download %}<a class="btn-print" href="{{ l.lab_download | relative_url }}" download="{{ l.lab_download_name }}">HTML 파일로 내려받기</a>{% endif %}</p>{% if l.lab_download %}
+    <p class="lab-note">내려받은 파일은 인터넷 없이도 열립니다. 수업 자료로 자유롭게 쓸 수 있습니다.</p>{% endif %}
   </li>
 {% endfor %}
 </ol>

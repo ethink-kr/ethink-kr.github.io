@@ -186,12 +186,12 @@
 
 <div id="tt"></div>
 
-<section class="teach" id="tt-teach" aria-label="선생님께">
+{% if include.standalone %}<section class="teach" id="tt-teach" aria-label="선생님께">
   <div><h3>수업 도입 10분</h3><p>주소 끝에 <code>?ep=2</code>처럼 사건 번호를 붙여 두면 학생은 그 사건만 봅니다. 선택과 이유만 적게 하고 발문 하나로 본 수업에 들어가세요.</p></div>
   <div><h3>우리 반 결과 모으기</h3><p>학생 화면 끝에 나오는 결과 코드를 채팅방이나 패들렛에 붙이게 한 뒤, 「선생님 화면 → 우리 반 결과」에 모아 붙이면 반 평균 시간표가 그려집니다. 이름은 코드에 들어가지 않습니다.</p><p style="margin:.75rem 0 0"><button class="btn-print" id="tt-open-teacher" type="button">선생님 화면 열기</button></p></div>
   <div><h3>문장과 출처</h3><p>길벗 『인문학과 윤리』에 실린 문장은 쪽수를, 수능과 모의고사 기출 제시문은 시험과 문항 번호를, 번역서는 옮긴이와 출판사를 함께 적었습니다. 교과서 해당 쪽을 펴면 단원과 바로 이어집니다.</p></div>
 </section>
-
+{% endif %}
 <div class="credit" style="font-size:var(--step--1);color:var(--muted);display:grid;gap:.25rem">
   <span>168시간 중 기본생활·필수일정 112시간을 뺀 56시간을 배분하는 수업용 가정입니다. 시간과 사건은 모두 가상이며 생활시간 통계나 미래 예측이 아닙니다. 인용문은 각 문장 아래에 출처를 밝혔습니다. 응답은 이 기기의 브라우저에만 저장되고 서버로 보내지지 않습니다.</span>
 {% if include.standalone %}  <span class="credit-gap">최신 판과 다른 코너는 <a href="https://ethink.kr/ethics-lab/timetable/?from=download" style="color:var(--accent)">ethink.kr/ethics-lab/timetable</a>에서 볼 수 있습니다.</span>
@@ -281,9 +281,9 @@ function intro(){return `<section style="display:flex;flex-direction:column;gap:
 <p>가상 인물 <b>다온</b>의 일주일 가운데 내 뜻대로 쓸 수 있는 <span class="mk">56시간</span>을 일곱 가지 삶의 영역에 나눕니다. 계획에 없던 일이 생기고, 사상가의 문장을 읽은 뒤 다시 나눕니다. 처음과 나중의 차이가 곧 나의 성찰 기록이 됩니다.</p>
 <ol class="steps"><li>일곱 영역에 56시간을 배분합니다.</li><li>뜻밖의 사건에서 선택을 하나 합니다. 선택에는 기회와 부담이 함께 따릅니다.</li><li>세 가지 생각의 렌즈로 교과서와 기출에 실린 사상가의 문장을 읽습니다.</li><li>줄어든 시간을 다시 배분하고, 네 가지 질문에 나의 말로 답합니다.</li></ol>
 <div class="box soft" aria-hidden="true" style="gap:.75rem"><div style="display:flex;justify-content:space-between;align-items:baseline"><span class="eyebrow">A WEEK OF POSSIBILITIES</span><span><b style="font-family:var(--font-display);font-size:var(--step-3)">56</b> 시간</span></div><div class="mosaic">${mosaic(initial)}</div><div class="legend">${legend()}</div><p class="lead-q">시간을 놓는 자리에 삶의 모양이 생깁니다.</p><p class="small muted">한 칸은 한 시간. 색마다 다른 삶의 장면.${cls?` · ${esc(cls)}`:''}</p></div>
-<div class="actions"><button class="cta" data-go="1">나의 선택 시작하기</button>${state.step>0?`<button class="sec" data-go="${state.step}">이어서 하기</button>`:''}<button class="ghost" data-teacher="1">선생님 화면</button></div>
+<div class="actions"><button class="cta" data-go="1">나의 선택 시작하기</button>${state.step>0?`<button class="sec" data-go="${state.step}">이어서 하기</button>`:''}{% if include.standalone %}<button class="ghost" data-teacher="1">선생님 화면</button>{% endif %}</div>
 <p class="small muted">시험처럼 정답을 맞히는 활동이 아닙니다. 배분한 시간의 양은 점수가 되지 않습니다.</p>
-{% unless include.standalone %}<div class="tools no-print">{% include share-btn.html url="/ethics-lab/timetable/" title="내 삶의 시간표 — 일주일 56시간, 무엇에 시간을 건네겠어요?" %}<a class="btn-print" href="{{ '/ethics-lab/timetable/ethink-timetable.html' | relative_url }}" download="내 삶의 시간표(Ethink).html">HTML 파일로 내려받기</a><span class="tools-note">내려받은 파일은 인터넷 없이도 열립니다. 수업 자료로 자유롭게 쓸 수 있습니다.</span></div>{% endunless %}
+{% unless include.standalone %}<div class="tools no-print">{% include share-btn.html url="/ethics-lab/timetable/" title="내 삶의 시간표 — 일주일 56시간, 무엇에 시간을 건네겠어요?" %}</div>{% endunless %}
 </section>`}
 
 function allocation(review){const arr=review?state.after:state.before,limit=review?target():56;return head(review?'CHOOSE AGAIN':'MAKE ROOM FOR WHAT MATTERS',review?'다시, 시간을 놓아 보세요.':'다온의 일주일을 그려 보세요.',review?'줄어든 시간 속에서도 지키고 싶은 것은 무엇인가요? 처음 선택을 유지해도 좋습니다.':'일곱 가지 영역에 56시간을 나눠 주세요. 지금 보이는 배분은 바꿀 수 있는 예시입니다.')+`
@@ -334,6 +334,7 @@ function tGuide(){return `<div style="display:grid;gap:1.25rem">
 <div><h3>두 가지 운영 방식</h3><p class="small"><b>한 차시(50분)</b> — 도입 5분 → 체험 15분(배분·사건·읽기·재배분) → 읽기·토론 20분 → 성찰 기록 10분.<br><b>도입 10분</b> — 사건 하나를 미리 정해 두고(아래 ‘링크로 사건 고정’) 학생은 선택과 이유만 적습니다. 발문 하나로 본 수업에 들어갑니다.</p></div>
 <div><h3>학생 결과를 모으는 방법</h3><p class="small">학생 응답은 서버로 전송되지 않습니다. 성찰 기록 화면의 <b>결과 코드</b>를 학생이 채팅방·패들렛·구글 폼 등에 붙여 넣게 한 뒤, ‘우리 반 결과’ 탭에 모아 붙이면 반 평균 시간표와 선택 분포가 그려집니다. 이름은 코드에 들어가지 않습니다.</p></div>
 <div><h3>링크로 사건 고정·반 표시</h3><p class="small">주소 끝에 <code>?ep=2</code>를 붙이면 2번 사건(돌봄)만 보이고, <code>?cls=2-3</code>을 붙이면 결과 코드 앞에 반 이름이 붙습니다. 예: <code>ethink.kr/ethics-lab/timetable/?ep=2&amp;cls=2-3</code></p></div>
+<div><h3>문장과 출처</h3><p class="small">길벗 『인문학과 윤리』에 실린 문장은 쪽수를, 수능과 모의고사 기출 제시문은 시험과 문항 번호를, 번역서는 옮긴이와 출판사를 함께 적었습니다. 교과서 해당 쪽을 펴면 단원과 바로 이어집니다.</p></div>
 <div><h3>예상되는 오해와 대응</h3><p class="small">① “시간을 많이 둔 영역이 더 가치 있는 영역”으로 읽는 경우 — 시간의 양과 가치의 크기는 다르다는 점을 결과 화면의 문장으로 짚어 줍니다.<br>② 휴식·즐거움을 많이 둔 학생을 평가하는 분위기 — 배분의 증감은 도덕성 점수가 아니라는 안내를 먼저 읽힙니다.<br>③ 가상 인물 이야기가 학생 가정 사정의 공개로 이어지는 경우 — “다온이라면”으로 말하게 하고 개인 사정은 묻지 않습니다.<br>④ “정답 배분”을 묻는 경우 — 이유의 적절성과 다른 관점의 검토를 본다고 알려 줍니다.</p></div>
 <div><h3>모형 안내</h3><p class="small">168시간 중 기본생활·필수일정 112시간을 제외한 56시간을 배분합니다. 모든 시간과 사건은 수업용 가정이며 실제 생활시간 통계나 미래 예측이 아닙니다. 항목은 주된 목적에 따라 나눴고 현실에서는 서로 겹칠 수 있습니다. 응답은 각 기기의 브라우저에만 저장되므로 공용 기기에서는 체험 뒤 ‘기록 지우고 처음으로’를 누르게 하세요.</p></div></div>`}
 
@@ -397,7 +398,7 @@ ${groups.map(([g,ks])=>`<div><h3>${g}</h3><table><tbody>${ks.map(k=>`<tr><td sty
 function updateBudget(){const review=state.step===4,a=review?state.after:state.before,t=review?target():56,left=t-sum(a);const bud=document.getElementById('budget');if(!bud)return;bud.innerHTML=left<0?`<span class="bad"><strong>${-left}</strong>시간 초과 · 다른 시간을 줄여 주세요</span>`:left===0?`<strong>${t}</strong>시간을 모두 배분했어요`:`앞으로 놓을 시간 <strong>${left}</strong> / ${t}h`;document.getElementById('bar').innerHTML=a.map((n,i)=>`<span style="width:${n/Math.max(t,sum(a))*100}%;background:${cats[i][2]}"></span>`).join('');document.getElementById('allocNext').disabled=left!==0}
 function scrollTop(){const y=app.getBoundingClientRect().top+window.scrollY-12;window.scrollTo({top:Math.max(0,y)})}
 function go(n){if((state.step===1&&n===2&&sum(state.before)!==56)||(state.step===4&&n===5&&sum(state.after)!==target())||(n>=3&&state.choice===null))return;state.step=n;save();render();if(n)scrollTop()}
-function render(){if(teacher){app.innerHTML=teacherView();teach.style.display='none';if(tab==='run')updateRun()}else{app.innerHTML=(state.step?prog():'')+[intro,()=>allocation(false),eventPage,reading,()=>allocation(true),results][state.step]();teach.style.display='';if([1,4].includes(state.step))updateBudget()}}
+function render(){if(teacher){app.innerHTML=teacherView();if(teach)teach.style.display='none';if(tab==='run')updateRun()}else{app.innerHTML=(state.step?prog():'')+[intro,()=>allocation(false),eventPage,reading,()=>allocation(true),results][state.step]();if(teach)teach.style.display='';if([1,4].includes(state.step))updateBudget()}}
 function setTeacher(on){teacher=on;try{history.replaceState(null,'',location.pathname+location.search+(on?'#teacher':''))}catch(e){}render();scrollTop()}
 let timerId=null,endAt=0;
 const $id=id=>document.getElementById(id);
@@ -446,7 +447,7 @@ app.addEventListener('input',e=>{const el=e.target;
  if(el.dataset.note!==undefined){const i=+el.dataset.note;state.notes[i]=el.value;document.getElementById('print'+i).textContent=el.value||' '}
  if(el.id==='codes'){tstate.codes=el.value;tsave();clearTimeout(aggT);aggT=setTimeout(()=>{const pos=el.selectionStart;render();const n=document.getElementById('codes');if(n){n.focus();n.setSelectionRange(pos,pos)}},700);return}
  save()});
-document.getElementById('tt-open-teacher').onclick=()=>setTeacher(true);
+{const o=document.getElementById('tt-open-teacher');if(o)o.onclick=()=>setTeacher(true)}
 render();
 })();
 </script>
