@@ -1,0 +1,52 @@
+---
+layout: default
+title: ETHICS LAB
+lead: 고르고, 읽고, 다시 생각하는 윤리 체험입니다. 혼자 해 봐도 좋고, 수업 도입이나 한 차시 활동으로 써도 좋습니다. 체험마다 선생님 화면이 있어 반 전체의 결과를 모아 볼 수 있습니다.
+og_image: /assets/og/lab.jpg
+---
+{% comment %}
+  윤리 실험실 목록. 각 체험 페이지 앞머리의 lab_no가 있는 페이지만, 번호 순서대로 나열합니다.
+  비공개 체험(앞머리에 published: false)은 사이트에 만들어지지 않으므로 이 목록에도 나오지 않습니다.
+{% endcomment %}
+{% assign labs = site.pages | where_exp: "p", "p.lab_no" | sort: "lab_no" %}
+<style>
+.lab-meta{margin:0;overflow:hidden;color:var(--accent)}
+.lab-meta .lm-in{display:flex;flex-wrap:wrap;margin-left:-1.6rem}
+.lab-meta .lm-in>span{white-space:nowrap}
+.lab-meta .lm-in>span::before{content:"·";display:inline-block;width:1.6rem;text-align:center;color:var(--muted)}
+.lab-list{display:flex;flex-direction:column;gap:2.25rem;margin:0;padding:0;list-style:none}
+.lab-card{border-top:2px solid var(--ink);padding-top:1rem;display:grid;gap:.6rem}
+.lab-card .lab-no{margin:0;color:var(--accent)}
+.lab-card h2{font-family:var(--font-display);font-size:var(--step-3);line-height:1.3;margin:0}
+.lab-card h2 a{text-decoration:none}
+.lab-card h2 a:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
+.lab-card .lab-lead{margin:0;color:var(--muted);font-size:var(--step-1)}
+.lab-card .lab-desc{margin:0;text-align:justify;text-justify:inter-word;word-break:normal;line-break:strict;overflow-wrap:break-word}
+.lab-card .lab-info{margin:0;font-size:var(--step--1);color:var(--muted);display:grid;gap:.1rem}
+.lab-card .lab-go{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-top:.25rem}
+.lab-card .lab-go .go{background:var(--ink);color:var(--paper);text-decoration:none;padding:.65rem 1.2rem;font-weight:700;border-radius:2px}
+.lab-card .lab-go .go:hover{background:var(--accent)}
+.lab-card .lab-go .btn-print{text-decoration:none}
+.lab-note{margin:0;font-size:var(--step--1);color:var(--muted);text-align:justify;text-justify:inter-word;word-break:normal;line-break:strict}
+</style>
+
+<section class="issue-hero">
+  <p class="lab-meta mono"><span class="lm-in"><span>ETHICS LAB</span><span>체험 {{ labs.size }}가지</span></span></p>
+  <h1 class="issue-title">{{ page.title }}</h1>
+  <p class="issue-lead">{{ page.lead }}</p>
+</section>
+
+<ol class="lab-list">
+{% for l in labs %}
+  <li class="lab-card">
+    <p class="lab-no mono">EXPERIENCE {{ l.lab_no }}</p>
+    <h2><a href="{{ l.url | relative_url }}">{{ l.title }}</a></h2>
+    <p class="lab-lead">{{ l.lead }}</p>
+    <p class="lab-desc">{{ l.lab_desc }}</p>
+    <p class="lab-info"><span>{{ l.lab_info }}</span><span>{{ l.lab_subjects }}</span></p>
+    <p class="lab-go"><a class="go" href="{{ l.url | relative_url }}">체험하기</a><a class="btn-print" href="{{ l.url | relative_url }}#teacher">선생님 화면</a></p>
+  </li>
+{% endfor %}
+</ol>
+
+<p class="lab-note">응답은 각자의 기기 브라우저에만 저장되고 서버로 보내지지 않습니다. 반 전체 결과는 학생이 붙여 넣은 결과 코드를 선생님 화면에 모아서 봅니다. 수업과 비상업적 공유에는 자유롭게 쓸 수 있습니다.</p>

@@ -72,6 +72,18 @@ downloads:
 | 홈(최신 글) | `/` |
 | 항목 하나 | `/weekly/2026-10-16/1/` |
 | 소개 | `/about/` |
+| 윤리 실험실(목록) | `/ethics-lab/` (상단 메뉴 「윤리 실험실」) |
+| EXPERIENCE 01 · 나와 닮은 사상가 | `/ethics-lab/thinker/` (단독 파일 `/ethics-lab/thinker/ethink-thinker.html`, 앱은 `_includes/thinker-app.html`) |
+| EXPERIENCE 02 · 내 삶의 시간표 (비공개) | `/ethics-lab/timetable/` (단독 파일 `/ethics-lab/timetable/ethink-timetable.html`, 앱은 `_includes/timetable-app.html`) |
+| 옛 주소 | `/thinker/` → `/ethics-lab/thinker/`로 넘겨 줍니다(`?from=` 표시도 그대로 넘김) |
+
+### 윤리 실험실 운영
+- 목록 페이지(`ethics-lab/index.html`)는 체험 페이지 앞머리에 `lab_no`가 있는 페이지를 번호 순서대로 저절로 나열합니다. 소개 문구는 각 체험 페이지 앞머리의 `lab_desc`(소개 글)·`lab_info`(시간·분량)·`lab_subjects`(연계 과목)에서 고칩니다.
+- **비공개·공개 전환**: 체험 폴더의 `index.html`과 단독 파일 두 곳 앞머리에 `published: false`가 있으면 사이트에 만들어지지 않고 목록에도 나오지 않습니다. EXPERIENCE 02를 공개하려면 `ethics-lab/timetable/` 두 파일에서 그 줄을 지우고 올립니다.
+- 새 체험을 더할 때: `ethics-lab/새이름/index.html`을 만들고 앞머리에 `lab_no: "03"`과 소개 항목을 넣습니다. 머리말 줄은 `ETHICS LAB · EXPERIENCE 03` 형식으로 씁니다. 「윤리 실험실」이라는 말은 상단 메뉴 이름으로만 씁니다.
+- 체험마다 학생 화면 외에 **선생님 화면**(`#teacher`)이 있습니다. 학생이 결과 화면의 결과 코드를 채팅방 등에 붙이면, 교사가 「우리 반 결과」 탭에 모아 붙여 반 전체 분포를 봅니다. 서버 전송은 없습니다. 주소 옵션: 시간표 `?ep=1~3`(사건 고정)·`?cls=반`, 사상가 `?scope=west|east|mix`·`?cls=반`.
+- 활동지 한글 파일: `files/ethics-lab-01-thinker-worksheet.hwpx`, `files/ethics-lab-02-timetable-worksheet.hwpx`. 선생님 화면 「활동지 인쇄」 탭의 「한글 파일(HWPX) 내려받기」 단추가 이 파일을 내려받게 합니다. 문항을 바꿀 때는 `_tools/worksheet-hwpx.py`의 문항을 고친 뒤 HWPX 스킬 경로를 넣어 다시 만듭니다(웹 활동지 문항도 함께 고칠 것).
+- 공유 썸네일: `assets/og/lab.jpg`(목록), `thinker.jpg`, `timetable.jpg`. 다시 만들 때는 `node _tools/og-page.cjs thinker "ETHICS LAB · EXPERIENCE 01 · 사상가 24인 · 문장 48개" "나와 닮은 사상가는?" "이름을 가린 문장 16개로 찾는\n나의 철학 짝꿍" /ethics-lab/thinker mark`처럼 씁니다.
 
 ## 확인할 것
 
@@ -89,7 +101,7 @@ downloads:
   - **통계** 탭: 요약(오늘·최근 7일·이번 달·전체), 코너별 방문자·조회수, 유입 경로, 글·페이지별 방문자·조회수, 사이트 안 이동, 일·주·월·연도별
   - **글목록** 탭: 주소마다 한 줄, 가장 최근 제목(제목이 바뀌어도 한 글로 셈)
   - **방문기록** 탭: 원자료
-- 코너: 홈 / 윤리로 읽는 뉴스 / 윤리로 읽는 책 / 나와 닮은 사상가 / 윤리 채널 / 소개·만든 책 / 운영자에게 의견 보내기 / 찜한 글.
+- 코너: 홈 / 윤리로 읽는 뉴스 / 윤리로 읽는 책 / 윤리 실험실(나와 닮은 사상가) / 윤리 채널 / 소개·만든 책 / 운영자에게 의견 보내기 / 찜한 글.
 - 유입 경로는 ① 주소 끝의 `?from=표시` ② 카카오톡·인스타그램 같은 앱 안 브라우저 ③ 이전 사이트 주소 순서로 정합니다. 사이트의 공유 버튼과 링크 복사에는 `?from=kakao`, `?from=link` 등이 자동으로 붙고, 읽은 뒤 주소창에서는 지워집니다.
 - 직접 링크를 걸 때 표시를 붙이면 경로가 구분됩니다: `?from=brunch`(브런치), `?from=blog`(네이버 블로그), `?from=insta`(인스타그램), `?from=channel`(길벗 카카오 채널), `?from=email`, `?from=qr`. 목록에 없는 표시는 '표시: 이름'으로 잡힙니다.
 - 내 브라우저를 집계에서 빼려면 그 브라우저로 `https://ethink.kr/?nostats=1`을 한 번 엽니다(`?nostats=0`이면 다시 셉니다).
