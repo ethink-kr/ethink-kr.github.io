@@ -212,7 +212,7 @@
         <p class="q" id="sample-q"></p>
         <div class="psrc"><span>누구의 문장일까요? <span class="hidden-name" aria-label="가려진 이름"></span></span><span id="sample-src"></span></div>
       </div>
-      <p class="sample-note" style="margin-top:.6rem">이런 문장이 16개 나옵니다. 시험처럼 정답을 맞히는 게 아니라, 마음이 가는 쪽을 고르면 됩니다. {% if include.standalone %}<button class="ghost" id="open-teacher">선생님 화면</button>{% endif %}</p>
+      <p class="sample-note" style="margin-top:.6rem">이런 문장이 16개 나옵니다. 시험처럼 정답을 맞히는 게 아니라, 마음이 가는 쪽을 고르면 됩니다. {% if include.standalone and include.student != true %}<button class="ghost" id="open-teacher">선생님 화면</button>{% endif %}</p>
     </div>
 {% unless include.standalone %}    <div class="tools no-print">
       {% include share-btn.html url="/ethics-lab/thinker/" title="나와 닮은 사상가는? — 이름을 가린 문장 16개로 찾는 나의 철학 짝꿍" %}
@@ -293,7 +293,7 @@
     </div>
   </section>
 
-{% if include.standalone %}  <section class="teach" id="tk-teach" aria-label="선생님께">
+{% if include.standalone and include.student != true %}  <section class="teach" id="tk-teach" aria-label="선생님께">
     <div><h3>수업 도입 5분</h3><p>단원을 열기 전에 학생들이 각자 한 판씩 하고, 결과 코드를 채팅방에 붙이게 하세요. 「선생님 화면 → 우리 반 결과」에 모아 붙이면 반의 사상가 분포가 그려집니다. 같은 반 안에서도 결이 나뉘는 모습이 곧 오늘 수업의 질문이 됩니다.</p><p style="margin-top:.5rem"><button class="btn-print" id="open-teacher2" type="button">선생님 화면 열기</button></p></div>
     <div><h3>기출·교과서와 바로 연결</h3><p>기출 문장에는 원래 실린 시험과 문항 번호를, 교과서 문장에는 길벗 교과서와 쪽수를 밝혔습니다. 결과 화면의 「이번 판에 나온 문장과 사상가」를 그대로 사상가 맞히기 복습으로 쓸 수 있습니다.</p></div>
     <div><h3>사상가는 이렇게 골랐습니다</h3><p>통합사회 8종, 현대사회와 윤리 7종, 윤리와 사상 4종, 인문학과 윤리 4종, 윤리문제 탐구 5종을 살펴, 여러 과목과 여러 교과서에 함께 나오는 사상가를 앞에 두었습니다.</p></div>
@@ -703,7 +703,7 @@ $('v-teacher').addEventListener('click',e=>{const b=e.target.closest('button');i
 function printOnly(){const h=document.documentElement;h.classList.add('tk-print-only');const off=()=>{h.classList.remove('tk-print-only');window.removeEventListener('afterprint',off)};window.addEventListener('afterprint',off);window.print()}
 let aggT=null;
 $('v-teacher').addEventListener('input',e=>{if(e.target.id!=='t-codes')return;TS.codes=e.target.value;tsave();clearTimeout(aggT);aggT=setTimeout(()=>{const pos=e.target.selectionStart;renderTeacher();const n=$('t-codes');if(n){n.focus();n.setSelectionRange(pos,pos)}},700)});
-if(location.hash==='#teacher')openTeacher(true);
+{% unless include.student %}if(location.hash==='#teacher')openTeacher(true);{% endunless %}
 
 
 </script>

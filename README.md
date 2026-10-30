@@ -73,8 +73,8 @@ downloads:
 | 항목 하나 | `/weekly/2026-10-16/1/` |
 | 소개 | `/about/` |
 | 윤리 실험실(목록) | `/ethics-lab/` (상단 메뉴 「윤리 실험실」) |
-| EXPERIENCE 01 · 나와 닮은 사상가 | `/ethics-lab/thinker/` (단독 파일 `/ethics-lab/thinker/ethink-thinker.html`, 앱은 `_includes/thinker-app.html`) |
-| EXPERIENCE 02 · 내 삶의 시간표 (비공개) | `/ethics-lab/timetable/` (단독 파일 `/ethics-lab/timetable/ethink-timetable.html`, 앱은 `_includes/timetable-app.html`) |
+| EXPERIENCE 01 · 나와 닮은 사상가 | `/ethics-lab/thinker/` (단독 파일: 선생님용 `/ethics-lab/thinker/ethink-thinker.html`, 학생용 `ethink-thinker-student.html`, 앱은 `_includes/thinker-app.html`) |
+| EXPERIENCE 02 · 내 삶의 시간표 (비공개) | `/ethics-lab/timetable/` (단독 파일: 선생님용 `/ethics-lab/timetable/ethink-timetable.html`, 학생용 `ethink-timetable-student.html`, 앱은 `_includes/timetable-app.html`) |
 | 옛 주소 | `/thinker/` → `/ethics-lab/thinker/`로 넘겨 줍니다(`?from=` 표시도 그대로 넘김) |
 
 ### 윤리 실험실 운영

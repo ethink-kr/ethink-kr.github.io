@@ -1,0 +1,52 @@
+---
+layout: null
+title: 나와 닮은 사상가는?
+lead: 이름을 가린 문장 16개로 찾는 나의 철학 짝꿍
+permalink: /ethics-lab/thinker/ethink-thinker-student.html
+sitemap: false
+---
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>나와 닮은 사상가는? · Ethink</title>
+<meta name="description" content="이름을 가린 사상가의 문장 16개를 둘씩 비교해 나와 결이 닮은 사상가를 찾습니다. Ethink(ethink.kr)에서 내려받은 학생용 파일입니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Ethink 사이트 기본 색·글꼴 (인터넷이 없으면 기기 글꼴로 대신 보입니다) */
+:root {
+  --paper: #f5f6f3;      /* 연한 회록빛 종이 */
+  --surface: #ffffff;
+  --ink: #1c2421;        /* 먹색 */
+  --muted: #5b6662;
+  --rule: #d9ded9;
+  --accent: #23614f;     /* 짙은 청록 — 교과서 단원 색 */
+  --accent-soft: #e3eee9;
+  --mark: #f2df74;       /* 형광펜 */
+  --mark-ink: #1c2421;
+  --font-display: "Gowun Batang", "Nanum Myeongjo", "AppleMyungjo", serif;
+  --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --step--1: 0.8125rem; --step-0: 1rem; --step-1: 1.1875rem; --step-2: 1.5rem; --step-3: 2rem;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); font-size: 1rem; line-height: 1.75; word-break: keep-all; }
+a { color: inherit; }
+.wrap { max-width: 46rem; margin: 0 auto; padding: 2rem 16px 4rem; display: flex; flex-direction: column; gap: 3rem; }
+.mono { font-family: var(--font-mono); font-size: 0.8125rem; }
+.issue-hero { display: flex; flex-direction: column; gap: 0.75rem; }
+.issue-meta { display: flex; flex-wrap: wrap; gap: 0 1rem; color: var(--accent); margin: 0; }
+.issue-meta span + span::before { content: "·"; margin-right: 1rem; color: var(--muted); }
+.issue-title { font-family: var(--font-display); font-weight: 700; font-size: 2rem; line-height: 1.35; margin: 0; }
+.issue-lead { margin: 0; font-size: 1.1875rem; line-height: 1.7; color: var(--muted); }
+@media print { .wrap { max-width: none; padding: 0; gap: 1rem; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+{% include thinker-app.html standalone=true student=true %}
+</div>
+</body>
+</html>

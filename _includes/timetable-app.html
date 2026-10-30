@@ -186,7 +186,7 @@
 
 <div id="tt"></div>
 
-{% if include.standalone %}<section class="teach" id="tt-teach" aria-label="선생님께">
+{% if include.standalone and include.student != true %}<section class="teach" id="tt-teach" aria-label="선생님께">
   <div><h3>수업 도입 10분</h3><p>주소 끝에 <code>?ep=2</code>처럼 사건 번호를 붙여 두면 학생은 그 사건만 봅니다. 선택과 이유만 적게 하고 발문 하나로 본 수업에 들어가세요.</p></div>
   <div><h3>우리 반 결과 모으기</h3><p>학생 화면 끝에 나오는 결과 코드를 채팅방이나 패들렛에 붙이게 한 뒤, 「선생님 화면 → 우리 반 결과」에 모아 붙이면 반 평균 시간표가 그려집니다. 이름은 코드에 들어가지 않습니다.</p><p style="margin:.75rem 0 0"><button class="btn-print" id="tt-open-teacher" type="button">선생님 화면 열기</button></p></div>
   <div><h3>문장과 출처</h3><p>길벗 『인문학과 윤리』에 실린 문장은 쪽수를, 수능과 모의고사 기출 제시문은 시험과 문항 번호를, 번역서는 옮긴이와 출판사를 함께 적었습니다. 교과서 해당 쪽을 펴면 단원과 바로 이어집니다.</p></div>
@@ -247,7 +247,7 @@ const cls=(params.get('cls')||'').replace(/[^\w가-힣-]/g,'').slice(0,12);
 /* ---------- 상태 ---------- */
 const newId=()=>Array.from({length:4},()=>'abcdefghjkmnpqrstuvwxyz23456789'[Math.random()*31|0]).join('');
 const fresh=()=>({rid:newId(),step:0,before:[...initial],after:[...initial],event:lockedEp??0,choice:null,lens:'',reason:'',quote:'',name:'',notes:['','','',''],group:false,groupText:''});
-let ridNew=false,state=fresh(),storageOK=true,teacher=location.hash==='#teacher',tab='guide';
+let ridNew=false,state=fresh(),storageOK=true,teacher={% if include.student %}false{% else %}location.hash==='#teacher'{% endif %},tab='guide';
 try{const raw=JSON.parse(localStorage.getItem(KEY));
  if(raw&&raw.version===1&&Array.isArray(raw.before)&&raw.before.length===7&&Array.isArray(raw.after)&&raw.after.length===7&&Array.isArray(raw.notes)&&raw.notes.length===4&&[...raw.before,...raw.after].every(n=>Number.isInteger(n)&&n>=0&&n<=56)&&Number.isInteger(raw.step)&&raw.step>=0&&raw.step<=5&&events[raw.event]&&(raw.choice===null||events[raw.event].choices[raw.choice])){state={...fresh(),...raw};if(!/^[a-z0-9]{4}$/.test(String(raw.rid||''))){state.rid=newId();ridNew=true}if(lockedEp!==null&&state.event!==lockedEp){state.event=lockedEp;state.choice=null;if(state.step>2)state.step=2}}
 }catch(e){storageOK=false}
@@ -281,7 +281,7 @@ function intro(){return `<section style="display:flex;flex-direction:column;gap:
 <p>가상 인물 <b>다온</b>의 일주일 가운데 내 뜻대로 쓸 수 있는 <span class="mk">56시간</span>을 일곱 가지 삶의 영역에 나눕니다. 계획에 없던 일이 생기고, 사상가의 문장을 읽은 뒤 다시 나눕니다. 처음과 나중의 차이가 곧 나의 성찰 기록이 됩니다.</p>
 <ol class="steps"><li>일곱 영역에 56시간을 배분합니다.</li><li>뜻밖의 사건에서 선택을 하나 합니다. 선택에는 기회와 부담이 함께 따릅니다.</li><li>세 가지 생각의 렌즈로 교과서와 기출에 실린 사상가의 문장을 읽습니다.</li><li>줄어든 시간을 다시 배분하고, 네 가지 질문에 나의 말로 답합니다.</li></ol>
 <div class="box soft" aria-hidden="true" style="gap:.75rem"><div style="display:flex;justify-content:space-between;align-items:baseline"><span class="eyebrow">A WEEK OF POSSIBILITIES</span><span><b style="font-family:var(--font-display);font-size:var(--step-3)">56</b> 시간</span></div><div class="mosaic">${mosaic(initial)}</div><div class="legend">${legend()}</div><p class="lead-q">시간을 놓는 자리에 삶의 모양이 생깁니다.</p><p class="small muted">한 칸은 한 시간. 색마다 다른 삶의 장면.${cls?` · ${esc(cls)}`:''}</p></div>
-<div class="actions"><button class="cta" data-go="1">나의 선택 시작하기</button>${state.step>0?`<button class="sec" data-go="${state.step}">이어서 하기</button>`:''}{% if include.standalone %}<button class="ghost" data-teacher="1">선생님 화면</button>{% endif %}</div>
+<div class="actions"><button class="cta" data-go="1">나의 선택 시작하기</button>${state.step>0?`<button class="sec" data-go="${state.step}">이어서 하기</button>`:''}{% if include.standalone and include.student != true %}<button class="ghost" data-teacher="1">선생님 화면</button>{% endif %}</div>
 <p class="small muted">시험처럼 정답을 맞히는 활동이 아닙니다. 배분한 시간의 양은 점수가 되지 않습니다.</p>
 {% unless include.standalone %}<div class="tools no-print">{% include share-btn.html url="/ethics-lab/timetable/" title="내 삶의 시간표 — 일주일 56시간, 무엇에 시간을 건네겠어요?" %}</div>{% endunless %}
 </section>`}

@@ -45,8 +45,8 @@ og_image: /assets/og/lab.jpg
     <p class="lab-lead">{{ l.lead }}</p>
     <p class="lab-desc">{{ l.lab_desc }}</p>
     <p class="lab-info"><span>{{ l.lab_info }}</span><span>{{ l.lab_subjects }}</span></p>
-    <p class="lab-go"><a class="go" href="{{ l.url | relative_url }}">체험하기</a><a class="btn-print" href="{{ l.url | relative_url }}#teacher">선생님 화면</a>{% if l.lab_download %}<a class="btn-print" href="{{ l.lab_download | relative_url }}" download="{{ l.lab_download_name }}">HTML 파일로 내려받기</a>{% endif %}</p>{% if l.lab_download %}
-    <p class="lab-note">내려받은 파일은 인터넷 없이도 열립니다. 수업 자료로 자유롭게 쓸 수 있습니다.</p>{% endif %}
+    <p class="lab-go"><a class="go" href="{{ l.url | relative_url }}">체험하기</a><a class="btn-print" href="{{ l.url | relative_url }}#teacher">선생님 화면</a>{% if l.lab_download_student %}<a class="btn-print" href="{{ l.lab_download_student | relative_url }}" download="{{ l.lab_download_student_name }}">학생용 HTML 내려받기</a>{% endif %}{% if l.lab_download %}<a class="btn-print" href="{{ l.lab_download | relative_url }}" download="{{ l.lab_download_name }}">선생님용 HTML 내려받기</a>{% endif %}</p>{% if l.lab_download %}
+    <p class="lab-note">내려받은 파일은 인터넷 없이도 열립니다. 학생에게는 학생용 파일을 나눠 주세요. 선생님용 파일에는 선생님 화면이 들어 있습니다.</p>{% endif %}
   </li>
 {% endfor %}
 </ol>
