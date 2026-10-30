@@ -19,14 +19,13 @@ lead: 도덕·윤리 선생님을 위한 길벗 도덕·윤리 카카오 채널�
 <section class="ch-group" id="{{ g.id }}">
   <h2 class="section-title">{{ g.name }}</h2>
   <p class="ch-about">{{ g.about }}</p>
-  {% if g.series %}
-    {% for s in g.series %}
-    <h3 class="ch-series">'{{ s.name }}'</h3>{% if s.sub %}<p class="ch-series-sub">- {{ s.sub }}</p>{% endif %}
-    {% include ch-list.html items=s.items shown=6 %}
-    {% endfor %}
-  {% else %}
+  {% if g.items and g.items.size > 0 %}
     {% include ch-list.html items=g.items %}
   {% endif %}
+  {% for s in g.series %}
+    <h3 class="ch-series">'{{ s.name }}'</h3>{% if s.sub %}<p class="ch-series-sub">- {{ s.sub }}</p>{% endif %}
+    {% include ch-list.html items=s.items shown=6 %}
+  {% endfor %}
 </section>
 {% endfor %}
 <p class="ch-note">이 페이지는 채널 글의 제목과 링크를 모은 목록입니다. 본문은 길벗 도덕·윤리 카카오 채널에서 볼 수 있고, 한 줄 소개는 운영자가 새로 썼습니다.</p>
