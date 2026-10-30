@@ -556,7 +556,7 @@ function result(){
   const ru=order.find(id=>G.reach[id]===2);G.res.runner=ru!==undefined&&C[ru].t!==champ?C[ru].t:'';
   $('x-code').textContent=makeCode();
   loadNotes();
-  try{localStorage.setItem(RKEY,JSON.stringify({v:1,t:Date.now(),scope:G.scope,reach:G.reach,picks:G.picks,champ:G.champ,id:G.id}))}catch(e){}
+  try{localStorage.setItem(RKEY,JSON.stringify({v:1,t:Date.now(),scope:G.scope,cls:CLS,reach:G.reach,picks:G.picks,champ:G.champ,id:G.id}))}catch(e){}
   show('v-result');
   drawCard();
 }
@@ -607,7 +607,7 @@ $('x-copy').onclick=()=>{
 $('x-again').onclick=()=>{const written=[...document.querySelectorAll('#x-reflect textarea')].some(t=>t.value.trim());
   if(written&&!confirm('이 결과와 써 둔 성찰 기록을 지우고 처음부터 할까요?'))return;
   G=null;try{localStorage.removeItem(NKEY);localStorage.removeItem(RKEY)}catch(e){}$('last-wrap').hidden=true;show('v-intro')};
-function loadLast(){try{const r=JSON.parse(localStorage.getItem(RKEY));if(!r||r.v!==1||!C[r.champ]||!Array.isArray(r.picks)||typeof r.reach!=='object'||Date.now()-r.t>36*3600e3)return null;return r}catch(e){return null}}
+function loadLast(){try{const r=JSON.parse(localStorage.getItem(RKEY));if(!r||r.v!==1||!C[r.champ]||!Array.isArray(r.picks)||typeof r.reach!=='object'||Date.now()-r.t>36*3600e3)return null;if((LOCK&&r.scope!==LOCK)||(r.cls||'')!==CLS)return null;return r}catch(e){return null}}
 (()=>{const r=loadLast();if(!r)return;const d=new Date(r.t),hm=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
   $('last-info').textContent=` ${T[C[r.champ].t].n} · ${d.toDateString()===new Date().toDateString()?'오늘':'어제'} ${hm}`;$('last-wrap').hidden=false})();
 $('last-go').onclick=()=>{const r=loadLast();if(!r)return;G={scope:r.scope,id:/^[a-z0-9]{4}$/.test(r.id||'')?r.id:'',round:[],next:[],i:0,step:15,reach:r.reach,picks:r.picks,champ:r.champ};result()};
@@ -626,7 +626,7 @@ const TABS=[['guide','수업 안내'],['run','수업 진행'],['agg','우리 반
 function tGuide(){return `<div style="display:grid;gap:1.25rem">
 <p>이름을 가린 사상가의 문장 16개를 둘씩 겨루어 끝까지 남은 문장의 주인을 확인하는 5~10분 체험입니다. 『윤리와 사상』·『인문학과 윤리』의 사상가 단원을 열 때, 또는 한 단원을 마치고 복습할 때 씁니다.</p>
 <div><h3>두 가지 운영 방식</h3><p class="small"><b>도입 5~10분</b> — 각자 한 판. 결과 코드를 채팅방에 붙이게 하고 ‘우리 반 결과’로 분포를 보며 발문 3·4로 수업을 엽니다.<br><b>한 차시(50분)</b> — 체험 10분 → 「이번 판에 나온 문장과 사상가」로 사상가 맞히기 복습 10분 → 결이 다른 두 학생이 같은 쟁점을 두고 말하기 15분 → 성찰 기록 15분.</p></div>
-<div><h3>링크로 범위 고정·반 표시</h3><p class="small">주소 끝에 <code>?scope=east</code>를 붙이면 동양 사상만 보이고, <code>?cls=2-3</code>을 붙이면 결과 코드 앞에 반 이름이 붙습니다. 예: <code>ethink.kr/ethics-lab/thinker/?scope=west&amp;cls=2-3</code></p></div>
+<div><h3>링크로 범위 고정·반 표시</h3><p class="small">주소 끝에 <code>?scope=east</code>를 붙이면 동양 사상만 보이고, <code>?cls=2-3</code>을 붙이면 결과 코드 앞에 반 이름이 붙습니다. 예: <code>ethink.kr/ethics-lab/thinker/?scope=west&amp;cls=2-3</code><br>범위나 반 표시가 다른 링크에서는 「방금 나온 결과 다시 보기」가 나타나지 않으므로, 지난 수업의 결과가 이번 수업의 결과로 제출되지 않습니다.</p></div>
 <div><h3>기출·교과서와 바로 연결</h3><p class="small">기출 문장에는 원래 실린 시험과 문항 번호를, 교과서 문장에는 길벗 교과서와 쪽수를 밝혔습니다. 결과 화면의 「이번 판에 나온 문장과 사상가」를 그대로 사상가 맞히기 복습으로 쓸 수 있습니다.</p></div>
 <div><h3>사상가는 이렇게 골랐습니다</h3><p class="small">통합사회 8종, 현대사회와 윤리 7종, 윤리와 사상 4종, 인문학과 윤리 4종, 윤리문제 탐구 5종을 살펴, 여러 과목과 여러 교과서에 함께 나오는 사상가를 앞에 두었습니다.</p></div>
 <div><h3>예상되는 오해와 대응</h3><p class="small">① 결과를 성격 검사처럼 받아들이는 경우 — 세 축은 이번 판에서 고른 문장의 무게일 뿐이며, 다른 날 다시 하면 바뀔 수 있다고 알려 줍니다.<br>② “내가 ○○주의자”라고 이름표를 붙이는 경우 — 사상가의 생각 가운데 동의하지 않는 점을 하나 쓰게 합니다(성찰 질문 2).<br>③ 특정 사상가가 ‘좋은 결과’로 여겨지는 분위기 — 모든 문장이 교과서와 시험에 실린 문장이라는 점을 짚어 줍니다.</p></div>
