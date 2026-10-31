@@ -5,7 +5,7 @@ lead: 읽은 책 중 도덕·윤리 수업과 관련된 대목을 바탕으로 �
 ---
 {% assign reads = site.reads | where_exp: "r", "r.date <= site.time" | sort: "date" | reverse %}
 <section class="issue-hero">
-  <p class="issue-meta mono"><span>코너</span><span>{{ reads.size }}편</span></p>
+  <p class="issue-meta mono"><span>book</span><span>{{ reads.size }}편</span></p>
   <h1 class="issue-title">윤리로 읽는 책</h1>
   <p class="issue-lead">{{ page.lead }} 책 전체에 대한 서평이 아니라, 수업에서 학생과 함께 생각해 볼 만한 문장과 질문을 정리합니다.</p>
 </section>
