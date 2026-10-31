@@ -375,7 +375,7 @@ const C=[
  ['singer','동물도 인간처럼 고통을 느낄 수 있으며 이해관계를 갖는다. 인간 종이 아니라는 이유로 동물의 이익을 희생시키는 것은 종 차별주의이다.','2024학년도(2024년 시행) 7월 고3 전국연합 '+L+' 19번'],
  ['singer','자기 가족의 기본적 필요를 충족하고도 소득이 남는 사람은 이익 평등 고려의 원칙에 따라 세계 극빈자 구호에 기부해야 할 의무가 있다.','2025학년도(2024년 시행) 수능 '+L+' 14번'],
  ['sandel','사회가 정의로운지 묻는 것은, 우리가 소중히 여기는 것들, 이를테면, 소득과 부, 의무와 권리, 권력과 기회, 공직과 영광 등을 어떻게 분배하는지 묻는 것이다.','길벗 『인문학과 윤리』 Ⅲ-2 92쪽 (『정의란 무엇인가』, 이창신 옮김, 김영사)'],
- ['sandel','공동선을 생각한다는 것은 공적인 일에 대한 지식, 공동체에 대한 소속감, 전체에 관한 관심, 공동체의 운명에 관한 위기의식과 도덕적 유대감 등을 발휘해야 하는 일이다.','길벗 『윤리문제 탐구』 Ⅱ-2 61쪽'],
+ ['sandel','공동선을 생각한다는 것은 공적인 일에 대한 지식, 공동체에 대한 소속감, 전체에 관한 관심, 공동체의 운명에 관한 위기의식과 도덕적 유대감 등을 발휘해야 하는 일이다.','길벗 『윤리문제 탐구』 Ⅱ-2 61쪽 (자료 2 「공동선에 대한 샌델의 시각」의 설명)'],
  ['jonas','“너의 행위의 효과가 지상에서의 진정한 인간적 삶의 지속과 조화될 수 있도록 행위하라.”','2025학년도(2024년 시행) 9월 평가원 '+L+' 8번 (일부)'],
  ['jonas','책임에 대한 요구는 권력의 행위 능력에 비례해서 커진다. (…) 기술의 영향력이 커지게 되면서 인간의 책임 역시 지구상 생명체의 미래로까지 확대되었다.','2025학년도(2025년 시행) 3월 고3 전국연합 '+L+' 18번 (일부)'],
  ['confucius','자기 자신을 이기고 예(禮)로 돌아가는 것이 인(仁)이다. 자기를 이기고 예로 돌아가게 되면 온 천하가 이 사람을 어질다고 할 것이다.','2022학년도(2022년 시행) 7월 전국연합 '+L+' 2번'],
@@ -562,7 +562,7 @@ function result(){
 }
 const NKEY='ethink-thinker-notes-v1',RKEY='ethink-thinker-last-v1';
 function makeCode(){const {champ,p,runner}=G.res;return (CLS?CLS+':':'')+champ+'|'+[p.x,p.y,p.z].map(v=>v.toFixed(2)).join(',')+'|'+G.scope+(runner?'|'+runner:'')+'~'+G.res.id}
-function parseCode(line){const m=line.trim().match(/(?:^|[^\w가-힣.,|~-])(?:([\w가-힣-]{1,12}):)?([a-z]+)\|(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)\|(west|east|mix)(?:\|([a-z]+))?(?:~([a-z0-9]{4}))?(?![\w가-힣|~-])(?![.,][\w가-힣])/);if(!m||!T[m[2]])return null;
+function parseCode(line){const m=line.trim().match(/(?:^|[^\w.,|~-])(?:([\w가-힣-]{1,12}):)?([a-z]+)\|(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)\|(west|east|mix)(?:\|([a-z]+))?(?:~([a-z0-9]{4}))?(?![\w|~-])(?![.,]\w)/);if(!m||!T[m[2]])return null;
  const fits=k=>m[6]==='mix'||T[k].side===m[6];if(!fits(m[2])||(m[7]&&(!T[m[7]]||!fits(m[7]))))return null;const p={x:+m[3],y:+m[4],z:+m[5]};if([p.x,p.y,p.z].some(v=>Math.abs(v)>2))return null;return {raw:m[0].replace(/^[^\w가-힣]/,''),cls:m[1]||'',id:m[8]||'',champ:m[2],p,scope:m[6],runner:T[m[7]]&&m[7]!==m[2]?m[7]:''}}
 function loadNotes(){let n=['','',''],who='';try{const r=JSON.parse(localStorage.getItem(NKEY));if(r&&r.champ===G.res.champ&&Array.isArray(r.notes)){n=r.notes;who=r.who||''}}catch(e){}$('x-who').value=who;$('xp-who').textContent=who;document.querySelectorAll('#x-reflect textarea').forEach((t,i)=>{t.value=n[i]||'';$('xp'+i).textContent=n[i]||' '})}
 function saveNotes(){const notes=[...document.querySelectorAll('#x-reflect textarea')].map(x=>x.value),who=$('x-who').value;notes.forEach((v,i)=>$('xp'+i).textContent=v||' ');$('xp-who').textContent=who;try{localStorage.setItem(NKEY,JSON.stringify({champ:G.res.champ,notes,who}))}catch(e){}}
