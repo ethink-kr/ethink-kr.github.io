@@ -100,3 +100,12 @@
 - name: 강영안
   match: ["강영안"]
   initial: 강
+- name: 싱어
+  match: ["싱어"]
+  img: /assets/faces/singer.jpg
+  credit: 피터 싱어 사진(Peter Singer 01.jpg)
+  license: 퍼블릭 도메인
+  url: https://commons.wikimedia.org/wiki/File:Peter_Singer_01.jpg
+- name: 하딘
+  match: ["하딘"]
+  initial: 하
