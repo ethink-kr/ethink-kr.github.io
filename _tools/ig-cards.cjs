@@ -5,7 +5,7 @@
 // 결과: assets/ig/<이름>-01.jpg, -02.jpg … (뉴스 글 이름은 YYYY-MM-DD-N, 책 글은 파일 이름)
 // 필요: playwright, js-yaml (npm i -g playwright js-yaml)
 //
-// 문안 파일(YAML) 형식 — 8~10장, 카드 한 장에 짧은 문단 3~4개. 사실·수치·사상가 풀이까지 담아 글을 안 읽어도 내용이 잡히게.
+// 문안 파일(YAML) 형식 — 기본 8~10장, 최대 20장(인스타그램 API 한도), 카드 한 장에 짧은 문단 3~4개. 사실·수치·사상가 풀이까지 담아 글을 안 읽어도 내용이 잡히게.
 //   approved: false            # 재형 님 승인 뒤 true. false면 자동 게시하지 않는다(_tools/ig-post.cjs).
 //   cards:
 //     - type: cover             # image(저작권이 풀린 그림·사상가 초상·직접 찍은 사진, /assets/art/…), focus(object-position), credit(그림 출처),

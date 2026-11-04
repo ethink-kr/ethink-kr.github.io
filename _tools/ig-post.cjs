@@ -15,6 +15,8 @@ const kst = new Date(Date.now() + 9 * 3600 * 1000);
 const arg = process.argv[2] || '';
 // 편집자 노트: node _tools/ig-post.cjs _notes/YYYY-MM-DD-이름.yml  (yml 안에 approved·caption·cards)
 const noteFile = /\.ya?ml$/.test(arg) ? path.resolve(ROOT, arg) : null;
+// 인스타그램 API 캐러셀 최대 장수(메타 개발자 문서: 이미지·동영상 20개까지)
+const MAX_CARDS = 20;
 const day = noteFile ? '' : (arg || new Date(kst.getTime() - 24 * 3600 * 1000).toISOString().slice(0, 10));
 const dir = noteFile ? path.dirname(noteFile) : path.join(ROOT, '_items', day);
 if (!fs.existsSync(noteFile || dir)) { console.log(`${arg || day}: 올릴 글이 없습니다.`); process.exit(0); }
@@ -67,7 +69,7 @@ async function postNote(file, done) {
   if (!caption) { console.log(`${name}: caption이 없어 건너뜁니다.`); return 0; }
   if (done.has(firstLine(caption))) { console.log(`${name}: 이미 올라간 노트입니다.`); return 0; }
   const count = (doc.cards || []).length;
-  if (!count || count > 10) { console.log(`${name}: 카드 수(${count})가 1~10장이 아닙니다.`); return 0; }
+  if (!count || count > MAX_CARDS) { console.log(`${name}: 카드 수(${count})가 1~${MAX_CARDS}장이 아닙니다.`); return 0; }
   const imgs = Array.from({ length: count }, (_, i) => `${SITE}/assets/ig/${name}-${String(i + 1).padStart(2, '0')}.jpg`);
   const id = await publish(imgs, caption, name);
   if (id) { console.log(`${name}: 인스타그램에 올렸습니다. 게시물 ID ${id} — 편집자 노트`); await postStory(name, name); }
@@ -97,7 +99,7 @@ async function postNote(file, done) {
     const cardsSrc = fs.readFileSync(cardsPath, 'utf8');
     if (!/^approved:\s*true\s*$/m.test(cardsSrc)) { console.log(`${day}/${n}: 카드 뉴스가 아직 승인되지 않아(approved: false) 건너뜁니다.`); continue; }
     const count = (cardsSrc.match(/^\s*-\s*type:/gm) || []).length;
-    if (!count || count > 10) { console.log(`${day}/${n}: 카드 수(${count})가 1~10장이 아니어서 건너뜁니다.`); continue; }
+    if (!count || count > MAX_CARDS) { console.log(`${day}/${n}: 카드 수(${count})가 1~${MAX_CARDS}장이 아니어서 건너뜁니다.`); continue; }
     const imgs = Array.from({ length: count }, (_, i) => `${SITE}/assets/ig/${day}-${n}-${String(i + 1).padStart(2, '0')}.jpg`);
     let ok = false;
     for (let i = 0; i < 10; i++) {
