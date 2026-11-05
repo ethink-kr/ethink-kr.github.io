@@ -109,3 +109,19 @@
 - name: 하딘
   match: ["하딘"]
   initial: 하
+- name: 하버마스
+  match: ["하버마스"]
+  img: /assets/faces/habermas.jpg
+  credit: Wolfram Huke 사진(2008, 뮌헨 철학대학)
+  license: CC BY-SA 3.0
+  license_url: https://creativecommons.org/licenses/by-sa/3.0/
+  url: https://commons.wikimedia.org/wiki/File:JuergenHabermas.jpg
+- name: 장자
+  match: ["장자"]
+  img: /assets/faces/zhuangzi.jpg
+  credit: 「장자와 개구리」, 작가·연대 미상
+  license: 퍼블릭 도메인
+  url: https://commons.wikimedia.org/wiki/File:Zhuangzi.gif
+- name: 혜자
+  match: ["혜자", "혜시"]
+  initial: 혜
