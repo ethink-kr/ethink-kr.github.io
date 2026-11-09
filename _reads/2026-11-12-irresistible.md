@@ -1,12 +1,12 @@
 ---
 title: 멈추지 못하는 것은 의지가 약해서일까?
-date: 2026-11-09 09:00:00 +0900
+date: 2026-11-12 08:00:00 +0900
 kicker: 행위 중독, 쾌락주의의 역설, 집착
 book: "멈추지 못하는 사람들"
 writer: 애덤 알터
 translator: 홍지수
 publisher: 부키
-cover: /assets/covers/2026-11-09-irresistible.jpg
+cover: /assets/covers/2026-11-12-irresistible.jpg
 cover_from: 알라딘
 buy: https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=201233833
 underlines:
@@ -17,7 +17,7 @@ underlines:
 question: 화면을 멈추지 못하는 책임은 의지가 약한 개인에게 있을까, 멈추기 어렵게 만든 설계에 있을까?
 subjects: [『인문학과 윤리』 · 성찰 대상으로서의 나, 『윤리문제 탐구』 · 진정한 행복이란 무엇이며 윤리적으로 살수록 행복한가, 『현대사회와 윤리』 · 과학과 디지털 학습 환경 윤리, "『통합사회1』 · 인간, 사회, 환경과 행복"]
 lenses: [에피쿠로스 · 쾌락주의의 역설과 욕구의 구분, 석가모니 · 집착과 괴로움]
-og_image: /assets/og/2026-11-09-irresistible.jpg
+og_image: /assets/og/2026-11-12-irresistible.jpg
 ---
 ##### 이 책은 무엇을 묻나
 
