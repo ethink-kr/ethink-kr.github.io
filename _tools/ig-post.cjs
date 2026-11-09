@@ -3,6 +3,9 @@
 // 글 폴더 _items/YYYY-MM-DD/N.md 옆에 ig.txt(캡션)와 ig-cards-N.yml(카드 문안, approved: true)이 있고,
 // assets/ig/YYYY-MM-DD-N-01.jpg … (카드 뉴스, _tools/ig-cards.cjs로 만듦)이 있어야 합니다. 여러 장이면 캐러셀로 올립니다.
 // 같은 글을 두 번 올리지 않도록, 최근 올린 게시물의 캡션 첫 줄과 비교합니다.
+// 첫 댓글: 문안 파일에 poll(q, options) 또는 first_comment가 있으면 게시 직후 계정 이름으로 첫 댓글을 답니다
+//   (인스타그램 API로는 투표를 만들 수 없어, 투표는 재형 님이 앱에서 직접 답니다. 이 댓글은 번호로 답하게 하는 대체 질문).
+//   댓글 관리 권한(instagram_business_manage_comments)이 토큰에 없으면 실패를 기록만 하고 넘어갑니다.
 // 사용: node _tools/ig-post.cjs [YYYY-MM-DD]   (날짜를 주지 않으면 어제, Asia/Seoul)
 const fs = require('fs'); const path = require('path');
 const ROOT = path.join(__dirname, '..');
@@ -30,6 +33,25 @@ async function api(p, opt = {}) {
 }
 function firstLine(s) { return String(s || '').split('\n').map(x => x.trim()).find(Boolean) || ''; }
 
+// 첫 댓글 문구: first_comment가 있으면 그대로, 없으면 poll(q, options)로 만듭니다.
+function commentText(doc) {
+  if (!doc) return '';
+  if (doc.first_comment) return String(doc.first_comment).trim();
+  const p = doc.poll; if (!p || !p.q || !Array.isArray(p.options) || !p.options.length) return '';
+  return [`${p.q}`, ...p.options.map((o, i) => `${i + 1}. ${o}`), '', p.ask || '번호와 이유를 한 줄로 댓글에 남겨 주세요!'].join('\n');
+}
+// 게시물을 올린 직후 첫 댓글을 답니다. 실패해도 게시물은 이미 올라간 것이므로 기록만 하고 넘어갑니다.
+async function postFirstComment(mediaId, text, label) {
+  if (!text) return;
+  try {
+    await sleep(5000);
+    const u = new URL(`${API}/${mediaId}/comments`); u.searchParams.set('access_token', TOKEN);
+    const r = await fetch(u, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: text }) });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok || j.error) throw new Error(JSON.stringify(j.error || j));
+    console.log(`${label}: 첫 댓글을 달았습니다. 댓글 ID ${j.id}`);
+  } catch (e) { console.log(`${label}: 첫 댓글 실패(게시물은 올라갔습니다) — ${String(e.message).slice(0, 300)}`); }
+}
 // 게시물을 올린 직후 표지를 스토리(9:16)로도 올립니다. 스토리가 실패해도 게시물은 이미 올라간 것이므로 오류만 기록하고 넘어갑니다.
 async function postStory(name, label) {
   const url = `${SITE}/assets/ig/${name}-story.jpg`;
@@ -72,7 +94,7 @@ async function postNote(file, done) {
   if (!count || count > MAX_CARDS) { console.log(`${name}: 카드 수(${count})가 1~${MAX_CARDS}장이 아닙니다.`); return 0; }
   const imgs = Array.from({ length: count }, (_, i) => `${SITE}/assets/ig/${name}-${String(i + 1).padStart(2, '0')}.jpg`);
   const id = await publish(imgs, caption, name);
-  if (id) { console.log(`${name}: 인스타그램에 올렸습니다. 게시물 ID ${id} — 편집자 노트`); await postStory(name, name); }
+  if (id) { console.log(`${name}: 인스타그램에 올렸습니다. 게시물 ID ${id} — 편집자 노트`); await postFirstComment(id, commentText(doc), name); await postStory(name, name); }
   return id ? 1 : 0;
 }
 (async () => {
@@ -126,6 +148,8 @@ async function postNote(file, done) {
     await waitReady(c.id);
     const pub = await api(`/${USER}/media_publish`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ creation_id: c.id }) });
     console.log(`${day}/${n}: 인스타그램에 올렸습니다. 게시물 ID ${pub.id} — ${title}`);
+    let cardsDoc = null; try { cardsDoc = require('js-yaml').load(cardsSrc); } catch (e) { console.log(`${day}/${n}: 문안 파일을 읽지 못해 첫 댓글은 건너뜁니다 — ${e.message}`); }
+    await postFirstComment(pub.id, commentText(cardsDoc), `${day}/${n}`);
     await postStory(`${day}-${n}`, `${day}/${n}`);
     posted++;
   }
