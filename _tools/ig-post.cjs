@@ -33,12 +33,18 @@ async function api(p, opt = {}) {
 }
 function firstLine(s) { return String(s || '').split('\n').map(x => x.trim()).find(Boolean) || ''; }
 
-// 첫 댓글 문구: first_comment가 있으면 그대로, 없으면 poll(q, options)로 만듭니다.
+// 첫 댓글 끝에 붙는 팔로우 안내(문안 파일에 follow: false를 쓰면 뺍니다).
+const FOLLOW = '에씽크(@ethink.kr)를 팔로우하시면\n수업 아이디어와 인사이트를 얻으실 수 있어요.';
+// 첫 댓글 문구: first_comment가 있으면 그대로, 없으면 poll(q, options)로 만듭니다. 끝에 팔로우 안내를 붙입니다.
 function commentText(doc) {
   if (!doc) return '';
-  if (doc.first_comment) return String(doc.first_comment).trim();
-  const p = doc.poll; if (!p || !p.q || !Array.isArray(p.options) || !p.options.length) return '';
-  return [`${p.q}`, ...p.options.map((o, i) => `${i + 1}. ${o}`), '', p.ask || '번호와 이유를 한 줄로 댓글에 남겨 주세요!'].join('\n');
+  let body = '';
+  if (doc.first_comment) body = String(doc.first_comment).trim();
+  else {
+    const p = doc.poll; if (!p || !p.q || !Array.isArray(p.options) || !p.options.length) return '';
+    body = [`${p.q}`, ...p.options.map((o, i) => `${i + 1}. ${o}`), '', p.ask || '번호와 이유를 한 줄로 댓글에 남겨 주세요!'].join('\n');
+  }
+  return doc.follow === false ? body : `${body}\n\n${FOLLOW}`;
 }
 // 게시물을 올린 직후 첫 댓글을 답니다. 실패해도 게시물은 이미 올라간 것이므로 기록만 하고 넘어갑니다.
 async function postFirstComment(mediaId, text, label) {
