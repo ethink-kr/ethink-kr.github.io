@@ -105,7 +105,7 @@ og_image: /assets/og/2026-11-09-irresistible.jpg
 <colgroup><col style="width:34%"><col style="width:18%"><col style="width:48%"></colgroup>
 <thead><tr><th>과목 · 단원</th><th>사상가</th><th>이 책과 이어지는 물음</th></tr></thead>
 <tbody>
-<tr><td>『인문학과 윤리』 · 성찰 대상으로서의 나(고통과 쾌락은 어디에서 비롯될까?)<br><span class="tbl-note">(길벗 교과서 26~37쪽)</span></td><td>에피쿠로스, 석가모니</td><td>강한 자극은 왜 더 큰 갈증을 부르는가, 좋은 쾌락과 나쁜 쾌락은 어떻게 가려내는가</td></tr>
+<tr><td>『인문학과 윤리』 · 성찰 대상으로서의 나(고통과 쾌락은 어디에서 비롯될까?)<br><span class="tbl-note">(길벗 교과서 26~37쪽)</span></td><td>에피쿠로스, 석가모니</td><td>강한 자극은 왜 더 큰 갈증을 부르는가, 즐거움 뒤의 고통까지 헤아려 무엇을 고르고 피할 것인가</td></tr>
 <tr><td>『윤리문제 탐구』 · 진정한 행복이란 무엇이며, 윤리적으로 살수록 행복한가<br><span class="tbl-note">(길벗 교과서 45쪽)</span></td><td>—</td><td>도파민 보상 회로는 왜 행복을 보장하지 못하는가</td></tr>
 <tr><td>『현대사회와 윤리』 · 과학과 디지털 학습 환경 윤리</td><td>—</td><td>사람을 붙잡도록 설계한 기술에는 어떤 책임이 따르는가</td></tr>
 <tr><td>『통합사회1』 · 인간, 사회, 환경과 행복</td><td>에피쿠로스</td><td>행복은 욕구를 채우는 데서 오는가, 욕구를 다스리는 데서 오는가</td></tr>
