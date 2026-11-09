@@ -125,3 +125,9 @@
 - name: 혜자
   match: ["혜자", "혜시"]
   initial: 혜
+- name: 아리스토텔레스
+  match: ["아리스토텔레스"]
+  img: /assets/faces/aristotle.jpg
+  credit: 리시포스 원작을 본뜬 대리석 흉상(로마 국립박물관 알템프스궁), Jastrow 사진
+  license: 퍼블릭 도메인
+  url: https://commons.wikimedia.org/wiki/File:Aristotle_Altemps_Inv8575.jpg
