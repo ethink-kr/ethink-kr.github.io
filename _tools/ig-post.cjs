@@ -16,7 +16,7 @@ if (!USER || !TOKEN) { console.log('IG_USER_ID 또는 IG_ACCESS_TOKEN이 없어 
 
 const kst = new Date(Date.now() + 9 * 3600 * 1000);
 const arg = process.argv[2] || '';
-// 편집자 노트: node _tools/ig-post.cjs _notes/YYYY-MM-DD-이름.yml  (yml 안에 approved·caption·cards)
+// 편집자 노트·GPT 카드 뉴스: node _tools/ig-post.cjs <yml 경로>  (yml 안에 approved·caption·cards, 이미지는 assets/ig/<yml 이름>-01.jpg …)
 const noteFile = /\.ya?ml$/.test(arg) ? path.resolve(ROOT, arg) : null;
 // 인스타그램 API 캐러셀 최대 장수(메타 개발자 문서: 이미지·동영상 20개까지)
 const MAX_CARDS = 20;
@@ -100,7 +100,7 @@ async function postNote(file, done) {
   if (!count || count > MAX_CARDS) { console.log(`${name}: 카드 수(${count})가 1~${MAX_CARDS}장이 아닙니다.`); return 0; }
   const imgs = Array.from({ length: count }, (_, i) => `${SITE}/assets/ig/${name}-${String(i + 1).padStart(2, '0')}.jpg`);
   const id = await publish(imgs, caption, name);
-  if (id) { console.log(`${name}: 인스타그램에 올렸습니다. 게시물 ID ${id} — 편집자 노트`); await postFirstComment(id, commentText(doc), name); await postStory(name, name); }
+  if (id) { console.log(`${name}: 인스타그램에 올렸습니다. 게시물 ID ${id} — ${doc.kind || '편집자 노트'}`); await postFirstComment(id, commentText(doc), name); await postStory(name, name); }
   return id ? 1 : 0;
 }
 (async () => {

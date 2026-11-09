@@ -1,0 +1,38 @@
+# GPT 카드 뉴스(재형 님 제공). 이미지: assets/ig/2026-11-09-1-gpt-01~10.jpg. 게시: 「인스타그램 수동 작업」에 이 파일 경로를 넣는다.
+kind: GPT 카드 뉴스
+approved: true
+source: Dropbox 에씽크/01 윤리로 읽는 뉴스/2026-11-9-card (png 01~10)
+caption: "딱 하나만 더 보려다가, 그만둘 때를 놓친 적 있나요?\n\n그렇다면 청소년에게 SNS를 아예 못 쓰게 하면 해결될까요?\n잠을 지키는 일도, 친구와 연결되는 일도 소중해서 답이 쉽지 않습니다.\n\n내 동생에게 규칙을 정해 준다면, 무엇부터 바꾸고 싶나요?\n\nA. 일정 나이까지 가입 제한\nB. 추천·자동 재생 등 기능 제한\nC. 교육과 스스로 정하는 규칙\nD. 여러 방법을 함께\n\nA~D 중 하나를 골라, 이유를 댓글 달아 주세요.\n그 규칙으로 지키고 싶은 자유도 궁금합니다.\n\n※ 국내 청소년 SNS 제한안은 2026년 11월 9일 기준 논의 중이며, 확정된 규칙이 아닙니다. 등장인물의 일상 대화는 구성한 장면이고, 철학자의 설명은 원전을 바탕으로 풀어 쓴 내용입니다.\n\n근거\n· 주간경향, 「“게임 셧다운제 실패 잊었나”…청소년 SNS 규제 논란」(2026.11.5)\n  https://weekly.khan.co.kr/article/202611050942011/\n· 존 스튜어트 밀, 『자유론』 1장·3장\n· 아리스토텔레스, 『니코마코스 윤리학』 2권 1장·10권 9장\n\n#에씽크 #철학 #청소년SNS #디지털시민성 #밀 #아리스토텔레스 #윤리수업"
+first_comment: '내 동생의 SNS, 어떤 규칙부터?
+
+  A. 일정 나이까지 가입 제한
+
+  B. 추천·자동 재생 등 기능 제한
+
+  C. 교육과 스스로 정하는 규칙
+
+  D. 여러 방법을 함께
+
+
+  A~D 중 하나를 골라, 이유를 댓글 달아 주세요.'
+cards:
+- type: image
+  file: ethink_sns-01.png
+- type: image
+  file: ethink_sns-02.png
+- type: image
+  file: ethink_sns-03.png
+- type: image
+  file: ethink_sns-04.png
+- type: image
+  file: ethink_sns-05.png
+- type: image
+  file: ethink_sns-06.png
+- type: image
+  file: ethink_sns-07.png
+- type: image
+  file: ethink_sns-08.png
+- type: image
+  file: ethink_sns-09.png
+- type: image
+  file: ethink_sns-10.png
