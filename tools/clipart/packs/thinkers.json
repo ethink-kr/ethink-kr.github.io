@@ -1,0 +1,2388 @@
+{
+"version": "260903",
+"count": 165,
+"items": [
+{
+"id": "p001",
+"file": "2023-10-윤사-16_인물만(제임스).jpg",
+"src": "2023-10-윤사-16",
+"names": [
+"제임스"
+],
+"side": null,
+"figures": 1,
+"w": 1000,
+"h": 1149,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p002",
+"file": "2023-10-윤사-1_인물만1(우측 에피쿠로스).jpg",
+"src": "2023-10-윤사-1",
+"names": [
+"에피쿠로스"
+],
+"side": "right",
+"figures": 1,
+"w": 1000,
+"h": 377,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p003",
+"file": "2023-10-윤사-1_인물만2(우측 에피쿠로스).jpg",
+"src": "2023-10-윤사-1",
+"names": [
+"에피쿠로스"
+],
+"side": "right",
+"figures": 1,
+"w": 1000,
+"h": 368,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p004",
+"file": "2023-10-윤사-1_인물만3(우측 에피쿠로스).jpg",
+"src": "2023-10-윤사-1",
+"names": [
+"에피쿠로스"
+],
+"side": "right",
+"figures": 1,
+"w": 1000,
+"h": 365,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p005",
+"file": "2023-10-윤사-1_인물만4(우측 에피쿠로스).jpg",
+"src": "2023-10-윤사-1",
+"names": [
+"에피쿠로스"
+],
+"side": "right",
+"figures": 1,
+"w": 1000,
+"h": 362,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p006",
+"file": "2023-3-생윤 5_인물만(톨스토이와  와일드).jpg",
+"src": "2023-3-생윤 5",
+"names": [
+"톨스토이",
+"와일드"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 296,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p007",
+"file": "2023-4-생윤-4_인물만1(우측 하버마스).jpg",
+"src": "2023-4-생윤-4",
+"names": [
+"하버마스"
+],
+"side": "right",
+"figures": 1,
+"w": 1000,
+"h": 360,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p008",
+"file": "2023-4-생윤-4_인물만2(우측 하버마스).jpg",
+"src": "2023-4-생윤-4",
+"names": [
+"하버마스"
+],
+"side": "right",
+"figures": 1,
+"w": 1000,
+"h": 365,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p009",
+"file": "2023-4-생윤-4_인물만3(우측 하버마스).jpg",
+"src": "2023-4-생윤-4",
+"names": [
+"하버마스"
+],
+"side": "right",
+"figures": 1,
+"w": 1000,
+"h": 364,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p010",
+"file": "2023-4-생윤-4_인물만4(우측 하버마스).jpg",
+"src": "2023-4-생윤-4",
+"names": [
+"하버마스"
+],
+"side": "right",
+"figures": 1,
+"w": 1000,
+"h": 361,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p011",
+"file": "2023-4-윤사-14_인물만(벌린과  페팃).jpg",
+"src": "2023-4-윤사-14",
+"names": [
+"벌린",
+"페팃"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 349,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p012",
+"file": "2023-7-생윤-9_인물만(칸트와 밀).jpg",
+"src": "2023-7-생윤-9",
+"names": [
+"칸트",
+"밀"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 400,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p013",
+"file": "2023-7-윤사-11_인물만(야스퍼스와 사르트르).jpg",
+"src": "2023-7-윤사-11",
+"names": [
+"야스퍼스",
+"사르트르"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 425,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p014",
+"file": "2023-7-윤사-1_인물만(스피노자).jpg",
+"src": "2023-7-윤사-1",
+"names": [
+"스피노자"
+],
+"side": null,
+"figures": 1,
+"w": 1000,
+"h": 904,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p015",
+"file": "2024-10-3-생윤-06_인물만(존 듀이).jpg",
+"src": "2024-10-3-생윤-06",
+"names": [
+"듀이"
+],
+"side": null,
+"figures": 1,
+"w": 694,
+"h": 969,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p016",
+"file": "2024-10-3-윤사-04_인물만(용수와 세친).jpg",
+"src": "2024-10-3-윤사-04",
+"names": [
+"용수",
+"세친"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 335,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p017",
+"file": "2024-10-3-윤사-04_인물만1_용수.png",
+"src": "2024-10-3-윤사-04",
+"names": [
+"용수"
+],
+"side": null,
+"figures": 1,
+"w": 391,
+"h": 401,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p018",
+"file": "2024-10-3-윤사-04_인물만2-세친.png",
+"src": "2024-10-3-윤사-04",
+"names": [
+"세친"
+],
+"side": null,
+"figures": 1,
+"w": 387,
+"h": 402,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p019",
+"file": "2024-10-3-윤사-20_인물만(아리스토텔레스).jpg",
+"src": "2024-10-3-윤사-20",
+"names": [
+"아리스토텔레스"
+],
+"side": null,
+"figures": 1,
+"w": 857,
+"h": 1300,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p020",
+"file": "2024-3-3-생윤-14_인물만(맹자와 플라톤).jpg",
+"src": "2024-3-3-생윤-14",
+"names": [
+"맹자",
+"플라톤"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 298,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p021",
+"file": "2024-3-3-생윤-14_인물만1_맹자.png",
+"src": "2024-3-3-생윤-14",
+"names": [
+"맹자"
+],
+"side": null,
+"figures": 1,
+"w": 492,
+"h": 443,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p022",
+"file": "2024-3-3-생윤-14_인물만2_플라톤.png",
+"src": "2024-3-3-생윤-14",
+"names": [
+"플라톤"
+],
+"side": null,
+"figures": 1,
+"w": 707,
+"h": 448,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p023",
+"file": "2024-3-3-생윤-18_인물만(아도르노).jpg",
+"src": "2024-3-3-생윤-18",
+"names": [
+"아도르노"
+],
+"side": null,
+"figures": 1,
+"w": 631,
+"h": 857,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p024",
+"file": "2024-3-3-윤사-13_인물만(프로타고라스와 소크라테스).jpg",
+"src": "2024-3-3-윤사-13",
+"names": [
+"프로타고라스",
+"소크라테스"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 270,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p025",
+"file": "2024-3-3-윤사-13_인물만1_프로타고라스.png",
+"src": "2024-3-3-윤사-13",
+"names": [
+"프로타고라스"
+],
+"side": null,
+"figures": 1,
+"w": 536,
+"h": 456,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p026",
+"file": "2024-3-3-윤사-13_인물만2_소크라테스.png",
+"src": "2024-3-3-윤사-13",
+"names": [
+"소크라테스"
+],
+"side": null,
+"figures": 1,
+"w": 538,
+"h": 445,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p027",
+"file": "2024-5-3-생윤-04_인물만(우측 아도르노).jpg",
+"src": "2024-5-3-생윤-04",
+"names": [
+"아도르노"
+],
+"side": "right",
+"figures": 1,
+"w": 1000,
+"h": 593,
+"variant": "sheet",
+"generic": false
+},
+{
+"id": "p028",
+"file": "2024-5-3-생윤-04_인물만1.png",
+"src": "2024-5-3-생윤-04",
+"names": [
+"질문자(여성)"
+],
+"side": null,
+"figures": 1,
+"w": 392,
+"h": 304,
+"variant": "clean",
+"generic": true
+},
+{
+"id": "p029",
+"file": "2024-5-3-생윤-04_인물만2_아도르노.png",
+"src": "2024-5-3-생윤-04",
+"names": [
+"아도르노"
+],
+"side": null,
+"figures": 1,
+"w": 314,
+"h": 305,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p030",
+"file": "2024-5-3-생윤-04_인물만3.png",
+"src": "2024-5-3-생윤-04",
+"names": [
+"질문자(여성)"
+],
+"side": null,
+"figures": 1,
+"w": 396,
+"h": 304,
+"variant": "clean",
+"generic": true
+},
+{
+"id": "p031",
+"file": "2024-5-3-생윤-04_인물만4_아도르노.png",
+"src": "2024-5-3-생윤-04",
+"names": [
+"아도르노"
+],
+"side": null,
+"figures": 1,
+"w": 378,
+"h": 301,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p032",
+"file": "2024-5-3-생윤-08-1-인물만1.png",
+"src": "2024-5-3-생윤-08-1-인물만1",
+"names": [
+"남학생"
+],
+"side": null,
+"figures": 1,
+"w": 381,
+"h": 392,
+"variant": "clean",
+"generic": true
+},
+{
+"id": "p033",
+"file": "2024-5-3-생윤-08-1-인물만2.png",
+"src": "2024-5-3-생윤-08-1-인물만2",
+"names": [
+"여학생"
+],
+"side": null,
+"figures": 1,
+"w": 336,
+"h": 391,
+"variant": "clean",
+"generic": true
+},
+{
+"id": "p034",
+"file": "2024-5-3-생윤-08-1-인물만_갑을 제거.jpg",
+"src": "2024-5-3-생윤-08-1-인물만",
+"names": [
+"두 학생"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 255,
+"variant": "clean",
+"generic": true
+},
+{
+"id": "p035",
+"file": "2024-5-3-생윤-08_갑을 제거.jpg",
+"src": "2024-5-3-생윤-08",
+"names": [
+"두 학생"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 472,
+"variant": "bubbles",
+"generic": true
+},
+{
+"id": "p036",
+"file": "2024-5-3-생윤-08_인물만(두 학생).jpg",
+"src": "2024-5-3-생윤-08",
+"names": [
+"두 학생"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 251,
+"variant": "clean",
+"generic": true
+},
+{
+"id": "p037",
+"file": "2024-5-3-생윤-08_인물만.jpg",
+"src": "2024-5-3-생윤-08",
+"names": [
+"두 학생"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 251,
+"variant": "clean",
+"generic": true
+},
+{
+"id": "p038",
+"file": "2024-5-3-생윤-16_인물만(게오르그 지멜).jpg",
+"src": "2024-5-3-생윤-16",
+"names": [
+"지멜"
+],
+"side": null,
+"figures": 1,
+"w": 660,
+"h": 959,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p039",
+"file": "2024-5-3-윤사-19(케인스와 하이에크)_갑을 제거.jpg",
+"src": "2024-5-3-윤사-19",
+"names": [
+"케인스",
+"하이에크"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 603,
+"variant": "bubbles",
+"generic": false
+},
+{
+"id": "p040",
+"file": "2024-5-3-윤사-19-인물만(케인스와 하이에크)_갑을 제거.jpg",
+"src": "2024-5-3-윤사-19-인물만",
+"names": [
+"케인스",
+"하이에크"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 265,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p041",
+"file": "2024-5-3-윤사-19-인물만1_케인스.png",
+"src": "2024-5-3-윤사-19-인물만1",
+"names": [
+"케인스"
+],
+"side": null,
+"figures": 1,
+"w": 528,
+"h": 396,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p042",
+"file": "2024-5-3-윤사-19-인물만2_하이에크.png",
+"src": "2024-5-3-윤사-19-인물만2",
+"names": [
+"하이에크"
+],
+"side": null,
+"figures": 1,
+"w": 435,
+"h": 403,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p043",
+"file": "2024-5-3-윤사-19_인물만(케인스와 하이에크).jpg",
+"src": "2024-5-3-윤사-19",
+"names": [
+"케인스",
+"하이에크"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 275,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p044",
+"file": "2024-6-윤사-1_인물만1(우측 노자).jpg",
+"src": "2024-6-윤사-1",
+"names": [
+"노자"
+],
+"side": "right",
+"figures": 1,
+"w": 1000,
+"h": 469,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p045",
+"file": "2024-6-윤사-1_인물만2(우측 노자).jpg",
+"src": "2024-6-윤사-1",
+"names": [
+"노자"
+],
+"side": "right",
+"figures": 1,
+"w": 1000,
+"h": 462,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p046",
+"file": "2024-6-윤사-1_인물만3(우측 노자).jpg",
+"src": "2024-6-윤사-1",
+"names": [
+"노자"
+],
+"side": "right",
+"figures": 1,
+"w": 1000,
+"h": 481,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p047",
+"file": "2024-6-윤사-1_인물만4(우측 노자).jpg",
+"src": "2024-6-윤사-1",
+"names": [
+"노자"
+],
+"side": "right",
+"figures": 1,
+"w": 1000,
+"h": 494,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p048",
+"file": "2024-7-3-생윤-05_인물만(에리히 프롬).jpg",
+"src": "2024-7-3-생윤-05",
+"names": [
+"프롬"
+],
+"side": null,
+"figures": 1,
+"w": 701,
+"h": 718,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p049",
+"file": "2024-7-3-윤사-02_인물만(트라시마코스와 소크라테스).jpg",
+"src": "2024-7-3-윤사-02",
+"names": [
+"트라시마코스",
+"소크라테스"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 545,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p050",
+"file": "2024-7-3-윤사-02_인물만1_트라시마코스.png",
+"src": "2024-7-3-윤사-02",
+"names": [
+"트라시마코스"
+],
+"side": null,
+"figures": 1,
+"w": 581,
+"h": 526,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p051",
+"file": "2024-7-3-윤사-02_인물만2_소크라테스.png",
+"src": "2024-7-3-윤사-02",
+"names": [
+"소크라테스"
+],
+"side": null,
+"figures": 1,
+"w": 549,
+"h": 516,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p052",
+"file": "2024-9-생윤-6_인물만(야스퍼스와 하이데거).jpg",
+"src": "2024-9-생윤-6",
+"names": [
+"야스퍼스",
+"하이데거"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 397,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p053",
+"file": "2024-수능-생윤-20_인물만(한스 큉).jpg",
+"src": "2024-수능-생윤-20",
+"names": [
+"큉"
+],
+"side": null,
+"figures": 1,
+"w": 1000,
+"h": 1280,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p054",
+"file": "2024-수능-윤사-4_인물만(토마스 모어).jpg",
+"src": "2024-수능-윤사-4",
+"names": [
+"모어"
+],
+"side": null,
+"figures": 1,
+"w": 975,
+"h": 1036,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p055",
+"file": "2024-수능-윤사-8_인물만(칸트와 갈퉁).jpg",
+"src": "2024-수능-윤사-8",
+"names": [
+"칸트",
+"갈퉁"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 338,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p056",
+"file": "2025-3-전연-생윤-10-인물만_갑을 제거(칸트와 모겐소).jpg",
+"src": "2025-3-전연-생윤-10-인물만",
+"names": [
+"칸트",
+"모겐소"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 254,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p057",
+"file": "2025-3-전연-생윤-10_갑을 제거(칸트와 모겐소).jpg",
+"src": "2025-3-전연-생윤-10",
+"names": [
+"칸트",
+"모겐소"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 497,
+"variant": "bubbles",
+"generic": false
+},
+{
+"id": "p058",
+"file": "2025-3-전연-생윤-10_인물만(칸트와 모겐소).jpg",
+"src": "2025-3-전연-생윤-10",
+"names": [
+"칸트",
+"모겐소"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 247,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p059",
+"file": "2025-3-전연-생윤-11_인물만(엘리아데).jpg",
+"src": "2025-3-전연-생윤-11",
+"names": [
+"엘리아데"
+],
+"side": null,
+"figures": 1,
+"w": 411,
+"h": 908,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p060",
+"file": "2025-3-전연-윤사-01_인물만(우측 벤담).jpg",
+"src": "2025-3-전연-윤사-01",
+"names": [
+"벤담"
+],
+"side": "right",
+"figures": 1,
+"w": 1000,
+"h": 514,
+"variant": "sheet",
+"generic": false
+},
+{
+"id": "p061",
+"file": "2025-3-전연-윤사-01_인물만1(우측 벤담).png",
+"src": "2025-3-전연-윤사-01",
+"names": [
+"벤담"
+],
+"side": "right",
+"figures": 1,
+"w": 627,
+"h": 265,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p062",
+"file": "2025-3-전연-윤사-01_인물만2(우측 벤담).png",
+"src": "2025-3-전연-윤사-01",
+"names": [
+"벤담"
+],
+"side": "right",
+"figures": 1,
+"w": 634,
+"h": 265,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p063",
+"file": "2025-3-전연-윤사-01_인물만3(우측 벤담).png",
+"src": "2025-3-전연-윤사-01",
+"names": [
+"벤담"
+],
+"side": "right",
+"figures": 1,
+"w": 624,
+"h": 263,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p064",
+"file": "2025-3-전연-윤사-01_인물만4(우측 벤담).png",
+"src": "2025-3-전연-윤사-01",
+"names": [
+"벤담"
+],
+"side": "right",
+"figures": 1,
+"w": 631,
+"h": 262,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p065",
+"file": "2025-3-전연-윤사-11_인물만(흄).jpg",
+"src": "2025-3-전연-윤사-11",
+"names": [
+"흄"
+],
+"side": null,
+"figures": 1,
+"w": 611,
+"h": 755,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p066",
+"file": "2025-6월 평가-생윤-06_인물만(베블런).jpg",
+"src": "2025-6월 평가-생윤-06",
+"names": [
+"베블런"
+],
+"side": null,
+"figures": 1,
+"w": 641,
+"h": 772,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p067",
+"file": "2025-6월 평가-생윤-11(장자와 에피쿠로스)_갑을 제거.jpg",
+"src": "2025-6월 평가-생윤-11",
+"names": [
+"장자",
+"에피쿠로스"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 457,
+"variant": "bubbles",
+"generic": false
+},
+{
+"id": "p068",
+"file": "2025-6월 평가-생윤-11-인물만(장자와 에피쿠로스)_갑을 제거.jpg",
+"src": "2025-6월 평가-생윤-11-인물만",
+"names": [
+"장자",
+"에피쿠로스"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 243,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p069",
+"file": "2025-6월 평가-생윤-11-인물만1_장자.png",
+"src": "2025-6월 평가-생윤-11-인물만1",
+"names": [
+"장자"
+],
+"side": null,
+"figures": 1,
+"w": 453,
+"h": 411,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p070",
+"file": "2025-6월 평가-생윤-11-인물만2_에피쿠로스.png",
+"src": "2025-6월 평가-생윤-11-인물만2",
+"names": [
+"에피쿠로스"
+],
+"side": null,
+"figures": 1,
+"w": 377,
+"h": 405,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p071",
+"file": "2025-6월 평가-생윤-11_인물만(장자와 에피쿠로스).jpg",
+"src": "2025-6월 평가-생윤-11",
+"names": [
+"장자",
+"에피쿠로스"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 227,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p072",
+"file": "2025-6월 평가-윤사-01_인물만(우측 소크라테스).jpg",
+"src": "2025-6월 평가-윤사-01",
+"names": [
+"소크라테스"
+],
+"side": "right",
+"figures": 1,
+"w": 1000,
+"h": 539,
+"variant": "sheet",
+"generic": false
+},
+{
+"id": "p073",
+"file": "2025-6월 평가-윤사-01_인물만1.png",
+"src": "2025-6월 평가-윤사-01",
+"names": [
+"청년(대화 상대)"
+],
+"side": null,
+"figures": 1,
+"w": 342,
+"h": 278,
+"variant": "clean",
+"generic": true
+},
+{
+"id": "p074",
+"file": "2025-6월 평가-윤사-01_인물만2_소크라테스.png",
+"src": "2025-6월 평가-윤사-01",
+"names": [
+"소크라테스"
+],
+"side": null,
+"figures": 1,
+"w": 339,
+"h": 269,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p075",
+"file": "2025-6월 평가-윤사-01_인물만3.png",
+"src": "2025-6월 평가-윤사-01",
+"names": [
+"청년(대화 상대)"
+],
+"side": null,
+"figures": 1,
+"w": 345,
+"h": 281,
+"variant": "clean",
+"generic": true
+},
+{
+"id": "p076",
+"file": "2025-6월 평가-윤사-20_인물만(밀).jpg",
+"src": "2025-6월 평가-윤사-20",
+"names": [
+"밀"
+],
+"side": null,
+"figures": 1,
+"w": 623,
+"h": 751,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p077",
+"file": "2025-7-전연-생윤-06_인물만(에리히 프롬).png",
+"src": "2025-7-전연-생윤-06",
+"names": [
+"프롬"
+],
+"side": null,
+"figures": 1,
+"w": 1000,
+"h": 1287,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p078",
+"file": "2025-7-전연-윤사-10_인물만(공자).png",
+"src": "2025-7-전연-윤사-10",
+"names": [
+"공자"
+],
+"side": null,
+"figures": 1,
+"w": 1000,
+"h": 951,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p079",
+"file": "2025-7-전연-윤사-17_인물만(스미스와 케인스).png",
+"src": "2025-7-전연-윤사-17",
+"names": [
+"스미스",
+"케인스"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 360,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p080",
+"file": "2025-9월 평가-생윤-05_인물만(강연자 남성).jpg",
+"src": "2025-9월 평가-생윤-05",
+"names": [
+"강연자 남성"
+],
+"side": null,
+"figures": 1,
+"w": 788,
+"h": 967,
+"variant": "clean",
+"generic": true
+},
+{
+"id": "p081",
+"file": "2025-9월 평가-윤사-01_인물만(우측 맹자).jpg",
+"src": "2025-9월 평가-윤사-01",
+"names": [
+"맹자"
+],
+"side": "right",
+"figures": 1,
+"w": 1000,
+"h": 604,
+"variant": "sheet",
+"generic": false
+},
+{
+"id": "p082",
+"file": "2025-9월 평가-윤사-01_인물만1.jpg",
+"src": "2025-9월 평가-윤사-01",
+"names": [
+"제자(대화 상대)"
+],
+"side": null,
+"figures": 1,
+"w": 348,
+"h": 408,
+"variant": "clean",
+"generic": true
+},
+{
+"id": "p083",
+"file": "2025-9월 평가-윤사-01_인물만2_맹자.jpg",
+"src": "2025-9월 평가-윤사-01",
+"names": [
+"맹자"
+],
+"side": null,
+"figures": 1,
+"w": 393,
+"h": 454,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p084",
+"file": "2025-9월 평가-윤사-01_인물만3.jpg",
+"src": "2025-9월 평가-윤사-01",
+"names": [
+"제자(대화 상대)"
+],
+"side": null,
+"figures": 1,
+"w": 352,
+"h": 408,
+"variant": "clean",
+"generic": true
+},
+{
+"id": "p085",
+"file": "2025-9월 평가-윤사-01_인물만4_맹자.jpg",
+"src": "2025-9월 평가-윤사-01",
+"names": [
+"맹자"
+],
+"side": null,
+"figures": 1,
+"w": 614,
+"h": 456,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p086",
+"file": "2025-9월 평가-윤사-01_인물만5.jpg",
+"src": "2025-9월 평가-윤사-01",
+"names": [
+"제자(대화 상대)"
+],
+"side": null,
+"figures": 1,
+"w": 494,
+"h": 398,
+"variant": "clean",
+"generic": true
+},
+{
+"id": "p087",
+"file": "2025-9월 평가-윤사-01_인물만6_맹자.jpg",
+"src": "2025-9월 평가-윤사-01",
+"names": [
+"맹자"
+],
+"side": null,
+"figures": 1,
+"w": 563,
+"h": 448,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p088",
+"file": "2025-9월 평가-윤사-19(이황과 이이)_갑을 제거.jpg",
+"src": "2025-9월 평가-윤사-19",
+"names": [
+"이황",
+"이이"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 488,
+"variant": "bubbles",
+"generic": false
+},
+{
+"id": "p089",
+"file": "2025-9월 평가-윤사-19-인물만(이황과 이이)_갑을 제거.jpg",
+"src": "2025-9월 평가-윤사-19-인물만",
+"names": [
+"이황",
+"이이"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 489,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p090",
+"file": "2025-9월 평가-윤사-19-인물만1_이황.png",
+"src": "2025-9월 평가-윤사-19-인물만1",
+"names": [
+"이황"
+],
+"side": null,
+"figures": 1,
+"w": 445,
+"h": 613,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p091",
+"file": "2025-9월 평가-윤사-19-인물만2_이이.png",
+"src": "2025-9월 평가-윤사-19-인물만2",
+"names": [
+"이이"
+],
+"side": null,
+"figures": 1,
+"w": 568,
+"h": 615,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p092",
+"file": "2025-9월 평가-윤사-19_인물만(이황과 이이).jpg",
+"src": "2025-9월 평가-윤사-19",
+"names": [
+"이황",
+"이이"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 462,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p093",
+"file": "2025-수능-생윤-03_인물만(아리스토텔레스).jpg",
+"src": "2025-수능-생윤-03",
+"names": [
+"아리스토텔레스"
+],
+"side": null,
+"figures": 1,
+"w": 804,
+"h": 948,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p094",
+"file": "2025-수능-생윤-20_인물만(두 학생).jpg",
+"src": "2025-수능-생윤-20",
+"names": [
+"두 학생"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 304,
+"variant": "clean",
+"generic": true
+},
+{
+"id": "p095",
+"file": "2025-수능-생윤-20_인물만1.png",
+"src": "2025-수능-생윤-20",
+"names": [
+"남학생"
+],
+"side": null,
+"figures": 1,
+"w": 368,
+"h": 452,
+"variant": "clean",
+"generic": true
+},
+{
+"id": "p096",
+"file": "2025-수능-생윤-20_인물만2.png",
+"src": "2025-수능-생윤-20",
+"names": [
+"여학생"
+],
+"side": null,
+"figures": 1,
+"w": 343,
+"h": 425,
+"variant": "clean",
+"generic": true
+},
+{
+"id": "p097",
+"file": "2025-수능-윤사-01_인물만(우측 순자).jpg",
+"src": "2025-수능-윤사-01",
+"names": [
+"순자"
+],
+"side": "right",
+"figures": 1,
+"w": 1000,
+"h": 581,
+"variant": "sheet",
+"generic": false
+},
+{
+"id": "p098",
+"file": "2025-수능-윤사-01_인물만1.png",
+"src": "2025-수능-윤사-01",
+"names": [
+"제자(대화 상대)"
+],
+"side": null,
+"figures": 1,
+"w": 345,
+"h": 409,
+"variant": "clean",
+"generic": true
+},
+{
+"id": "p099",
+"file": "2025-수능-윤사-01_인물만2_순자.png",
+"src": "2025-수능-윤사-01",
+"names": [
+"순자"
+],
+"side": null,
+"figures": 1,
+"w": 389,
+"h": 427,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p100",
+"file": "2025-수능-윤사-01_인물만3.png",
+"src": "2025-수능-윤사-01",
+"names": [
+"제자(대화 상대)"
+],
+"side": null,
+"figures": 1,
+"w": 346,
+"h": 388,
+"variant": "clean",
+"generic": true
+},
+{
+"id": "p101",
+"file": "2025-수능-윤사-01_인물만4_순자.png",
+"src": "2025-수능-윤사-01",
+"names": [
+"순자"
+],
+"side": null,
+"figures": 1,
+"w": 523,
+"h": 435,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p102",
+"file": "2025-수능-윤사-01_인물만5.png",
+"src": "2025-수능-윤사-01",
+"names": [
+"제자(대화 상대)"
+],
+"side": null,
+"figures": 1,
+"w": 456,
+"h": 389,
+"variant": "clean",
+"generic": true
+},
+{
+"id": "p103",
+"file": "2025-수능-윤사-01_인물만6_순자.png",
+"src": "2025-수능-윤사-01",
+"names": [
+"순자"
+],
+"side": null,
+"figures": 1,
+"w": 387,
+"h": 424,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p104",
+"file": "2025-수능-윤사-01_인물만7_순자.png",
+"src": "2025-수능-윤사-01",
+"names": [
+"순자"
+],
+"side": null,
+"figures": 1,
+"w": 529,
+"h": 426,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p105",
+"file": "2025-수능-윤사-08_인물만(슘페터).jpg",
+"src": "2025-수능-윤사-08",
+"names": [
+"슘페터"
+],
+"side": null,
+"figures": 1,
+"w": 708,
+"h": 815,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p106",
+"file": "2026-3-3-생윤 08_인물만(요나스).jpg",
+"src": "2026-3-3-생윤 08",
+"names": [
+"요나스"
+],
+"side": null,
+"figures": 1,
+"w": 1000,
+"h": 1282,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p107",
+"file": "2026-3-3-생윤 19_인물만(공자와 노자).jpg",
+"src": "2026-3-3-생윤 19",
+"names": [
+"공자",
+"노자"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 415,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p108",
+"file": "2026-3-3-윤사 19_삽화만(이황과 이이).jpg",
+"src": "2026-3-3-윤사 19",
+"names": [
+"이황",
+"이이"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 415,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p109",
+"file": "2026-3-3-윤사 1_삽화만(우측 소크라테스).jpg",
+"src": "2026-3-3-윤사 1",
+"names": [
+"소크라테스"
+],
+"side": "right",
+"figures": 1,
+"w": 1000,
+"h": 719,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p110",
+"file": "2026-6-평가원-생윤-05_인물만(플라톤).jpg",
+"src": "2026-6-평가원-생윤-05",
+"names": [
+"플라톤"
+],
+"side": null,
+"figures": 1,
+"w": 900,
+"h": 997,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p111",
+"file": "2026-6-평가원-윤사-01_인물만1(우측 석가모니).jpg",
+"src": "2026-6-평가원-윤사-01",
+"names": [
+"석가모니"
+],
+"side": "right",
+"figures": 1,
+"w": 1000,
+"h": 589,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p112",
+"file": "2026-6-평가원-윤사-01_인물만2(우측 석가모니).jpg",
+"src": "2026-6-평가원-윤사-01",
+"names": [
+"석가모니"
+],
+"side": "right",
+"figures": 1,
+"w": 1000,
+"h": 562,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p113",
+"file": "2026-6-평가원-윤사-01_인물만3(우측 석가모니).jpg",
+"src": "2026-6-평가원-윤사-01",
+"names": [
+"석가모니"
+],
+"side": "right",
+"figures": 1,
+"w": 1000,
+"h": 588,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p114",
+"file": "2026-6-평가원-윤사-01_인물만4(우측 석가모니).jpg",
+"src": "2026-6-평가원-윤사-01",
+"names": [
+"석가모니"
+],
+"side": "right",
+"figures": 1,
+"w": 1000,
+"h": 587,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p115",
+"file": "2026-6-평가원-윤사-06_인물만(이황과 이이).jpg",
+"src": "2026-6-평가원-윤사-06",
+"names": [
+"이황",
+"이이"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 481,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p116",
+"file": "2026-6-평가원-윤사-13_인물만(존 듀이).jpg",
+"src": "2026-6-평가원-윤사-13",
+"names": [
+"듀이"
+],
+"side": null,
+"figures": 1,
+"w": 896,
+"h": 1100,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p117",
+"file": "2026-7-8-생윤_17_프롬_인물만.png",
+"src": "2026-7-8-생윤",
+"names": [
+"프롬"
+],
+"side": null,
+"figures": 1,
+"w": 558,
+"h": 778,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p118",
+"file": "2026-7-8-윤사_06_소크라테스_인물만.png",
+"src": "2026-7-8-윤사",
+"names": [
+"소크라테스"
+],
+"side": null,
+"figures": 1,
+"w": 681,
+"h": 677,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p119",
+"file": "2026-7-8-윤사_06_소피스트_인물만.png",
+"src": "2026-7-8-윤사",
+"names": [
+"소피스트"
+],
+"side": null,
+"figures": 1,
+"w": 713,
+"h": 688,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p120",
+"file": "2026-7-8-윤사_06_소피스트와 소크라테스_인물만.png",
+"src": "2026-7-8-윤사",
+"names": [
+"소피스트",
+"소크라테스"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 360,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p121",
+"file": "2026-7-8-윤사_14_비롤리_인물만.png",
+"src": "2026-7-8-윤사",
+"names": [
+"비롤리"
+],
+"side": null,
+"figures": 1,
+"w": 772,
+"h": 978,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p122",
+"file": "2027-6-4-생윤-3_말풍선 제거(와일드).png",
+"src": "2027-6-4-생윤-3",
+"names": [
+"와일드"
+],
+"side": null,
+"figures": 1,
+"w": 461,
+"h": 728,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p123",
+"file": "2027-6-4-생윤_20_대화_말풍선 제거.png",
+"src": "2027-6-4-생윤",
+"names": [
+"두 학생"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 423,
+"variant": "clean",
+"generic": true
+},
+{
+"id": "p124",
+"file": "2027-6-4-윤사 11(스미스)_말풍선 제거.png",
+"src": "2027-6-4-윤사 11",
+"names": [
+"스미스"
+],
+"side": null,
+"figures": 1,
+"w": 444,
+"h": 597,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p125",
+"file": "2027-6-4-윤사 1_석가모니 인터뷰_말풍선 제거.png",
+"src": "2027-6-4-윤사 1",
+"names": [
+"석가모니"
+],
+"side": null,
+"figures": 1,
+"w": 1000,
+"h": 667,
+"variant": "sheet",
+"generic": false
+},
+{
+"id": "p126",
+"file": "2027-6-4-윤사 6_대화(주희와 왕수인)_말풍선 갑을 제거.png",
+"src": "2027-6-4-윤사 6",
+"names": [
+"주희",
+"왕수인"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 497,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p127",
+"file": "2027-9-생윤-19_롤스와 노직_갑을없음.png",
+"src": "2027-9-생윤-19",
+"names": [
+"롤스",
+"노직"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 438,
+"variant": "bubbles",
+"generic": false
+},
+{
+"id": "p128",
+"file": "2027-9-생윤-19_롤스와 노직_인물만.png",
+"src": "2027-9-생윤-19",
+"names": [
+"롤스",
+"노직"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 438,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p129",
+"file": "2027-9-생윤-3_프롬_인물만.png",
+"src": "2027-9-생윤-3",
+"names": [
+"프롬"
+],
+"side": null,
+"figures": 1,
+"w": 751,
+"h": 932,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p130",
+"file": "2027-9-윤사-11_이황과 이이_갑을없음.png",
+"src": "2027-9-윤사-11",
+"names": [
+"이황",
+"이이"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 561,
+"variant": "bubbles",
+"generic": false
+},
+{
+"id": "p131",
+"file": "2027-9-윤사-11_이황과 이이_인물만.png",
+"src": "2027-9-윤사-11",
+"names": [
+"이황",
+"이이"
+],
+"side": null,
+"figures": 2,
+"w": 1000,
+"h": 596,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p132",
+"file": "2027-9-윤사-16_제임스_인물만.png",
+"src": "2027-9-윤사-16",
+"names": [
+"제임스"
+],
+"side": null,
+"figures": 1,
+"w": 861,
+"h": 1345,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p133",
+"file": "2027-9-윤사-1_우측 에피쿠로스_인물만.png",
+"src": "2027-9-윤사-1",
+"names": [
+"에피쿠로스"
+],
+"side": "right",
+"figures": 1,
+"w": 1000,
+"h": 497,
+"variant": "clean",
+"generic": false
+},
+{
+"id": "p134",
+"file": "2024-5-3-생윤-04_인물만(우측 아도르노).jpg [분할1]",
+"src": "2024-5-3-생윤-04",
+"names": [
+"질문자(여성)"
+],
+"side": "right",
+"figures": 1,
+"w": 218,
+"h": 170,
+"variant": "clean",
+"generic": true,
+"from": "p027"
+},
+{
+"id": "p135",
+"file": "2024-5-3-생윤-04_인물만(우측 아도르노).jpg [분할2]",
+"src": "2024-5-3-생윤-04",
+"names": [
+"아도르노"
+],
+"side": "right",
+"figures": 1,
+"w": 169,
+"h": 170,
+"variant": "clean",
+"generic": false,
+"from": "p027"
+},
+{
+"id": "p136",
+"file": "2024-5-3-생윤-04_인물만(우측 아도르노).jpg [분할3]",
+"src": "2024-5-3-생윤-04",
+"names": [
+"질문자(여성)"
+],
+"side": "right",
+"figures": 1,
+"w": 217,
+"h": 170,
+"variant": "clean",
+"generic": true,
+"from": "p027"
+},
+{
+"id": "p137",
+"file": "2024-5-3-생윤-04_인물만(우측 아도르노).jpg [분할4]",
+"src": "2024-5-3-생윤-04",
+"names": [
+"아도르노"
+],
+"side": "right",
+"figures": 1,
+"w": 204,
+"h": 170,
+"variant": "clean",
+"generic": false,
+"from": "p027"
+},
+{
+"id": "p138",
+"file": "2024-5-3-생윤-04_인물만(우측 아도르노).jpg [분할5]",
+"src": "2024-5-3-생윤-04",
+"names": [
+"질문자(여성)"
+],
+"side": "right",
+"figures": 1,
+"w": 218,
+"h": 171,
+"variant": "clean",
+"generic": true,
+"from": "p027"
+},
+{
+"id": "p139",
+"file": "2024-5-3-생윤-04_인물만(우측 아도르노).jpg [분할6]",
+"src": "2024-5-3-생윤-04",
+"names": [
+"아도르노"
+],
+"side": "right",
+"figures": 1,
+"w": 169,
+"h": 171,
+"variant": "clean",
+"generic": false,
+"from": "p027"
+},
+{
+"id": "p140",
+"file": "2024-5-3-생윤-04_인물만(우측 아도르노).jpg [분할7]",
+"src": "2024-5-3-생윤-04",
+"names": [
+"질문자(여성)"
+],
+"side": "right",
+"figures": 1,
+"w": 217,
+"h": 171,
+"variant": "clean",
+"generic": true,
+"from": "p027"
+},
+{
+"id": "p141",
+"file": "2024-5-3-생윤-04_인물만(우측 아도르노).jpg [분할8]",
+"src": "2024-5-3-생윤-04",
+"names": [
+"아도르노"
+],
+"side": "right",
+"figures": 1,
+"w": 204,
+"h": 171,
+"variant": "clean",
+"generic": false,
+"from": "p027"
+},
+{
+"id": "p142",
+"file": "2025-3-전연-윤사-01_인물만(우측 벤담).jpg [분할1]",
+"src": "2025-3-전연-윤사-01",
+"names": [
+"청년(대화 상대)"
+],
+"side": "right",
+"figures": 1,
+"w": 167,
+"h": 156,
+"variant": "clean",
+"generic": true,
+"from": "p060"
+},
+{
+"id": "p143",
+"file": "2025-3-전연-윤사-01_인물만(우측 벤담).jpg [분할2]",
+"src": "2025-3-전연-윤사-01",
+"names": [
+"벤담"
+],
+"side": "right",
+"figures": 1,
+"w": 157,
+"h": 156,
+"variant": "clean",
+"generic": false,
+"from": "p060"
+},
+{
+"id": "p144",
+"file": "2025-3-전연-윤사-01_인물만(우측 벤담).jpg [분할3]",
+"src": "2025-3-전연-윤사-01",
+"names": [
+"청년(대화 상대)"
+],
+"side": "right",
+"figures": 1,
+"w": 168,
+"h": 156,
+"variant": "clean",
+"generic": true,
+"from": "p060"
+},
+{
+"id": "p145",
+"file": "2025-3-전연-윤사-01_인물만(우측 벤담).jpg [분할4]",
+"src": "2025-3-전연-윤사-01",
+"names": [
+"벤담"
+],
+"side": "right",
+"figures": 1,
+"w": 154,
+"h": 156,
+"variant": "clean",
+"generic": false,
+"from": "p060"
+},
+{
+"id": "p146",
+"file": "2025-3-전연-윤사-01_인물만(우측 벤담).jpg [분할5]",
+"src": "2025-3-전연-윤사-01",
+"names": [
+"청년(대화 상대)"
+],
+"side": "right",
+"figures": 1,
+"w": 167,
+"h": 157,
+"variant": "clean",
+"generic": true,
+"from": "p060"
+},
+{
+"id": "p147",
+"file": "2025-3-전연-윤사-01_인물만(우측 벤담).jpg [분할6]",
+"src": "2025-3-전연-윤사-01",
+"names": [
+"벤담"
+],
+"side": "right",
+"figures": 1,
+"w": 157,
+"h": 157,
+"variant": "clean",
+"generic": false,
+"from": "p060"
+},
+{
+"id": "p148",
+"file": "2025-3-전연-윤사-01_인물만(우측 벤담).jpg [분할7]",
+"src": "2025-3-전연-윤사-01",
+"names": [
+"청년(대화 상대)"
+],
+"side": "right",
+"figures": 1,
+"w": 168,
+"h": 157,
+"variant": "clean",
+"generic": true,
+"from": "p060"
+},
+{
+"id": "p149",
+"file": "2025-3-전연-윤사-01_인물만(우측 벤담).jpg [분할8]",
+"src": "2025-3-전연-윤사-01",
+"names": [
+"벤담"
+],
+"side": "right",
+"figures": 1,
+"w": 154,
+"h": 157,
+"variant": "clean",
+"generic": false,
+"from": "p060"
+},
+{
+"id": "p150",
+"file": "2025-6월 평가-윤사-01_인물만(우측 소크라테스).jpg [분할1]",
+"src": "2025-6월 평가-윤사-01",
+"names": [
+"청년(대화 상대)"
+],
+"side": "right",
+"figures": 1,
+"w": 198,
+"h": 167,
+"variant": "clean",
+"generic": true,
+"from": "p072"
+},
+{
+"id": "p151",
+"file": "2025-6월 평가-윤사-01_인물만(우측 소크라테스).jpg [분할2]",
+"src": "2025-6월 평가-윤사-01",
+"names": [
+"소크라테스"
+],
+"side": "right",
+"figures": 1,
+"w": 193,
+"h": 167,
+"variant": "clean",
+"generic": false,
+"from": "p072"
+},
+{
+"id": "p152",
+"file": "2025-6월 평가-윤사-01_인물만(우측 소크라테스).jpg [분할3]",
+"src": "2025-6월 평가-윤사-01",
+"names": [
+"청년(대화 상대)"
+],
+"side": "right",
+"figures": 1,
+"w": 197,
+"h": 167,
+"variant": "clean",
+"generic": true,
+"from": "p072"
+},
+{
+"id": "p153",
+"file": "2025-6월 평가-윤사-01_인물만(우측 소크라테스).jpg [분할4]",
+"src": "2025-6월 평가-윤사-01",
+"names": [
+"소크라테스"
+],
+"side": "right",
+"figures": 1,
+"w": 194,
+"h": 167,
+"variant": "clean",
+"generic": false,
+"from": "p072"
+},
+{
+"id": "p154",
+"file": "2025-6월 평가-윤사-01_인물만(우측 소크라테스).jpg [분할5]",
+"src": "2025-6월 평가-윤사-01",
+"names": [
+"청년(대화 상대)"
+],
+"side": "right",
+"figures": 1,
+"w": 198,
+"h": 164,
+"variant": "clean",
+"generic": true,
+"from": "p072"
+},
+{
+"id": "p155",
+"file": "2025-6월 평가-윤사-01_인물만(우측 소크라테스).jpg [분할6]",
+"src": "2025-6월 평가-윤사-01",
+"names": [
+"소크라테스"
+],
+"side": "right",
+"figures": 1,
+"w": 193,
+"h": 164,
+"variant": "clean",
+"generic": false,
+"from": "p072"
+},
+{
+"id": "p156",
+"file": "2025-6월 평가-윤사-01_인물만(우측 소크라테스).jpg [분할7]",
+"src": "2025-6월 평가-윤사-01",
+"names": [
+"청년(대화 상대)"
+],
+"side": "right",
+"figures": 1,
+"w": 197,
+"h": 164,
+"variant": "clean",
+"generic": true,
+"from": "p072"
+},
+{
+"id": "p157",
+"file": "2025-6월 평가-윤사-01_인물만(우측 소크라테스).jpg [분할8]",
+"src": "2025-6월 평가-윤사-01",
+"names": [
+"소크라테스"
+],
+"side": "right",
+"figures": 1,
+"w": 194,
+"h": 164,
+"variant": "clean",
+"generic": false,
+"from": "p072"
+},
+{
+"id": "p158",
+"file": "2025-9월 평가-윤사-01_인물만(우측 맹자).jpg [분할1]",
+"src": "2025-9월 평가-윤사-01",
+"names": [
+"맹자",
+"제자(대화 상대)"
+],
+"side": "right",
+"figures": 2,
+"w": 445,
+"h": 231,
+"variant": "clean",
+"generic": false,
+"from": "p081"
+},
+{
+"id": "p159",
+"file": "2025-9월 평가-윤사-01_인물만(우측 맹자).jpg [분할2]",
+"src": "2025-9월 평가-윤사-01",
+"names": [
+"맹자",
+"제자(대화 상대)"
+],
+"side": "right",
+"figures": 2,
+"w": 470,
+"h": 231,
+"variant": "clean",
+"generic": false,
+"from": "p081"
+},
+{
+"id": "p160",
+"file": "2025-9월 평가-윤사-01_인물만(우측 맹자).jpg [분할3]",
+"src": "2025-9월 평가-윤사-01",
+"names": [
+"맹자",
+"제자(대화 상대)"
+],
+"side": "right",
+"figures": 2,
+"w": 445,
+"h": 228,
+"variant": "clean",
+"generic": false,
+"from": "p081"
+},
+{
+"id": "p161",
+"file": "2025-9월 평가-윤사-01_인물만(우측 맹자).jpg [분할4]",
+"src": "2025-9월 평가-윤사-01",
+"names": [
+"맹자",
+"제자(대화 상대)"
+],
+"side": "right",
+"figures": 2,
+"w": 470,
+"h": 228,
+"variant": "clean",
+"generic": false,
+"from": "p081"
+},
+{
+"id": "p162",
+"file": "2025-수능-윤사-01_인물만(우측 순자).jpg [분할1]",
+"src": "2025-수능-윤사-01",
+"names": [
+"순자",
+"제자(대화 상대)"
+],
+"side": "right",
+"figures": 2,
+"w": 473,
+"h": 225,
+"variant": "clean",
+"generic": false,
+"from": "p097"
+},
+{
+"id": "p163",
+"file": "2025-수능-윤사-01_인물만(우측 순자).jpg [분할2]",
+"src": "2025-수능-윤사-01",
+"names": [
+"순자",
+"제자(대화 상대)"
+],
+"side": "right",
+"figures": 2,
+"w": 481,
+"h": 225,
+"variant": "clean",
+"generic": false,
+"from": "p097"
+},
+{
+"id": "p164",
+"file": "2025-수능-윤사-01_인물만(우측 순자).jpg [분할3]",
+"src": "2025-수능-윤사-01",
+"names": [
+"순자",
+"제자(대화 상대)"
+],
+"side": "right",
+"figures": 2,
+"w": 481,
+"h": 224,
+"variant": "clean",
+"generic": false,
+"from": "p097"
+},
+{
+"id": "p165",
+"file": "2025-수능-윤사-01_인물만(우측 순자).jpg [분할4]",
+"src": "2025-수능-윤사-01",
+"names": [
+"순자",
+"제자(대화 상대)"
+],
+"side": "right",
+"figures": 2,
+"w": 481,
+"h": 225,
+"variant": "clean",
+"generic": false,
+"from": "p097"
+}
+]
+}

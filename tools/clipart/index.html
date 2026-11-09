@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>윤리 클립아트 생성기 · Ethink</title>
+<meta name="description" content="평가원·수능 윤리 문항의 자료 제시 형태(사상가 대화·인터뷰·벤다이어그램·상호 비판·순서도·XYZ·두루마리·칼럼)로 그림을 만들어 한글 문서에 바로 붙여 넣는 도구입니다.">
+<meta property="og:title" content="윤리 클립아트 생성기 · Ethink">
+<meta property="og:description" content="평가원 자료 제시 형태로 윤리 문항 그림을 만들고 한글 문서에 바로 붙여 넣으세요.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ethink.kr/tools/clipart/">
+<meta property="og:image" content="https://ethink.kr/assets/og/site.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body>
+<header class="top">
+  <div class="top-l">
+    <a class="brand" href="/" title="Ethink 홈으로"><span class="brand-name">Ethink</span><span class="brand-sub">에씽크</span></a>
+    <span class="top-sep"></span>
+    <h1 class="app-title">윤리 클립아트 생성기</h1>
+    <span class="badge">출제 도구</span>
+    <p class="app-desc">평가원 자료 제시 형태로 윤리 문항 그림을 만들고, 한글 문서에 바로 붙여 넣으세요</p>
+  </div>
+  <div class="top-r">
+    <button class="tbtn" id="bGuide">안내</button>
+    <button class="tbtn" id="bGallery">내 갤러리 <span class="cnt" id="galCount">0</span></button>
+  </div>
+</header>
+
+<div class="app">
+  <aside class="side" id="side">
+    <section class="step">
+      <h2><span class="num">1</span>형태 고르기</h2>
+      <div class="tabs" id="tabs">
+        <button data-mode="dialog">사상가 대화</button>
+        <button data-mode="interview">가상 인터뷰</button>
+        <button data-mode="venn">벤다이어그램</button>
+        <button data-mode="critique">상호 비판</button>
+        <button data-mode="flow">순서도</button>
+        <button data-mode="xyz">XYZ 좌표</button>
+        <button data-mode="scroll">두루마리(원전)</button>
+        <button data-mode="column">신문 칼럼</button>
+      </div>
+      <p class="formdesc" id="formDesc"></p>
+    </section>
+    <section class="step">
+      <h2><span class="num">2</span>내용 입력</h2>
+      <div id="panel"></div>
+    </section>
+    <section class="step">
+      <h2><span class="num">3</span>꾸미기</h2>
+      <div class="grp">
+        <div class="row"><label>한글 글꼴 <select id="selFont"><option value="gothic">고딕</option><option value="myeongjo">명조</option></select></label>
+          <label>글자 크기 <select id="selScaleFont"><option value="0.85">작게</option><option value="1" selected>기본</option><option value="1.15">크게</option></select></label></div>
+        <div class="row"><button class="btn" id="bAddText">＋ 글상자</button><button class="btn" id="bAddMark">＋ 표식 (갑)·ㄱ</button><button class="btn" id="bAddMask">＋ 흰색 가림 상자</button></div>
+        <div class="row"><button class="btn" id="bMove">✥ 도식 글자 위치 옮기기</button><button class="btn" id="bResetPos">↺ 위치 초기화</button><button class="btn" id="bClearOv">글상자 모두 지우기</button></div>
+        <p class="hint">입력 표기법: <code>[가]</code> → 네모 빈칸 <b>(가)</b> · <code>[ ]</code> → 빈 네모 · <code>_이 왕_</code> → 밑줄</p>
+      </div>
+      <div class="grp notice">
+        <p>이 도구의 사상가 인물 삽화는 <b>(주)도서출판 길벗</b>이 윤리 교과서 교수학습 자료로 만든 클립아트입니다. 수업·평가 자료를 만드는 데만 쓰고, 삽화만 따로 모아 다시 배포하거나 판매하지 마세요. 「내 갤러리」는 이 브라우저(기기)에만 저장됩니다.</p>
+      </div>
+    </section>
+  </aside>
+
+  <main class="work">
+    <div class="toolbar">
+      <div class="tb-l">
+        <button class="ibtn" id="bUndo" title="실행 취소 (Ctrl+Z)">↶</button>
+        <button class="ibtn" id="bRedo" title="다시 실행 (Ctrl+Y)">↷</button>
+        <span class="autosave" id="autosave">자동 저장</span>
+      </div>
+      <div class="tb-r">
+        <button class="btn primary" id="bCopy">⧉ 이미지 복사</button>
+        <button class="btn" id="bPng">↓ PNG 저장</button>
+        <button class="btn" id="bSvg">↓ SVG</button>
+        <button class="btn" id="bPrint">▣ 인쇄 / PDF</button>
+        <button class="btn" id="bSaveGal">☆ 갤러리에 저장</button>
+        <select id="selZoom" title="화면 배율"><option value="fit">맞춤</option><option value="50">50%</option><option value="75">75%</option><option value="100">100%</option><option value="125">125%</option><option value="150">150%</option></select>
+      </div>
+    </div>
+    <div class="metarow">
+      <label>파일 이름 <input type="text" id="inFname" placeholder="윤리_자료"></label>
+      <label>문항 번호 <input type="text" id="inQno" placeholder="예: 2026 수능 5번 (갤러리에 표시)"></label>
+      <label class="chk"><input type="checkbox" id="chkTrans"> 투명 배경</label>
+      <label>해상도 <select id="selScale"><option value="2">2배</option><option value="3" selected>3배 (인쇄용)</option><option value="4">4배</option></select></label>
+      <span class="hint" id="modeHint"></span>
+    </div>
+    <div class="stagewrap" id="stagewrap">
+      <div class="stage" id="stage">
+        <svg id="base" xmlns="http://www.w3.org/2000/svg"></svg>
+        <svg id="ovl" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
+    </div>
+    <div class="ovpanel" id="ovpanel"></div>
+  </main>
+</div>
+
+<footer class="foot">
+  <span><b>제작</b> Ethink(에씽크) · 윤리 교과서와 교과 단행본을 만드는 편집자가 운영합니다</span>
+  <span class="foot-sep">·</span>
+  <span><b>클립아트</b> (주)도서출판 길벗</span>
+  <span class="foot-sep">·</span>
+  <a href="/">ethink.kr</a>
+</footer>
+
+<!-- 안내 모달 -->
+<div class="modal" id="guideModal" hidden>
+  <div class="mbox">
+    <div class="mhead"><h2>윤리 클립아트 생성기</h2><button class="x" data-close>✕</button></div>
+    <div class="mbody">
+      <p class="lead">평가원(6월·9월·수능)과 교육청 전국연합 윤리 문항에 나오는 자료 제시 그림을 같은 형태로 만들어, 한글(HWP) 시험지와 활동지에 바로 붙여 넣을 수 있습니다.</p>
+      <h3>사용 방법</h3>
+      <ol>
+        <li>왼쪽에서 <b>형태</b>를 고릅니다. 사상가 대화·가상 인터뷰는 인물 삽화를, 벤다이어그램·상호 비판·순서도·XYZ는 도식을, 두루마리·칼럼은 양식을 만듭니다.</li>
+        <li>인물을 고르고 대사·내용을 입력합니다. 사상가는 이름으로 검색할 수 있습니다.</li>
+        <li><b>이미지 복사</b>를 누른 뒤 한글 문서에서 Ctrl+V로 붙여 넣습니다. 인쇄용은 PNG 저장(3배)을 권합니다.</li>
+      </ol>
+      <h3>미리보기 조작</h3>
+      <p>말풍선은 끌어서 옮기고, 오른쪽 아래 네모를 끌면 크기가, 파란 점을 끌면 꼬리 방향이 바뀝니다. 글상자·표식은 더블클릭 없이 바로 끌 수 있고 Delete로 지웁니다. 방향키는 1칸(Shift는 10칸) 이동, Ctrl+S는 갤러리 저장입니다.</p>
+      <h3>이용 안내</h3>
+      <p>사상가 인물 삽화는 (주)도서출판 길벗이 윤리 교과서 교수학습 자료로 제작한 클립아트입니다. 수업·평가 자료 제작에만 쓰고, 삽화만 따로 모아 재배포하거나 판매하지 마세요. 원전·사료를 인용할 때는 출처를 정확히 적어 주세요. 「내 갤러리」 저장 내용은 이 브라우저(기기)에만 남습니다.</p>
+    </div>
+    <div class="mfoot"><label class="chk"><input type="checkbox" id="chkNoGuide"> 다음부터 자동으로 열지 않기</label><span style="display:flex;gap:8px"><a class="btn" href="guide.html" target="_blank" rel="noopener">사용 설명서</a><a class="btn" href="ethink-clipart-offline.html" download="윤리 클립아트 생성기(Ethink, 오프라인).html">오프라인용 내려받기</a><button class="btn primary" data-close>시작하기</button></span></div>
+  </div>
+</div>
+
+<!-- 갤러리 모달 -->
+<div class="modal" id="galModal" hidden>
+  <div class="mbox wide">
+    <div class="mhead"><h2>내 갤러리</h2><button class="x" data-close>✕</button></div>
+    <div class="mbody" id="galBody"></div>
+    <div class="mfoot"><span class="hint">이 브라우저에만 저장됩니다. 다른 기기에서는 보이지 않습니다.</span><button class="btn" data-close>닫기</button></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="printArea" id="printArea"></div>
+<script src="app.js?v=1"></script>
+</body>
+</html>

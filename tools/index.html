@@ -1,0 +1,46 @@
+---
+layout: default
+title: 출제 도구
+lead: 시험지와 활동지에 바로 붙여 넣는 그림을 만드는 도구입니다. 설치 없이 브라우저에서 열어 쓰고, 만든 그림은 PNG로 저장하거나 복사해서 한글 문서에 붙여 넣습니다.
+og_image: /assets/og/site.jpg
+---
+<style>
+.tool-list{display:flex;flex-direction:column;gap:2.25rem;margin:0;padding:0;list-style:none}
+.tool-card{border-top:2px solid var(--ink);padding-top:1rem;display:grid;gap:.6rem}
+.tool-card .tool-no{margin:0;color:var(--accent)}
+.tool-card h2{font-family:var(--font-display);font-size:var(--step-3);line-height:1.3;margin:0}
+.tool-card h2 a{text-decoration:none}
+.tool-card h2 a:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
+.tool-card .tool-lead{margin:0;color:var(--muted);font-size:var(--step-1)}
+.tool-card .tool-desc{margin:0;text-align:justify;text-justify:inter-word;word-break:normal;line-break:strict;overflow-wrap:break-word}
+.tool-card .tool-info{margin:0;font-size:var(--step--1);color:var(--muted);display:grid;gap:.1rem}
+.tool-card .tool-go{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-top:.25rem}
+.tool-card .tool-go .go{background:var(--ink);color:var(--paper);text-decoration:none;padding:.65rem 1.2rem;font-weight:700;border-radius:2px}
+.tool-card .tool-go .go:hover{background:var(--accent)}
+.tool-note{margin:0;font-size:var(--step--1);color:var(--muted);text-align:justify;text-justify:inter-word;word-break:normal;line-break:strict}
+.tool-forms{display:flex;flex-wrap:wrap;gap:.4rem;margin:0;padding:0;list-style:none}
+.tool-forms li{font-size:var(--step--1);border:1px solid var(--rule);border-radius:999px;padding:.15rem .7rem;color:var(--muted)}
+</style>
+
+<section class="issue-hero">
+  <p class="lab-meta mono" style="margin:0;color:var(--accent)">TOOLS · 도구 1가지</p>
+  <h1 class="issue-title">{{ page.title }}</h1>
+  <p class="issue-lead">{{ page.lead }}</p>
+</section>
+
+<ol class="tool-list">
+  <li class="tool-card">
+    <p class="tool-no mono">TOOL 01</p>
+    <h2><a href="{{ '/tools/clipart/' | relative_url }}">윤리 클립아트 생성기</a></h2>
+    <p class="tool-lead">평가원 자료 제시 형태로 윤리 문항 그림을 만들고 한글에 바로 붙여 넣는 도구</p>
+    <p class="tool-desc">생활과 윤리·윤리와 사상 기출에 나오는 자료 제시 방식을 여덟 가지 형태로 만들었습니다. 사상가 인물 삽화를 고르고 대사를 넣으면 말풍선과 이름표가 자동으로 배치되고, 도식은 사상가 수와 기호만 정하면 범례까지 그려집니다. 말풍선은 끌어서 옮기거나 크기와 꼬리 방향을 바꿀 수 있고, <code>[가]</code>로 네모 빈칸을 만듭니다.</p>
+    <ul class="tool-forms">
+      <li>사상가 대화</li><li>가상 인터뷰</li><li>벤다이어그램</li><li>상호 비판</li><li>순서도</li><li>XYZ 좌표</li><li>두루마리(원전)</li><li>신문 칼럼</li>
+    </ul>
+    <p class="tool-info"><span>사상가 인물 삽화 130여 장 · 이름으로 검색 · PNG 저장·이미지 복사·SVG · 내 갤러리(브라우저 저장)</span><span>『생활과 윤리』 · 『윤리와 사상』 · 『인문학과 윤리』 · 『윤리문제 탐구』 · 『현대사회와 윤리』 출제·활동지</span></p>
+    <p class="tool-go"><a class="go" href="{{ '/tools/clipart/' | relative_url }}">도구 열기</a><a class="btn-print" href="{{ '/tools/clipart/guide.html' | relative_url }}">사용 설명서</a><a class="btn-print" href="{{ '/tools/clipart/ethink-clipart-offline.html' | relative_url }}" download="윤리 클립아트 생성기(Ethink, 오프라인).html">오프라인용 HTML 내려받기</a></p>
+    <p class="tool-note">내려받은 파일은 인터넷 없이도 열립니다. 인물 삽화가 모두 들어 있어 파일 크기는 6MB 정도입니다.</p>
+  </li>
+</ol>
+
+<p class="tool-note">도구는 서버 없이 브라우저 안에서만 동작하고, 입력한 내용과 「내 갤러리」는 사용자의 브라우저에만 저장됩니다. 사상가 인물 삽화는 (주)도서출판 길벗이 윤리 교과서 교수학습 자료로 제작한 클립아트로, 수업·평가 자료 제작에만 쓰고 삽화만 따로 모아 재배포하거나 판매할 수 없습니다.</p>
