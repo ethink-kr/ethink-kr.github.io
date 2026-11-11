@@ -46,6 +46,14 @@ function commentText(doc) {
   }
   return doc.follow === false ? body : `${body}\n\n${FOLLOW}`;
 }
+// 캡션 정리(2026-11-12 재형 님 지시): 인스타그램에는 '에씽크'만 드러내고 글쓴이 이름(박재형)은 쓰지 않는다.
+// 첫 댓글(투표)과 같은 문장은 캡션에서 뺀다. 캡션과 댓글이 겹치지 않게 한다.
+function tidyCaption(caption, comment) {
+  let s = String(caption || '').replace(/박재형\s*[,·]\s*/g, '').replace(/박재형\s*/g, '');
+  const dup = new Set(String(comment || '').split('\n').map(x => x.trim()).filter(x => x.length > 1));
+  if (dup.size) s = s.split('\n').filter(l => !dup.has(l.trim())).join('\n');
+  return s.replace(/\n{3,}/g, '\n\n').trim();
+}
 // 게시물을 올린 직후 첫 댓글을 답니다. 실패해도 게시물은 이미 올라간 것이므로 기록만 하고 넘어갑니다.
 async function postFirstComment(mediaId, text, label) {
   if (!text) return;
@@ -93,7 +101,7 @@ async function postNote(file, done) {
   const doc = yaml.load(fs.readFileSync(file, 'utf8')) || {};
   const name = path.basename(file).replace(/\.ya?ml$/, '');
   if (doc.approved !== true) { console.log(`${name}: 아직 승인되지 않아(approved: false) 건너뜁니다.`); return 0; }
-  const caption = String(doc.caption || '').trim();
+  const caption = tidyCaption(doc.caption, commentText(doc));
   if (!caption) { console.log(`${name}: caption이 없어 건너뜁니다.`); return 0; }
   if (done.has(firstLine(caption))) { console.log(`${name}: 이미 올라간 노트입니다.`); return 0; }
   const count = (doc.cards || []).length;
@@ -119,7 +127,7 @@ async function postNote(file, done) {
     if (!isNaN(when) && when.getTime() > Date.now()) { console.log(`${day}/${n}: 아직 발행 시각 전입니다(${dateLine.trim()}).`); continue; }
     const capPath = fs.existsSync(path.join(dir, `ig-${n}.txt`)) ? path.join(dir, `ig-${n}.txt`) : path.join(dir, 'ig.txt');
     if (!fs.existsSync(capPath)) { console.log(`${day}/${n}: 캡션 파일(ig.txt)이 없어 건너뜁니다.`); continue; }
-    const caption = fs.readFileSync(capPath, 'utf8').trim();
+    const caption = tidyCaption(fs.readFileSync(capPath, 'utf8'), '');
     if (done.has(firstLine(caption))) { console.log(`${day}/${n}: 이미 올라간 글입니다.`); continue; }
     // 카드 뉴스 문안(ig-cards-N.yml)에 approved: true가 있어야 올린다(재형 님 승인).
     const cardsPath = path.join(dir, `ig-cards-${n}.yml`);
