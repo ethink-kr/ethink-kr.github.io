@@ -145,7 +145,10 @@
   url: https://www.metmuseum.org/art/collection/search/38777
 - name: 엘리아데
   match: ["엘리아데"]
-  initial: 엘
+  img: /assets/faces/eliade.jpg
+  credit: 1933년 사진, 촬영자 미상
+  license: 퍼블릭 도메인
+  url: https://commons.wikimedia.org/wiki/File:Mircea_Eliade_young.jpg
 - name: 큉
   match: ["큉"]
   initial: 큉
