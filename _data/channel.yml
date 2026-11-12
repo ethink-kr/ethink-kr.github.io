@@ -239,6 +239,11 @@
 - id: special
   name: 특별 기획
   about: 하나의 주제를 여러 편에 걸쳐 이어 가는 기획 연재입니다.
+  items:
+  - title: '윤리 게임: 나와 닮은 사상가는?'
+    desc: 게임으로 나와 생각이 닮은 윤리 사상가를 찾아보며 사상가들의 관점을 가볍게 만나 봅니다.
+    url: https://pf.kakao.com/_PVHxjn/115152782
+    date: 2026. 11.
   series:
   - name: 고전이 건네는 말
     items:
@@ -280,6 +285,10 @@
   series:
   - name: 윤리 공통
     items:
+    - title: 2026년 2차 정기 시험을 위한 문제 은행
+      desc: 2차 정기 시험 출제에 쓸 문항을 모은 문제 은행으로, 교무실 출입 금지 포스터도 함께 드립니다.
+      url: https://pf.kakao.com/_PVHxjn/115153160
+      date: 2026. 11.
     - title: '한 학기 한 책 읽기 자료집: 독서 활동지(기본편, 심화편)'
       desc: 고등학교 윤리 교육과정과 연결한 한 학기 한 책 읽기 독서 활동지입니다.
       url: https://pf.kakao.com/_PVHxjn/114654666
