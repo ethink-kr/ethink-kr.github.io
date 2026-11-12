@@ -143,3 +143,12 @@
   credit: 「불두(佛頭)」, 4세기 무렵 간다라 · 메트로폴리탄미술관
   license: 퍼블릭 도메인(CC0)
   url: https://www.metmuseum.org/art/collection/search/38777
+- name: 엘리아데
+  match: ["엘리아데"]
+  img: /assets/faces/eliade.jpg
+  credit: 1933년 사진, 촬영자 미상
+  license: 퍼블릭 도메인
+  url: https://commons.wikimedia.org/wiki/File:Mircea_Eliade_young.jpg
+- name: 큉
+  match: ["큉"]
+  initial: 큉
