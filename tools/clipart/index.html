@@ -60,7 +60,19 @@ table.rg th{color:var(--muted);font-weight:normal;font-size:12px}
 #stage.move [data-k]:hover{outline:1px dashed var(--sel)}
 [data-ov]{cursor:move}
 .modehint{font-size:12px;color:var(--accent);padding:2px 4px}
-#ovpanel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:none}
+.ibtn{border:1px solid #c5ccd3;background:#fff;border-radius:7px;width:32px;height:30px;cursor:pointer;font-size:16px}
+.ibtn:disabled{opacity:.35;cursor:default}
+.savestate{font-size:12px;color:var(--muted);margin-left:auto}
+.sizeinfo{font-size:12px;color:var(--muted)}
+.warn{background:#fff7e6;border:1px solid #f0c36d;border-left:4px solid #e0a020;border-radius:6px;padding:8px 10px;font-size:12.5px;margin-bottom:12px;color:#5c4210}
+.warn p{margin:0 0 4px}.warn p:last-child{margin:0}
+.warn .btn{padding:3px 8px;font-size:12px;margin-top:4px}
+.modeline{font-size:12px;margin:0 0 6px;color:var(--muted)}.modeline b{color:var(--accent)}
+.gitem .gt{display:block;font-size:12.5px;font-weight:600;line-height:1.3;color:#222}
+.gitem .gs{display:block;font-size:11px;color:var(--muted);line-height:1.3;margin-top:1px}
+#ovpanel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:none;position:fixed;right:18px;bottom:18px;width:min(460px,calc(100vw - 36px));max-height:46vh;overflow:auto;z-index:40;box-shadow:0 8px 28px rgba(0,0,0,.18)}
+#ovpanel .ovhead{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+#ovpanel .ovhead .x{margin-left:auto;border:0;background:none;font-size:16px;cursor:pointer;color:var(--muted)}
 #ovpanel.show{display:block}
 #ovpanel .row{gap:8px}
 .gal-filter{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px}
@@ -109,7 +121,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:6px 16px 26px
     <h1>윤리 출제 클립아트 스튜디오</h1>
     <p>벤다이어그램 · 상호 비판 · 순서도 · XYZ 도식과 사상가·양식 삽화로 시험지와 활동지 그림을 만드는 도구</p>
   </div>
-  <div class="badges"><span class="badge">교사용 출제·수업 자료</span><span class="badge">v1.1.0 웹판</span></div>
+  <div class="badges"><span class="badge">교사용 출제·수업 자료</span><span class="badge">v1.2.0 웹판</span></div>
 </header>
 
 <main class="layout">
@@ -127,6 +139,9 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:6px 16px 26px
 
   <section class="work">
     <div class="toolbar">
+      <button class="ibtn" id="bUndo" title="실행 취소 (Ctrl+Z)" disabled>↶</button>
+      <button class="ibtn" id="bRedo" title="다시 실행 (Ctrl+Shift+Z)" disabled>↷</button>
+      <span class="sep"></span>
       <button class="btn" id="bMove" title="도식의 글자·범례를 끌어서 옮깁니다">✥ 글자 위치 옮기기</button>
       <button class="btn" id="bResetPos">↺ 위치 초기화</button>
       <span class="sep"></span>
@@ -138,11 +153,13 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:6px 16px 26px
       <label>한글 글꼴 <select id="selFont"><option value="gothic">고딕</option><option value="myeongjo">명조</option></select></label>
       <label>화면 <select id="selZoom"><option value="fit">맞춤</option><option>50</option><option>75</option><option>100</option><option>125</option><option>150</option><option>200</option></select></label>
       <span class="modehint" id="modeHint"></span>
+      <span class="savestate" id="saveState">이 브라우저에만 자동 저장됩니다</span>
     </div>
     <div class="stagewrap" id="stagewrap"><div id="stage"><svg id="base"></svg><svg id="ovl"></svg></div></div>
     <div id="ovpanel"></div>
     <div class="exportbar">
       <label>해상도 <select id="selScale"><option value="2">2배</option><option value="3" selected>3배 (인쇄용)</option><option value="4">4배</option></select></label>
+      <span class="sizeinfo" id="sizeInfo"></span>
       <label><input type="checkbox" id="chkTrans"> 투명 배경</label>
       <button class="btn pri" id="bPng">↓ PNG 저장</button>
       <button class="btn pri" id="bCopy">⧉ 이미지 복사</button>
@@ -164,11 +181,11 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:6px 16px 26px
     <div class="steps">
       <div class="step"><b class="n">01</b><h4>그림 종류 고르기</h4><p>왼쪽 위 탭에서 <b>벤다이어그램·상호 비판·순서도·XYZ 좌표·사상가 인물·칼럼·양식</b> 중 하나를 고르세요. 탭을 옮겨도 각 탭의 설정은 그대로 남습니다.</p></div>
       <div class="step"><b class="n">02</b><h4>도식 설정하기</h4><p>벤다이어그램은 원 개수, 영역 기호(A·B·C…), 빗금 무늬를 정하면 범례가 자동으로 만들어집니다. 상호 비판은 화살표를 하나씩 켜고 끌 수 있고, 순서도는 네 가지 틀 가운데 고른 뒤 문구를 고칩니다. XYZ 좌표는 꼭짓점마다 ㄱ·ㄴ·ㄷ 기호를 넣거나 비울 수 있습니다.</p></div>
-      <div class="step"><b class="n">03</b><h4>삽화 고르기</h4><p><b>사상가 인물</b>과 <b>칼럼·양식</b> 탭에서는 기출 삽화를 검색해 고릅니다. <b>제거본만</b>을 켜면 말풍선·갑을·글자를 지운 편집용 그림만 보입니다.</p></div>
+      <div class="step"><b class="n">03</b><h4>삽화 고르기</h4><p><b>사상가 인물</b>과 <b>칼럼·양식</b> 탭에서는 기출 삽화를 검색해 고릅니다. 목록 위의 <b>인물만·갑·을 제거·말풍선 제거</b> 단추로 편집용 그림만 골라 볼 수 있습니다. 목록에는 사상가 이름을 크게, 출처 시험을 작게 보여 줍니다.</p></div>
       <div class="step"><b class="n">04</b><h4>글상자·표식 얹기</h4><p><b>＋ 글상자</b>로 말풍선이나 칼럼 안에 글을 넣고, <b>＋ 표식</b>으로 (갑)·ㄱ·(가) 같은 기호를 붙이세요. <b>흰색 가림 상자</b>는 그림에 남은 글자를 가립니다. 글상자를 누르면 아래에 설정 창이 열리고, 오른쪽 아래 파란 점을 끌면 크기가 바뀝니다. 선택한 글상자는 Delete 키로 지울 수 있습니다.</p></div>
       <div class="step"><b class="n">05</b><h4>글자 위치 다듬기</h4><p><b>✥ 글자 위치 옮기기</b>를 켜면 도식 안의 이름·기호·범례를 끌어 옮길 수 있습니다. <b>↺ 위치 초기화</b>로 원래 자리로 돌아갑니다.</p></div>
-      <div class="step"><b class="n">06</b><h4>저장·복사·인쇄</h4><p><b>PNG 저장</b>은 한글 문서에 넣을 이미지, <b>이미지 복사</b>는 바로 붙여넣기용입니다. 인쇄용은 3배 이상을 권합니다. <b>SVG 저장</b>은 확대해도 선이 깨지지 않는 벡터 파일입니다.</p></div>
-      <div class="step"><b class="n">07</b><h4>작업 이어 하기</h4><p>설정과 글상자는 이 브라우저에 자동 보관됩니다. 다른 컴퓨터에서 이어 하려면 <b>작업 파일 저장</b>으로 받은 파일을 <b>작업 파일 열기</b>로 불러오세요.</p></div>
+      <div class="step"><b class="n">06</b><h4>저장·복사·인쇄</h4><p><b>PNG 저장</b>은 한글 문서에 넣을 이미지, <b>이미지 복사</b>는 바로 붙여넣기용입니다. 인쇄용은 3배 이상을 권합니다. 해상도 옆에 출력 크기와 300dpi 기준으로 선명하게 넣을 수 있는 가로 폭이 나옵니다. 삽화는 원본 크기보다 크게 넣으면 흐려집니다. <b>SVG 저장</b>은 확대해도 선이 깨지지 않는 벡터 파일입니다.</p></div>
+      <div class="step"><b class="n">07</b><h4>작업 이어 하기</h4><p>설정과 글상자는 이 브라우저에 자동 보관됩니다. 다른 컴퓨터에서 이어 하려면 <b>작업 파일 저장</b>으로 받은 파일을 <b>작업 파일 열기</b>로 불러오세요. 잘못 고쳤으면 <b>↶ 실행 취소</b>(Ctrl+Z)로 되돌립니다.</p></div>
     </div>
     <div class="notes">
       · 그림의 한글 글꼴은 사용하는 컴퓨터에 설치된 글꼴(HY중고딕·맑은 고딕 / HY신명조·바탕 등)로 그려집니다. 알파벳 기호는 Times New Roman 계열을 씁니다.<br>
@@ -178,7 +195,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:6px 16px 26px
     </div>
   </div>
 </section>
-<footer>제작 Ethink(에씽크) · 삽화 (주)도서출판 길벗 「윤리 기출문제 클립아트」 · 윤리 출제 클립아트 스튜디오 v1.1.0 (첫 판 2026. 10. 15.) · <a href="/" style="color:inherit">ethink.kr</a></footer>
+<footer>제작 Ethink(에씽크) · 삽화 (주)도서출판 길벗 「윤리 기출문제 클립아트」 · 윤리 출제 클립아트 스튜디오 v1.2.0 (첫 판 2026. 10. 15. · 고침 2026. 11. 12.) · <a href="/" style="color:inherit">ethink.kr</a></footer>
 <div id="printArea"></div>
 <div class="toast" id="toast"></div>
 
@@ -223,8 +240,18 @@ let S=defaults();
 try{const raw=localStorage.getItem(STORE); if(raw){S=Object.assign(defaults(),JSON.parse(raw));}}catch(e){}
 function merge(){const d=defaults();for(const k of Object.keys(d)){if(typeof d[k]==='object'&&d[k]&&!Array.isArray(d[k])){S[k]=Object.assign(d[k],S[k]||{});}}}
 merge();
-let saveT=0;function saveNow(){clearTimeout(saveT);try{localStorage.setItem(STORE,JSON.stringify(S))}catch(e){}}
-function save(){clearTimeout(saveT);saveT=setTimeout(saveNow,300)}
+let saveT=0;function saveNow(){clearTimeout(saveT);let ok=true;try{localStorage.setItem(STORE,JSON.stringify(S))}catch(e){ok=false}
+  const el=document.getElementById('saveState');if(el){const d=new Date();el.textContent=ok?`자동 저장됨 ${d.toLocaleTimeString('ko-KR',{hour:'numeric',minute:'2-digit'})} · 이 브라우저에만 저장됩니다`:'자동 저장에 실패했습니다. 작업 파일 저장을 이용하세요.'}}
+function save(){clearTimeout(saveT);saveT=setTimeout(saveNow,300);histMark()}
+/* ---- 실행 취소 ---- */
+const UNDO=[],REDO=[];let histT=0,histBase=null,histMute=false;
+function histInit(){histBase=JSON.stringify(S);updHist()}
+function histMark(){if(histMute)return;clearTimeout(histT);histT=setTimeout(histCommit,450)}
+function histCommit(){clearTimeout(histT);const now=JSON.stringify(S);if(histBase===null){histBase=now;return}if(now===histBase)return;UNDO.push(histBase);if(UNDO.length>80)UNDO.shift();REDO.length=0;histBase=now;updHist()}
+function updHist(){const u=document.getElementById('bUndo'),r=document.getElementById('bRedo');if(u)u.disabled=!UNDO.length;if(r)r.disabled=!REDO.length}
+function histApply(json){histMute=true;S=Object.assign(defaults(),JSON.parse(json));merge();sel=-1;histBase=json;renderAll();saveNow();histMute=false;updHist()}
+function undo(){histCommit();if(!UNDO.length)return;REDO.push(JSON.stringify(S));histApply(UNDO.pop());toast('되돌렸습니다.')}
+function redo(){if(!REDO.length)return;UNDO.push(JSON.stringify(S));histApply(REDO.pop());toast('다시 실행했습니다.')}
 window.addEventListener('pagehide',saveNow);window.addEventListener('beforeunload',saveNow);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')saveNow()});
 
 function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2400)}
@@ -397,6 +424,7 @@ function pVenn(){
   <div class="grp"><h3>범례</h3>
     <div class="row"><label><input type="checkbox" data-bind="venn.legend" ${v.legend?'checked':''}> 범례 표시</label>
       <select data-bind="venn.lstyle"><option value="gwa" ${v.lstyle==='gwa'?'selected':''}>갑과 을의 공통 입장</option><option value="comma" ${v.lstyle==='comma'?'selected':''}>갑, 을의 공통 입장</option></select></div>
+    <p class="modeline" id="legendMode"></p>
     <textarea data-bind="venn.lover" placeholder="직접 고치려면 한 줄에 하나씩 입력 (예: A: 갑만의 입장)&#10;비워 두면 자동으로 만듭니다.">${esc(v.lover)}</textarea>
     <div class="row"><button class="btn" data-act="legendFill">자동 범례를 칸에 불러오기</button></div></div>`;
 }
@@ -409,9 +437,9 @@ const CR_DEF={
 function rCrit(){
   const c=S.critique,def=CR_DEF[c.n],R=62,N=c.names;let body='';
   def.pos.forEach((p,i)=>{body+=`<circle cx="${p[0]}" cy="${p[1]}" r="${R}" fill="#fff" stroke="#000" stroke-width="1.6"/>`+D('cn'+i,txt(p[0],p[1],N[i],{fs:30}))});
-  const used=[];
+  const used=[];let exArr=null;
   for(const [k,[f,t,side]] of Object.entries(def.arr)){
-    if(!c.on[k])continue;used.push(c.letters[k]||k);
+    if(!c.on[k])continue;used.push(c.letters[k]||k);if(!exArr)exArr={k,f,t};
     const P=def.pos[f],Q=def.pos[t];const dx=Q[0]-P[0],dy=Q[1]-P[1],len=Math.hypot(dx,dy);const ux=dx/len,uy=dy/len;
     let nx=-uy,ny=ux;const mx=(P[0]+Q[0])/2,my=(P[1]+Q[1])/2;
     const out=((mx+nx-def.cent[0])**2+(my+ny-def.cent[1])**2)>((mx-def.cent[0])**2+(my-def.cent[1])**2);
@@ -425,21 +453,22 @@ function rCrit(){
   let x0=-R-20,y0=-R-20,x1=(c.n===2?310:350)+R+20,y1=(c.n===2?0:265)+R+20;
   const rows=[];
   if(c.legend&&used.length){
-    const range=used.length<=2?used.join(', '):used[0]+'~'+used[used.length-1];
+    const seq=used.every(u=>u.length===1)&&used.every((u,i)=>i===0||u.charCodeAt(0)===used[i-1].charCodeAt(0)+1);
+    const range=used.length<=2||!seq?used.join(', '):used[0]+'~'+used[used.length-1];
     const lb=legendBox('〈 범 례 〉',[
       {icon:{svg:`<line x1="0" y1="0" x2="44" y2="0" stroke="#000" stroke-width="1.5" marker-end="url(#ah)"/>`,w:46},parts:[[': 비판의 방향',ko()]]},
       {parts:[[range,LAT],[' : 비판의 내용',ko()]]}]);
     rows.push(lb);
   }
-  if(c.example){
-    const a=used[0]||'A',fs=19;
-    const ex1=jNeun(a)+' '+jI(N[0])+' '+N[1]+'에게 제기할';
+  if(c.example&&exArr){
+    const a=c.letters[exArr.k]||exArr.k,fs=19,F0=N[exArr.f],T0=N[exArr.t];
+    const ex1=jNeun(a)+' '+jI(F0)+' '+T0+'에게 제기할';
     const ex2='수 있는 비판임.';
     const w=Math.max(tw(ex1,fs,ko()),tw(ex2,fs,ko()),150)+24,h=118;
     let s=`<rect x="0" y="0" width="${r1(w)}" height="${h}" fill="#fff" stroke="#000" stroke-width="1.3"/>`;
     const tW=tw('〈 예 시 〉',fs,ko())+16;
     s+=`<rect x="${r1(w/2-tW/2)}" y="-3" width="${r1(tW)}" height="6" fill="#fff"/>`+txt(w/2,0,'〈 예 시 〉',{fs});
-    s+=circ(w/2-55,38,N[0],16,15)+circ(w/2+55,38,N[1],16,15)+`<line x1="${r1(w/2-36)}" y1="38" x2="${r1(w/2+36)}" y2="38" stroke="#000" stroke-width="1.4" marker-end="url(#ah)"/>`+txt(w/2,22,a,{fs:24,fam:LAT});
+    s+=circ(w/2-55,38,F0,16,15)+circ(w/2+55,38,T0,16,15)+`<line x1="${r1(w/2-36)}" y1="38" x2="${r1(w/2+36)}" y2="38" stroke="#000" stroke-width="1.4" marker-end="url(#ah)"/>`+txt(w/2,22,a,{fs:24,fam:LAT});
     s+=`<text x="12" y="75" font-size="${fs}" font-family="${esc(ko())}" dominant-baseline="central">${esc(ex1)}</text><text x="12" y="102" font-size="${fs}" font-family="${esc(ko())}" dominant-baseline="central">${esc(ex2)}</text>`;
     rows.push({svg:s,w,h});
   }
@@ -512,6 +541,8 @@ function rFlow(){
   }
   return {defs:ARROW_DEF,body,x:x0,y:y0,w:x1-x0,h:y1-y0};
 }
+function flowStartDefault(n){return n===3?'사상가 갑, 을, 병의\n입장을 탐구한다.':'사상가 갑, 을의\n입장을 탐구한다.'}
+const FLOW_DEFAULTS=[flowStartDefault(2),flowStartDefault(3)];
 function pFlow(){
   const f=S.flow,T=FLOW_T[f.tpl];const nl=Object.keys(T.nodes).filter(k=>k[0]!=='R').length;
   return `
@@ -582,10 +613,45 @@ function pXyz(){
 
 /* ============ 삽화 ============ */
 const FORM_SUB=[['all','전체'],['news','신문 칼럼'],['scroll','두루마리'],['memo','메모·쪽지'],['syllogism','실천적 삼단 논법'],['etc','기타']];
-const CLEAN_RE=/(제거|없음|인물만|삽화만|인물-|인물\()/;
-function imgList(cat){
-  const st=S[cat];const q=st.q.trim().toLowerCase().split(/\s+/).filter(Boolean);
-  return ASSETS.filter(a=>a.cat===(cat==='person'?'person':'form')&&(!st.clean||CLEAN_RE.test(a.name))&&(cat!=='form'||st.sub==='all'||a.sub===st.sub)&&q.every(w=>a.name.toLowerCase().includes(w)));
+/* 파일명에서 사상가 이름·시험 출처·편집 상태를 뽑아 보여 줍니다 */
+function assetMeta(a){
+  const n=a.name.normalize('NFC').replace(/\s+/g,' ').trim();
+  // 출처
+  const sm=n.match(/^(\d{4})[-\s]*(.*?)(생윤|윤사)[-\s_]*0?(\d{1,2})(?!\d)/);
+  let src='';
+  if(sm){const y=sm[1],mid=sm[2];let kind='',mon='';
+    if(/수능/.test(mid))kind='수능';
+    else{const m=mid.match(/(\d{1,2})\s*월?/);if(m)mon=m[1]+'월';
+      if(/평가/.test(mid))kind='평가원';else if(/전연|전국/.test(mid))kind='전국연합';
+      else if(/^\d{1,2}-3-?$/.test(mid.replace(/[-\s]+$/,'-')))kind='전국연합';}
+    src=[y,(mon+(kind&&kind!=='수능'?' '+kind:'')).trim()||kind,(sm[3]==='생윤'?'생활과 윤리':'윤리와 사상')+' '+sm[4]+'번'].filter(Boolean).join(' · ');
+  }
+  // 변형
+  let v='원본';
+  if(/말풍선/.test(n)&&/제거|없음/.test(n))v='말풍선 제거';
+  else if(/갑을\s*(제거|없음)/.test(n))v='갑·을 제거';
+  else if(/(글자|가나)\s*제거/.test(n))v='글자 제거';
+  else if(/인물만|삽화만|-인물|컷만/.test(n))v='인물만';
+  else if(/갑을/.test(n))v='갑·을 표기';
+  let extra='';if(/인물만/.test(n)&&/갑을\s*(제거|없음)/.test(n)){v='인물만';extra=' (갑·을 제거)'}
+  // 이름
+  let names='';
+  const p=[...n.matchAll(/\(([^)]*)\)/g)].map(m=>m[1]);
+  let cand=p.length?p:n.split('_').slice(1).filter(t=>!/^(인물만\d*|갑을.*|삽화만|글자 제거|가나 제거|말풍선.*|양식.*|컷만|xyz.*|.*만)$/i.test(t.trim()));
+  names=cand.map(t=>t.replace(/^(우측|좌측)\s*/,'').replace(/^인물만\d*[-_]?/,'').trim()).filter(t=>t&&!/^\d+$/.test(t)).join(' · ').replace(/\s+/g,' ');
+  if(!names){const m=n.match(/인물만\d[_-](.+)$/);if(m)names=m[1]}
+  const base=names||(a.cat==='form'?({news:'신문 칼럼',scroll:'두루마리',memo:'메모·쪽지',syllogism:'실천적 삼단 논법'}[a.sub]||'양식'):'');
+  const title=base?(base+(v==='원본'?'':' · '+v+extra)):(v==='원본'?'삽화':v+extra);
+  return {title,src:src||n,v};
+}
+
+const VARIANTS={person:[['all','전체'],['edit','편집용 전체'],['인물만','인물만'],['갑·을 제거','갑·을 제거'],['말풍선 제거','말풍선 제거'],['원본','원본(말풍선·갑을 있음)']],
+  form:[['all','전체'],['원본','원본'],['글자 제거','글자 제거']]};
+function vfOf(st){return st.vf||(st.clean?'edit':'all')}
+function vMatch(a,vf){const v=a.meta.v;if(vf==='all')return true;if(vf==='edit')return v!=='원본'&&v!=='갑·을 표기';if(vf==='원본')return v==='원본'||v==='갑·을 표기';return v===vf}
+function imgList(cat,vfOver){
+  const st=S[cat];const q=st.q.trim().toLowerCase().split(/\s+/).filter(Boolean);const vf=vfOver||vfOf(st);
+  return ASSETS.filter(a=>a.cat===(cat==='person'?'person':'form')&&vMatch(a,vf)&&(cat!=='form'||st.sub==='all'||a.sub===st.sub)&&q.every(w=>(a.meta.title+' '+a.meta.src+' '+a.name).toLowerCase().includes(w)));
 }
 function pImg(cat){
   const st=S[cat],list=imgList(cat);
@@ -593,9 +659,9 @@ function pImg(cat){
   <div class="grp"><h3>${cat==='person'?'사상가 인물 삽화':'칼럼·두루마리 등 양식'}</h3>
     <div class="row"><input type="text" style="width:100%" placeholder="${cat==='person'?'사상가 이름·시험 검색 (예: 칸트, 수능 윤사)':'시험 검색 (예: 2025 생윤)'}" data-bind="${cat}.q" data-live="1" value="${esc(st.q)}"></div>
     ${cat==='form'?`<div class="gal-filter">${FORM_SUB.map(([k,t])=>`<button class="chip ${st.sub===k?'on':''}" data-set="form.sub" data-val="${k}">${t}</button>`).join('')}</div>`:''}
-    <div class="row"><label><input type="checkbox" data-bind="${cat}.clean" ${st.clean?'checked':''}> 제거본만 (말풍선·갑을·글자 지운 그림)</label></div>
-    <div class="count">${list.length}개</div>
-    <div class="gallery">${list.map(a=>`<button class="gitem ${st.id===a.id?'on':''}" data-pick="${a.id}" title="${esc(a.name)}"><img loading="lazy" alt="" src="img/${a.id}.t.jpg"><span>${esc(a.name)}</span></button>`).join('')}</div>
+    <div class="gal-filter">${VARIANTS[cat].map(([k,t])=>{const n=imgList(cat,k).length;return n||k==='all'?`<button class="chip ${vfOf(st)===k?'on':''}" data-setvf="${cat}" data-val="${k}">${t} ${n}</button>`:''}).join('')}</div>
+    <div class="count">${list.length}개 · 위는 사상가 이름, 아래는 출처 시험입니다</div>
+    <div class="gallery">${list.map(a=>`<button class="gitem ${st.id===a.id?'on':''}" data-pick="${a.id}" title="${esc(a.name)}"><img loading="lazy" alt="" src="img/${a.id}.t.jpg"><span class="gt">${esc(a.meta.title)}</span><span class="gs">${esc(a.meta.src)}</span></button>`).join('')}</div>
   </div>`;
 }
 function rImg(cat){
@@ -647,9 +713,9 @@ function renderOvPanel(){
   if(!o){P.classList.remove('show');P.innerHTML='';return}
   P.classList.add('show');
   const b=(k,v)=>`data-ob="${k}" value="${esc(v)}"`;
-  let h='';
+  let h=`<div class="ovhead"><span class="hint">그림을 보면서 고칠 수 있게 화면 오른쪽 아래에 떠 있습니다.</span><button class="x" data-oa="close" title="닫기">✕</button></div>`;
   if(o.t==='text'){
-    h=`<div class="row"><b>글상자</b><span class="hint">줄바꿈은 Enter, 상자 폭에 맞춰 자동으로도 줄이 바뀝니다.</span></div>
+    h+=`<div class="row"><b>글상자</b><span class="hint">줄바꿈은 Enter, 상자 폭에 맞춰 자동으로도 줄이 바뀝니다.</span></div>
     <textarea data-ob="text" rows="3">${esc(o.text)}</textarea>
     <div class="row"><label>크기 <input type="number" class="sm" min="8" max="80" ${b('fs',o.fs)}></label>
     <label>폭 <input type="number" class="sm" style="width:64px" min="40" max="2000" ${b('w',Math.round(o.w))}></label>
@@ -660,7 +726,7 @@ function renderOvPanel(){
     <label>글꼴 <select data-ob="font">${[['gothic','고딕'],['myeongjo','명조'],['lat','영문 명조']].map(([k,t])=>`<option value="${k}" ${o.font===k?'selected':''}>${t}</option>`).join('')}</select></label>
     <label><input type="checkbox" data-ob="bold" ${o.bold?'checked':''}> 굵게</label></div>`;
   }else if(o.t==='mark'){
-    h=`<div class="row"><b>표식</b>
+    h+=`<div class="row"><b>표식</b>
     <label>글자 <input type="text" class="md" ${b('text',o.text)}></label>
     <label>모양 <select data-ob="shape">${[['circle','원문자 (갑)'],['paren','괄호 (가)'],['plain','글자만']].map(([k,t])=>`<option value="${k}" ${o.shape===k?'selected':''}>${t}</option>`).join('')}</select></label>
     <label>크기 <input type="number" class="sm" min="8" max="120" ${b('fs',o.fs)}></label>
@@ -668,7 +734,7 @@ function renderOvPanel(){
     <label><input type="checkbox" data-ob="halo" ${o.halo?'checked':''}> 흰 테두리</label></div>
     <div class="row">${['갑','을','병','정','ㄱ','ㄴ','ㄷ','ㄹ','가','나','다','A','B','C'].map(t=>`<button class="chip" data-quick="${t}">${t}</button>`).join('')}</div>`;
   }else{
-    h=`<div class="row"><b>흰색 가림 상자</b><label>폭 <input type="number" class="sm" style="width:64px" ${b('w',Math.round(o.w))}></label><label>높이 <input type="number" class="sm" style="width:64px" ${b('h',Math.round(o.h))}></label><span class="hint">점선은 화면에만 보이고 저장할 때는 사라집니다.</span></div>`;
+    h+=`<div class="row"><b>흰색 가림 상자</b><label>폭 <input type="number" class="sm" style="width:64px" ${b('w',Math.round(o.w))}></label><label>높이 <input type="number" class="sm" style="width:64px" ${b('h',Math.round(o.h))}></label><span class="hint">점선은 화면에만 보이고 저장할 때는 사라집니다.</span></div>`;
   }
   h+=`<div class="row" style="margin-top:6px"><button class="btn" data-oa="dup">복제</button><button class="btn" data-oa="front">맨 앞으로</button><button class="btn" data-oa="back">맨 뒤로</button><button class="btn" data-oa="del">삭제</button></div>`;
   P.innerHTML=h;
@@ -681,6 +747,7 @@ $('#ovpanel').addEventListener('input',e=>{
 });
 $('#ovpanel').addEventListener('change',e=>{if(e.target.dataset.ob)renderOvPanel()});
 $('#ovpanel').addEventListener('click',e=>{
+  if(e.target.closest('[data-oa="close"]')){sel=-1;renderOv();renderOvPanel();return}
   const L=ovList(),o=L[sel];if(!o)return;
   const q=e.target.dataset.quick;if(q){o.text=q;save();renderOv();renderOvPanel();return}
   const a=e.target.dataset.oa;if(!a)return;
@@ -717,11 +784,38 @@ function renderBase(){
       if(bb.width>0){VB={w:Math.ceil(bb.width+PAD*2),h:Math.ceil(bb.height+PAD*2)};
         BASE=`<g transform="translate(${r1(PAD-bb.x)} ${r1(PAD-bb.y)})">${inner}</g>`;base.innerHTML=`<defs>${DEFS}</defs>${BASE}`}}catch(e){}
   }
-  applyZoom();renderOv();save()}
+  applyZoom();renderOv();updateWarn();updSize();save()}
+/* ---- 확인이 필요한 곳 알림 ---- */
+function vennDesc(v){const N=v.names;return {a:N[0]+'만',b:N[1]+'만',c:N[2]+'만',ab:N[0]+'·'+N[1]+(v.n===3?'만':' 공통'),ac:N[0]+'·'+N[2]+'만',bc:N[1]+'·'+N[2]+'만',abc:N[0]+'·'+N[1]+'·'+N[2]+' 공통'}}
+function vennSig(v){const L=vennLabels(v);return JSON.stringify([v.n,v.names.slice(0,v.n),regionKeys(v.n).map(k=>(L[k]||'').trim()),v.lstyle])}
+function dupMsgs(pairs,what){const m={};pairs.forEach(([lab,where])=>{lab=(lab||'').trim();if(!lab)return;(m[lab]=m[lab]||[]).push(where)});
+  return Object.entries(m).filter(([,w])=>w.length>1).map(([lab,w])=>`기호 <b>${esc(lab)}</b>가 ${w.length}${what}(${w.map(esc).join(', ')})에 쓰였습니다. 의도한 것이 아니면 하나를 바꾸세요.`)}
+function warnings(){const t=cur(),out=[];
+  if(t==='venn'){const v=S.venn,L=vennLabels(v),D=vennDesc(v);
+    out.push(...dupMsgs(regionKeys(v.n).map(k=>[L[k],D[k]]),'개 영역'));
+    if(v.legend&&v.lover.trim()){if(v.lsig==null)v.lsig=vennSig(v);
+      if(v.lsig!==vennSig(v))out.push(`사상가 이름이나 영역 기호가 바뀌었는데 <b>직접 쓴 범례</b>는 그대로입니다. 그림과 범례가 맞는지 확인하세요.<br><button class="btn" data-act="legendFill">자동 범례로 다시 불러오기</button> <button class="btn" data-act="legendKeep">지금 범례 그대로 쓰기</button>`)}}
+  if(t==='critique'){const c=S.critique,def=CR_DEF[c.n],N=c.names;
+    out.push(...dupMsgs(Object.entries(def.arr).filter(([k])=>c.on[k]).map(([k,[f,to]])=>[c.letters[k],N[f]+'→'+N[to]]),'개 화살표'));
+    if(c.example&&!Object.keys(def.arr).some(k=>c.on[k]))out.push('켜진 화살표가 없어 예시 상자를 그리지 않았습니다.')}
+  if(t==='flow'){const f=S.flow,T=FLOW_T[f.tpl];const ids=Object.keys(T.nodes).filter(k=>k[0]!=='R');
+    out.push(...dupMsgs(ids.map((id,i)=>[f.letters[i],(i+1)+'번째 판단']),'곳'));
+    const has3=/병/.test(f.start);if((T.n===3&&!has3)||(T.n===2&&has3))out.push(`출발 조건이 <b>사상가 ${T.n}명</b> 틀과 맞지 않는 것 같습니다. 문구를 확인하세요.<br><button class="btn" data-act="flowStart">기본 문구(${T.n}명)로 바꾸기</button>`)}
+  if(t==='xyz'){const z=S.xyz,nm=['낮','높'];out.push(...dupMsgs(XYZ_V.map(k=>[z.v[k],`${z.axes[0]}${nm[k[0]]}·${z.axes[1]}${nm[k[1]]}·${z.axes[2]}${nm[k[2]]}`]),'개 꼭짓점'))}
+  return out}
+function updateWarn(){const el=document.getElementById('pwarn');if(!el)return;const w=warnings();el.innerHTML=w.length?`<div class="warn">${w.map(x=>`<p>⚠ ${x}</p>`).join('')}</div>`:'';
+  const ml=document.getElementById('legendMode');if(ml){const v=S.venn;ml.innerHTML=v.lover.trim()?'지금은 <b>직접 쓴 범례</b>를 씁니다. 이름·기호를 바꿔도 범례는 그대로입니다. <button class="btn" data-act="legendAuto">직접 쓴 범례 지우기</button>':'지금은 <b>자동 범례</b>입니다. 이름·기호를 바꾸면 범례도 함께 바뀝니다.'}}
+function updSize(){const el=document.getElementById('sizeInfo');if(!el)return;const sc=Number($('#selScale').value)||3;
+  const pw=Math.round(VB.w*sc),ph=Math.round(VB.h*sc),cm=x=>(x/300*2.54).toFixed(1);
+  let t=`출력 ${pw.toLocaleString()}×${ph.toLocaleString()}px · 300dpi 기준 가로 ${cm(pw)}cm까지 선명`;
+  const a=(cur()==='person'||cur()==='form')?AMAP[S[cur()].id]:null;
+  if(a)t+=` · 삽화 원본은 가로 ${a.w.toLocaleString()}px라 ${cm(a.w)}cm 이하로 넣어야 선명합니다(해상도를 높여도 삽화는 원본보다 선명해지지 않음)`;
+  el.textContent=t}
 function renderOv(){$('#ovl').innerHTML=ovList().map((o,i)=>ovSvg(o,i,false)).join('')}
 function renderPanel(){
   const t=cur();
-  $('#panel').innerHTML=t==='venn'?pVenn():t==='critique'?pCrit():t==='flow'?pFlow():t==='xyz'?pXyz():pImg(t);
+  $('#panel').innerHTML='<div id="pwarn"></div>'+(t==='venn'?pVenn():t==='critique'?pCrit():t==='flow'?pFlow():t==='xyz'?pXyz():pImg(t));
+  updateWarn();
   document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.mode===t));
   $('#selFont').value=S.font;$('#selZoom').value=S.zoom;
 }
@@ -737,23 +831,38 @@ panelEl.addEventListener('input',e=>{
   let v=e.target.type==='checkbox'?e.target.checked:e.target.value;
   if(e.target.type==='range'||/\.(n|gap)$/.test(p))v=Number(v);
   setPath(p,v);
+  if(p==='venn.lover'){S.venn.lsig=v.trim()?vennSig(S.venn):null}
+  if(p==='flow.tpl'){const n=FLOW_T[v].n,cs=S.flow.start.trim();if(FLOW_DEFAULTS.some(d=>d.trim()===cs)&&cs!==flowStartDefault(n).trim()){S.flow.start=flowStartDefault(n);toast(`출발 조건을 사상가 ${n}명에 맞게 바꿨습니다.`)}}
   if(e.target.dataset.live){clearTimeout(liveT);liveT=setTimeout(()=>{const pos=e.target.selectionStart;renderPanel();const inp=panelEl.querySelector(`[data-bind="${p}"]`);if(inp){inp.focus();try{inp.setSelectionRange(pos,pos)}catch(_){}}},250);save();return}
   renderBase();
 });
 panelEl.addEventListener('change',e=>{
   const p=e.target.dataset.bind;if(!p)return;
-  if(e.target.type==='checkbox'||e.target.tagName==='SELECT'||/names|axes/.test(p)){const sc=panelEl.scrollTop;renderPanel();panelEl.scrollTop=sc}
+  if(e.target.type==='checkbox'||e.target.tagName==='SELECT'){const sc=panelEl.scrollTop;renderPanel();panelEl.scrollTop=sc}
+  else if(/names|axes|lover/.test(p)){
+    /* 다음 칸이나 단추를 누르는 순간 패널을 다시 그리면 그 클릭이 사라지므로, 클릭이 끝난 뒤 다시 그리고 포커스를 되살립니다 */
+    setTimeout(()=>{const ae=document.activeElement,ab=ae&&ae.dataset?ae.dataset.bind:null,pos=ae&&ae.selectionStart,sc=panelEl.scrollTop;
+      renderPanel();panelEl.scrollTop=sc;if(ab){const n=panelEl.querySelector(`[data-bind="${ab}"]`);if(n){n.focus();try{n.setSelectionRange(pos,pos)}catch(_){}}}},120)}
 });
 panelEl.addEventListener('click',e=>{
   const b=e.target.closest('[data-set]');
   if(b){let v=b.dataset.val;if(/^\d+$/.test(v))v=Number(v);setPath(b.dataset.set,v);const sc=panelEl.scrollTop;renderPanel();panelEl.scrollTop=sc;renderBase();return}
   const pk=e.target.closest('[data-pick]');
   if(pk){S[cur()].id=pk.dataset.pick;panelEl.querySelectorAll('.gitem').forEach(g=>g.classList.toggle('on',g===pk));renderBase();return}
-  const a=e.target.closest('[data-act]');
-  if(a&&a.dataset.act==='legendFill'){S.venn.lover=vennLegendLines(S.venn).map(([x,y])=>x+': '+y).join('\n');renderPanel();renderBase()}
+  const vb=e.target.closest('[data-setvf]');
+  if(vb){const st=S[vb.dataset.setvf];st.vf=vb.dataset.val;st.clean=false;const sc=panelEl.scrollTop;renderPanel();panelEl.scrollTop=sc;save();return}
+  const a=e.target.closest('[data-act]');if(!a)return;const act=a.dataset.act,sc=panelEl.scrollTop;
+  if(act==='legendFill'){S.venn.lover=vennLegendLines(S.venn).map(([x,y])=>x+': '+y).join('\n');S.venn.lsig=vennSig(S.venn)}
+  else if(act==='legendKeep'){S.venn.lsig=vennSig(S.venn)}
+  else if(act==='legendAuto'){S.venn.lover='';S.venn.lsig=null;toast('자동 범례로 돌아갔습니다.')}
+  else if(act==='flowStart'){S.flow.start=flowStartDefault(FLOW_T[S.flow.tpl].n)}
+  else return;
+  renderPanel();panelEl.scrollTop=sc;renderBase();
 });
 document.querySelectorAll('#tabs button').forEach(b=>b.addEventListener('click',()=>{S.tab=b.dataset.mode;sel=-1;renderAll();$('#panel').scrollTop=0}));
 $('#selFont').addEventListener('change',e=>{S.font=e.target.value;renderBase()});
+$('#selScale').addEventListener('change',updSize);
+$('#bUndo').addEventListener('click',undo);$('#bRedo').addEventListener('click',redo);
 $('#selZoom').addEventListener('change',e=>{S.zoom=e.target.value;applyZoom();renderOv();save()});
 window.addEventListener('resize',()=>{if(S.zoom==='fit'){applyZoom();renderOv()}});
 
@@ -799,7 +908,9 @@ function endDrag(){
 }
 stage.addEventListener('pointerup',endDrag);stage.addEventListener('pointercancel',endDrag);
 document.addEventListener('keydown',e=>{
-  if(sel<0)return;const tag=(e.target.tagName||'').toLowerCase();if(tag==='input'||tag==='textarea'||tag==='select')return;
+  const tag=(e.target.tagName||'').toLowerCase(),typing=tag==='input'||tag==='textarea'||tag==='select';
+  if((e.ctrlKey||e.metaKey)&&!typing){const k=e.key.toLowerCase();if(k==='z'){e.preventDefault();e.shiftKey?redo():undo();return}if(k==='y'){e.preventDefault();redo();return}}
+  if(sel<0||typing)return;
   const o=ovList()[sel];if(!o)return;
   if(e.key==='Delete'||e.key==='Backspace'){ovList().splice(sel,1);sel=-1;save();renderOv();renderOvPanel();e.preventDefault()}
   const st=e.shiftKey?10:1;const mv={ArrowLeft:[-st,0],ArrowRight:[st,0],ArrowUp:[0,-st],ArrowDown:[0,st]}[e.key];
@@ -813,7 +924,7 @@ function exportSvg(){
   return `<svg xmlns="${NS}" xmlns:xlink="http://www.w3.org/1999/xlink" width="${VB.w}" height="${VB.h}" viewBox="0 0 ${VB.w} ${VB.h}"><defs>${DEFS}</defs>${trans?'':`<rect width="100%" height="100%" fill="#fff"/>`}${BASE}${ov}</svg>`;
 }
 function fname(ext){const nm={venn:'벤다이어그램',critique:'상호비판',flow:'순서도',xyz:'XYZ좌표',person:'사상가인물',form:'양식'}[cur()];
-  const d=new Date(),p=n=>String(n).padStart(2,'0');return `길벗윤리클립아트_${nm}_${d.getFullYear()}${p(d.getMonth()+1)}${p(d.getDate())}_${p(d.getHours())}${p(d.getMinutes())}${p(d.getSeconds())}.${ext}`}
+  const d=new Date(),p=n=>String(n).padStart(2,'0');return `윤리출제클립아트_${nm}_${d.getFullYear()}${p(d.getMonth()+1)}${p(d.getDate())}_${p(d.getHours())}${p(d.getMinutes())}${p(d.getSeconds())}.${ext}`}
 function download(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1500)}
 function toPng(){
   return new Promise((res,rej)=>{
@@ -844,7 +955,8 @@ $('#fileLoad').addEventListener('change',async e=>{const f=e.target.files[0];if(
   try{const j=JSON.parse(await f.text());if(!j.state)throw 0;S=Object.assign(defaults(),j.state);merge();sel=-1;renderAll();toast('작업 파일을 불러왔습니다.')}catch(_){toast('작업 파일을 읽지 못했습니다.')}e.target.value=''});
 $('#bResetAll').addEventListener('click',()=>{const t=cur();if(!confirm('현재 탭의 설정과 글상자를 처음 상태로 되돌릴까요?'))return;const d=defaults();S[t]=d[t];S.ov[t]=[];S.offs[t]={};sel=-1;renderAll();toast('현재 탭을 초기화했습니다.')});
 
-fetch('assets.json').then(r=>r.json()).then(j=>{ASSETS=j;ASSETS.forEach(a=>AMAP[a.id]=a);renderAll()}).catch(()=>{renderAll();toast('삽화 목록을 불러오지 못했습니다.')});
+histInit();
+fetch('assets.json').then(r=>r.json()).then(j=>{ASSETS=j;ASSETS.forEach(a=>{a.meta=assetMeta(a);AMAP[a.id]=a});renderAll();histInit()}).catch(()=>{renderAll();toast('삽화 목록을 불러오지 못했습니다.')});
 </script>
 </body>
 </html>
