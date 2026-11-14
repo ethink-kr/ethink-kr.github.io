@@ -18,6 +18,8 @@
 //     - type: notes             # label, lines(번호 붙은 짧은 문단 2~4개) — 프로젝트 썸원식 글 카드
 //     - type: underline         # 책 글: lines(밑줄 문장 1~2개), page
 //     - type: book              # 책 글: 표지(작게)·책 이름·지은이. 표지 출처를 함께 적는다.
+//     - type: lesson            # 수업 연계(2026-11-14부터 end 바로 앞에 고정): subjects(교과·단원·쪽, 없으면 글의 subjects), questions(탐구 질문 2개)
+//     - type: pull              # 인용 전용(2026-11-14부터 한 장): text(사상가 문장이나 글의 결론, 2~3줄·60자 안팎), who(선택), source(짧게). 진한 단색 바탕. 스토리용 <이름>-pull-story.jpg도 만든다
 //     - type: end               # '이번 주 질문'으로 질문을 다시 보여 주고 댓글을 청한다(ask로 문구 바꾸기)
 // 바탕색: 시사 글은 연한 녹색(#eef1ec), 책 글은 종이색(#f4ece0), 편집자 노트는 흰 종이(#fbfaf7)에 남색. 모든 카드 왼쪽 위에 같은 분류 표시.
 // 편집자 노트: node _tools/ig-cards.cjs _notes/YYYY-MM-DD-이름.yml  (no: '№1' 같은 번호, caption: 캡션, cards: …, cover는 kicker/hook/sub/by)
@@ -129,6 +131,21 @@ body{width:1080px;height:1350px;background:var(--bg);font-family:"IBM Plex Sans 
 .nc-q{font-family:"Gowun Batang",serif;font-weight:700;font-size:84px;line-height:1.3;letter-spacing:-.01em;word-break:keep-all;margin-top:28px}
 .nc-sub{font-size:34px;line-height:1.6;color:var(--sub);margin-top:44px;word-break:keep-all}
 .nc-by{font-family:"Gowun Batang",serif;font-size:32px;margin-top:auto;margin-bottom:40px}
+/* 수업 연계 */
+.ls-h{font-size:28px;font-weight:700;color:var(--ac);letter-spacing:.06em;margin-top:52px}
+.ls-sub{list-style:none;padding:0;margin:18px 0 0}
+.ls-sub li{font-size:32px;line-height:1.5;padding:14px 0;border-bottom:1px solid var(--line);word-break:keep-all}
+.ls-q{padding:0;margin:20px 0 0;counter-reset:q;list-style:none}
+.ls-q li{position:relative;padding:26px 30px 26px 92px;margin-bottom:20px;background:var(--card);border:1px solid var(--line);border-radius:14px;font-family:"Gowun Batang",serif;font-weight:700;font-size:36px;line-height:1.5;word-break:keep-all}
+.ls-q li:before{counter-increment:q;content:counter(q);position:absolute;left:30px;top:26px;width:44px;height:44px;border-radius:50%;background:var(--deep);color:#fff;font-family:"IBM Plex Mono",monospace;font-size:26px;display:grid;place-items:center}
+/* 인용 전용: 단색 바탕에 2~3줄 */
+body.pull{background:var(--deep)}
+.pull .top .cat{background:rgba(255,255,255,.14)} .pull .top .page,.pull .foot{color:rgba(255,255,255,.75)} .pull .foot{border-top-color:rgba(255,255,255,.25)} .pull .foot .url{color:rgba(255,255,255,.9)}
+.pq{margin:auto 0;color:#fff}
+.pull .foot{margin-top:0}
+.pq .mk{font-family:"Gowun Batang",serif;font-size:150px;line-height:.6;color:rgba(255,255,255,.35)}
+.pq .t{font-family:"Gowun Batang",serif;font-weight:700;font-size:64px;line-height:1.5;word-break:keep-all;letter-spacing:-.01em;margin-top:20px}
+.pq .by{font-size:30px;color:rgba(255,255,255,.8);margin-top:44px}
 /* 마지막 장: 이번 주 질문 */
 .wk{margin-top:96px;font-size:30px;font-weight:600;color:var(--ac);letter-spacing:.06em}
 .endq{font-family:"Gowun Batang",serif;font-weight:700;font-size:60px;line-height:1.45;word-break:keep-all;margin-top:26px}
@@ -165,6 +182,14 @@ function render(c, i) {
     const cov = fm.cover ? dataUri(fm.cover) : '';
     return page(i, `<p class="label">${esc(c.label || '이번에 읽은 책')}</p><div class="book">${cov ? `<img src="${cov}" alt="">` : ''}<div><h2>${esc(fm.book)}</h2><p>${esc(fm.writer)} 지음${fm.translator ? ` · ${esc(fm.translator)} 옮김` : ''}<br>${esc(fm.publisher || '')}</p>${(c.lines || []).map(l => `<p>${esc(l)}</p>`).join('')}${cov && fm.cover_from ? `<p class="credit">표지 이미지: ${esc(fm.cover_from)}</p>` : ''}</div></div>`);
   }
+  if (t === 'lesson') {
+    const subs = c.subjects || fm.subjects || [];
+    return page(i, `<p class="label">${esc(c.label || '수업 연계')}</p><p class="ls-h">교과 연계</p><ul class="ls-sub">${subs.map(x => `<li>${esc(x)}</li>`).join('')}</ul><p class="ls-h">탐구 질문</p><ol class="ls-q">${(c.questions || []).slice(0, 2).map(q => `<li>${esc(q)}</li>`).join('')}</ol>`);
+  }
+  if (t === 'pull') {
+    const by = c.source && c.who && String(c.source).startsWith(c.who) ? c.source : [c.who, c.source].filter(Boolean).join(' · ');
+    return page(i, `<div class="pq"><p class="mk">“</p><p class="t" style="font-size:${String(c.text).length <= 30 ? 72 : String(c.text).length <= 50 ? 62 : 56}px">${esc(c.text).replace(/\n/g, '<br>')}</p>${by ? `<p class="by">— ${esc(by)}</p>` : ''}</div>`);
+  }
   if (t === 'end') {
     const q = c.question || fm.question;
     return page(i, `<p class="wk">이번 주 질문</p><p class="endq"><span class="hl">${esc(q)}</span></p><p class="ask">${esc(c.ask || '여러분의 생각을 댓글로 남겨 주세요. 한 줄이어도 좋습니다.')}</p><p class="cta">${c.cta ? esc(c.cta).replace(/\n/g, '<br>') : '전문과 수업 활동 예시는<br><b>프로필 링크 · ethink.kr</b>에서 읽을 수 있습니다.'}</p>`, '저장해 두고 다시 읽어 보세요');
@@ -176,7 +201,7 @@ function render(c, i) {
   const dir = path.join(ROOT, 'assets', 'ig'); fs.mkdirSync(dir, { recursive: true });
   for (const f of fs.readdirSync(dir)) if (new RegExp(`^${name}-\\d{2}\\.jpg$`).test(f)) fs.unlinkSync(path.join(dir, f));
   for (let i = 0; i < cards.length; i++) {
-    await p.setContent(`<!doctype html><html lang="ko"><head><meta charset="utf-8"><style>${css}</style></head><body>${render(cards[i], i)}</body></html>`);
+    await p.setContent(`<!doctype html><html lang="ko"><head><meta charset="utf-8"><style>${css}</style></head><body class="${cards[i].type === 'pull' ? 'pull' : ''}">${render(cards[i], i)}</body></html>`);
     await p.waitForTimeout(i === 0 ? 2500 : 600);
     const out = path.join(dir, `${name}-${String(i + 1).padStart(2, '0')}.jpg`);
     await p.screenshot({ path: out, type: 'jpeg', quality: 90 }); console.log(out);
@@ -187,5 +212,13 @@ function render(c, i) {
   await sp.setContent(`<!doctype html><html><body style="margin:0;width:1080px;height:1920px;background:${T.bg};display:flex;align-items:center;justify-content:center"><img src="data:image/jpeg;base64,${fs.readFileSync(cover).toString('base64')}" style="width:1080px;height:1350px;display:block"></body></html>`);
   await sp.waitForTimeout(500);
   const sout = path.join(dir, `${name}-story.jpg`); await sp.screenshot({ path: sout, type: 'jpeg', quality: 90 }); console.log(sout);
+  // 인용 전용 카드도 스토리용으로 한 장 더(공유용)
+  const pi = cards.findIndex(c => c.type === 'pull');
+  if (pi >= 0) {
+    const src = path.join(dir, `${name}-${String(pi + 1).padStart(2, '0')}.jpg`);
+    await sp.setContent(`<!doctype html><html><body style="margin:0;width:1080px;height:1920px;background:${T.deep};display:flex;align-items:center;justify-content:center"><img src="data:image/jpeg;base64,${fs.readFileSync(src).toString('base64')}" style="width:1080px;height:1350px;display:block"></body></html>`);
+    await sp.waitForTimeout(400);
+    const pout = path.join(dir, `${name}-pull-story.jpg`); await sp.screenshot({ path: pout, type: 'jpeg', quality: 90 }); console.log(pout);
+  }
   await b.close();
 })();

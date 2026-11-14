@@ -42,6 +42,7 @@ function commentText(doc) {
   if (doc.first_comment) body = String(doc.first_comment).trim();
   else {
     const p = doc.poll; if (!p || !p.q || !Array.isArray(p.options) || !p.options.length) return '';
+    if (p.options.length !== 2) console.log(`주의: 투표 보기가 ${p.options.length}개입니다. 2026-11-14부터 두 입장(1번 vs 2번)으로 씁니다.`);
     body = [`${p.q}`, ...p.options.map((o, i) => `${i + 1}. ${o}`), '', p.ask || '번호와 이유를 한 줄로 댓글에 남겨 주세요!'].join('\n');
   }
   return doc.follow === false ? body : `${body}\n\n${FOLLOW}`;
