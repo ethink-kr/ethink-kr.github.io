@@ -262,10 +262,13 @@
         <img class="shot" id="x-shot" alt="결과 카드 이미지">
         <p class="hint">이미지를 길게 누르거나 오른쪽 버튼으로 눌러 저장할 수 있습니다.</p>
         <div class="actions">
-          <button class="cta" id="x-copy">결과 문구 복사</button>
+          <button class="cta" id="x-link">결과 링크 복사</button>
+          <button class="sec" id="x-copy">결과 문구 복사</button>
 {% unless include.standalone %}          {% include share-btn.html url="/ethics-lab/thinker/" title="나와 닮은 사상가는? — 이름을 가린 문장 16개로 찾는 나의 철학 짝꿍" %}
-{% endunless %}          <button class="sec" id="x-again">다시 하기</button>
+{% endunless %}          <button class="sec" id="x-tell">이 체험 알리기</button>
+          <button class="sec" id="x-again">다시 하기</button>
         </div>
+        <p class="hint">결과 링크를 받은 사람은 내 결과를 보고 바로 같은 체험을 해 볼 수 있습니다. 링크에는 남은 사상가와 나의 결만 담기고 이름·반·글은 담기지 않습니다.</p>
         <p class="ptoast" id="x-toast" aria-live="polite"></p>
 {% unless include.standalone %}        {% include subscribe-box.html title="사상가의 문장을 뉴스에서 다시 만나기" text="오늘의 뉴스를 윤리와 사상가의 눈으로 다시 읽는 글을 한 달에 두 번 메일로 보내 드립니다. 무료이고, 언제든 끊을 수 있습니다." %}
 {% endunless %}      </div>
@@ -280,6 +283,29 @@
         <label class="field"><span>2. 결과로 나온 사상가의 생각 가운데 동의하는 점과 동의하기 어려운 점을 하나씩 써 보세요.</span><textarea data-note="1"></textarea><div class="print-text" id="xp1"> </div></label>
         <label class="field"><span>3. 결승에서 떨어진 문장의 사상가는 무엇을 중시했나요? 두 사상가가 맞선다면 어떤 쟁점에서 부딪힐까요?</span><textarea data-note="2"></textarea><div class="print-text" id="xp2"> </div></label>
         <div class="actions no-print"><button class="sec" id="x-print">성찰 기록 인쇄 / PDF</button><span class="hint">결과와 글은 이 브라우저에만 저장되어, 페이지를 다시 열어도 처음 화면의 「방금 나온 결과 다시 보기」로 돌아올 수 있습니다. 공용 기기에서는 「다시 하기」로 지워 주세요.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="v-shared" hidden>
+    <div class="res">
+      <div class="panel">
+        <p class="eyebrow">공유받은 결과 · 나와 결이 닮은 사상가</p>
+        <div><h2 id="sh-name"></h2><p class="type" id="sh-type"></p><p class="intro" id="sh-intro"></p></div>
+        <div class="actions no-print"><button class="cta sh-go">나도 해 보기</button><span class="hint">이름을 가린 문장으로 나와 닮은 사상가 찾기</span></div>
+        <div class="h3">추천 책</div>
+        <div class="pbook"><span class="t" id="sh-book"></span><p id="sh-bookwhy"></p></div>
+        <div class="h3">결이 닿는 사상가</div>
+        <div class="near" id="sh-near"></div>
+        <div class="h3">윤리적 결</div>
+        <div id="sh-axes" style="display:grid;gap:1rem"></div>
+      </div>
+      <div class="panel no-print">
+        <div class="h3">나는 어떤 사상가와 닮았을까?</div>
+        <p>사상가 이름을 가린 문장을 둘씩 겨루며 마음이 가는 쪽을 고르면, 나와 결이 닮은 사상가가 남습니다.</p>
+        <div class="actions"><button class="cta sh-go" id="sh-go">나도 해 보기</button></div>
+        <p class="hint">이 화면은 받은 링크에 담긴 결과를 보여 줍니다. 링크에는 이름과 글이 담기지 않습니다.</p>
+        <p class="hint"><a href="https://ethink.kr/ethics-lab/?from=result#lab-01" style="color:var(--accent)">선생님이라면 — 수업용 선생님 화면과 활동지 보기</a></p>
       </div>
     </div>
   </section>
@@ -397,7 +423,7 @@ const C=[
 ].map((c,i)=>({id:i,t:c[0],q:c[1],src:c[2]}));
 
 const $=id=>document.getElementById(id);
-const VIEWS=['v-intro','v-game','v-reveal','v-result','v-teacher'];
+const VIEWS=['v-intro','v-game','v-reveal','v-result','v-shared','v-teacher'];
 // 주소 옵션: ?scope=west|east|mix (범위 고정) · ?cls=2-3 (결과 코드 앞에 반 표시)
 const PARAMS=new URLSearchParams(location.search);
 const LOCK=['west','east','mix'].includes(PARAMS.get('scope'))?PARAMS.get('scope'):null;
@@ -600,10 +626,32 @@ async function drawCard(){
 }
 $('x-copy').onclick=()=>{
   const {champ,p}=G.res,th=T[champ];
-  const t=`[나와 닮은 사상가는?] 나와 결이 닮은 사상가는 ${th.n}. 나의 결은 '${typeName(p)}'. 추천 책: ${th.book}\n나도 해 보기: https://ethink.kr/ethics-lab/thinker/?from=link`;
-  const done=()=>$('x-toast').textContent='결과 문구를 복사했습니다.';
-  try{navigator.clipboard.writeText(t).then(done,()=>{$('x-toast').textContent=t})}catch(e){$('x-toast').textContent=t}
+  const t=`[나와 닮은 사상가는?] 나와 결이 닮은 사상가는 ${th.n}. 나의 결은 '${typeName(p)}'. 추천 책: ${th.book}\n내 결과 보기·나도 해 보기: ${shareLink('result-text')}`;
+  copyText(t,'결과 문구를 복사했습니다.');
 };
+/* 결과 링크: 남은 사상가·결승 상대·범위·세 가지 결 값만 담는다(이름·반·글·식별 표시 없음). 받은 사람이 열면 v-shared 화면 */
+const SHARE_URL='https://ethink.kr/ethics-lab/thinker/';
+function shareLink(from){const {champ,p,runner}=G.res;const tok=[champ,runner||'-',G.scope,...[p.x,p.y,p.z].map(v=>Math.round(v*100))].join('.');return SHARE_URL+'?r='+tok+'&from='+from}
+function readShare(s){const a=(s||'').split('.');if(a.length!==6)return null;const [c,r,sc,...n]=a;if(!T[c]||!['west','east','mix'].includes(sc))return null;const fits=k=>sc==='mix'||T[k].side===sc;if(!fits(c))return null;if(r!=='-'&&(!T[r]||r===c||!fits(r)))return null;if(n.some(v=>!/^-?\d{1,3}$/.test(v)||Math.abs(+v)>200))return null;return {champ:c,runner:r==='-'?'':r,scope:sc,p:{x:+n[0]/100,y:+n[1]/100,z:+n[2]/100}}}
+function copyText(t,ok){const out=$('x-toast');const done=()=>{out.textContent=ok};const fail=()=>{out.textContent='길게 눌러 직접 복사해 주세요: '+t};
+  const legacy=()=>{try{const a=document.createElement('textarea');a.value=t;a.setAttribute('readonly','');a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();const k=document.execCommand('copy');a.remove();if(k)done();return k}catch(e){return false}};
+  try{if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(done,()=>{if(!legacy())fail()});return}}catch(e){}
+  if(!legacy())fail()}
+$('x-link').onclick=()=>copyText(shareLink('result'),'결과 링크를 복사했습니다. 메신저나 SNS에 붙여 넣어 보내세요.');
+const TELL_URL='https://ethink.kr/ethics-lab/?from=lab-share#lab-01';
+const TELL_TEXT='윤리 수업에 바로 쓸 수 있는 체험을 소개합니다. 「나와 닮은 사상가」는 학생이 휴대폰으로 사상가 이름을 가린 문장을 둘씩 겨루며 자신과 결이 닮은 사상가를 찾는 활동입니다. 선생님 화면에서 타이머와 발문으로 수업을 진행하고 반 전체 결과를 모아 볼 수 있으며, 활동지도 인쇄할 수 있습니다. 인터넷 없이 쓰는 학생용·선생님용 파일도 내려받을 수 있습니다.';
+$('x-tell').onclick=()=>{
+  const mobile=window.matchMedia&&matchMedia('(pointer:coarse)').matches;
+  if(navigator.share&&mobile){navigator.share({title:'나와 닮은 사상가 — Ethink 윤리 실험실',text:TELL_TEXT,url:TELL_URL}).catch(e=>{if(e&&e.name!=='AbortError')copyText(TELL_TEXT+'\n'+TELL_URL,'보낼 글을 복사했습니다. 메신저나 메일에 붙여 넣어 보내세요.')})}
+  else copyText(TELL_TEXT+'\n'+TELL_URL,'보낼 글을 복사했습니다. 메신저나 메일에 붙여 넣어 보내세요.')};
+function showShared(sh){const th=T[sh.champ],p=sh.p;
+  const near=Object.keys(T).filter(k=>k!==sh.champ).map(k=>({k,d:(T[k].x-p.x)**2+(T[k].y-p.y)**2+(T[k].z-p.z)**2})).sort((a,b)=>a.d-b.d).slice(0,2).map(o=>o.k);
+  $('sh-name').textContent=th.n;$('sh-type').innerHTML=`결 · <span class="mk">${typeName(p)}</span>`;$('sh-intro').textContent=th.in;
+  $('sh-book').textContent=th.book;$('sh-bookwhy').textContent=th.why;
+  $('sh-near').innerHTML=near.map(k=>`<div><b>${T[k].n}</b><span>${esc(T[k].book.replace(T[k].n+', ',''))}</span></div>`).join('');
+  $('sh-axes').innerHTML=AX.map(a=>{const v=p[a.k],pct=50+v/2*46;return `<div class="axis"><div class="ends"><b>${a.name}</b><span>${leanText(a,v)}</span></div><div class="track"><i style="left:${pct}%"></i></div><div class="ends"><span>${a.neg}</span><span>${a.pos}</span></div></div>`}).join('');
+  show('v-shared')}
+document.querySelectorAll('#tk .sh-go').forEach(b=>b.onclick=()=>{try{history.replaceState(null,'',location.pathname+location.hash)}catch(e){}show('v-intro');const el=document.getElementById('tk');if(el)window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-12})});
 $('x-again').onclick=()=>{const written=[...document.querySelectorAll('#x-reflect textarea')].some(t=>t.value.trim());
   if(written&&!confirm('이 결과와 써 둔 성찰 기록을 지우고 처음부터 할까요?'))return;
   G=null;try{localStorage.removeItem(NKEY);localStorage.removeItem(RKEY)}catch(e){}$('last-wrap').hidden=true;show('v-intro')};
@@ -704,6 +752,7 @@ function printOnly(){const h=document.documentElement;h.classList.add('tk-print-
 let aggT=null;
 $('v-teacher').addEventListener('input',e=>{if(e.target.id!=='t-codes')return;TS.codes=e.target.value;tsave();clearTimeout(aggT);aggT=setTimeout(()=>{const pos=e.target.selectionStart;renderTeacher();const n=$('t-codes');if(n){n.focus();n.setSelectionRange(pos,pos)}},700)});
 {% unless include.student %}if(location.hash==='#teacher')openTeacher(true);{% endunless %}
+if(location.hash!=='#teacher'||{{ include.student | default: false }}){const SH=readShare(PARAMS.get('r'));if(SH)showShared(SH)}
 
 
 </script>
