@@ -18,7 +18,7 @@
 //     - type: notes             # label, lines(번호 붙은 짧은 문단 2~4개) — 프로젝트 썸원식 글 카드
 //     - type: underline         # 책 글: lines(밑줄 문장 1~2개), page
 //     - type: book              # 책 글: 표지(작게)·책 이름·지은이. 표지 출처를 함께 적는다.
-//     - type: lesson            # 수업 연계(2026-11-14부터 end 바로 앞에 고정): subjects(교과·단원·쪽, 없으면 글의 subjects), questions(탐구 질문 2개)
+//     - type: lesson            # 수업 연계(2026-11-14부터 end 바로 앞에 고정): subjects(교과·단원, 없으면 글의 subjects), cites(인용한 교과서와 쪽, '인용' 머리 아래), questions(탐구 질문 2개)
 //     - type: pull              # 인용 전용(2026-11-14부터 한 장): text(사상가 문장이나 글의 결론, 2~3줄·60자 안팎), who(선택), source(짧게). 진한 단색 바탕. 스토리용 <이름>-pull-story.jpg도 만든다
 //     - type: end               # '이번 주 질문'으로 질문을 다시 보여 주고 댓글을 청한다(ask로 문구 바꾸기)
 // 바탕색: 시사 글은 연한 녹색(#eef1ec), 책 글은 종이색(#f4ece0), 편집자 노트는 흰 종이(#fbfaf7)에 남색. 모든 카드 왼쪽 위에 같은 분류 표시.
@@ -132,12 +132,12 @@ body{width:1080px;height:1350px;background:var(--bg);font-family:"IBM Plex Sans 
 .nc-sub{font-size:34px;line-height:1.6;color:var(--sub);margin-top:44px;word-break:keep-all}
 .nc-by{font-family:"Gowun Batang",serif;font-size:32px;margin-top:auto;margin-bottom:40px}
 /* 수업 연계 */
-.ls-h{font-size:28px;font-weight:700;color:var(--ac);letter-spacing:.06em;margin-top:52px}
+.ls-h{font-size:28px;font-weight:700;color:var(--ac);letter-spacing:.06em;margin-top:40px}
 .ls-sub{list-style:none;padding:0;margin:18px 0 0}
-.ls-sub li{font-size:32px;line-height:1.5;padding:14px 0;border-bottom:1px solid var(--line);word-break:keep-all}
+.ls-sub li{font-size:30px;line-height:1.45;padding:10px 0;border-bottom:1px solid var(--line);word-break:keep-all}
 .ls-q{padding:0;margin:20px 0 0;counter-reset:q;list-style:none}
-.ls-q li{position:relative;padding:26px 30px 26px 92px;margin-bottom:20px;background:var(--card);border:1px solid var(--line);border-radius:14px;font-family:"Gowun Batang",serif;font-weight:700;font-size:36px;line-height:1.5;word-break:keep-all}
-.ls-q li:before{counter-increment:q;content:counter(q);position:absolute;left:30px;top:26px;width:44px;height:44px;border-radius:50%;background:var(--deep);color:#fff;font-family:"IBM Plex Mono",monospace;font-size:26px;display:grid;place-items:center}
+.ls-q li{position:relative;padding:20px 28px 20px 88px;margin-bottom:16px;background:var(--card);border:1px solid var(--line);border-radius:14px;font-family:"Gowun Batang",serif;font-weight:700;font-size:36px;line-height:1.5;word-break:keep-all}
+.ls-q li:before{counter-increment:q;content:counter(q);position:absolute;left:28px;top:22px;width:44px;height:44px;border-radius:50%;background:var(--deep);color:#fff;font-family:"IBM Plex Mono",monospace;font-size:26px;display:grid;place-items:center}
 /* 인용 전용: 단색 바탕에 2~3줄 */
 body.pull{background:var(--deep)}
 .pull .top .cat{background:rgba(255,255,255,.14)} .pull .top .page,.pull .foot{color:rgba(255,255,255,.75)} .pull .foot{border-top-color:rgba(255,255,255,.25)} .pull .foot .url{color:rgba(255,255,255,.9)}
@@ -186,7 +186,7 @@ function render(c, i) {
   }
   if (t === 'lesson') {
     const subs = c.subjects || fm.subjects || [];
-    return page(i, `<p class="label">${esc(c.label || '수업 연계')}</p><p class="ls-h">교과 연계</p><ul class="ls-sub">${subs.map(x => `<li>${esc(x)}</li>`).join('')}</ul><p class="ls-h">탐구 질문</p><ol class="ls-q">${(c.questions || []).slice(0, 2).map(q => `<li>${esc(q)}</li>`).join('')}</ol>`);
+    return page(i, `<p class="label">${esc(c.label || '수업 연계')}</p><p class="ls-h">교과 연계</p><ul class="ls-sub">${subs.map(x => `<li>${esc(x)}</li>`).join('')}</ul>${(c.cites || []).length ? `<p class="ls-h">인용</p><ul class="ls-sub">${c.cites.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}<p class="ls-h">탐구 질문</p><ol class="ls-q">${(c.questions || []).slice(0, 2).map(q => `<li>${esc(q)}</li>`).join('')}</ol>`);
   }
   if (t === 'pull') {
     const by = c.source && c.who && String(c.source).startsWith(c.who) ? c.source : [c.who, c.source].filter(Boolean).join(' · ');
