@@ -152,3 +152,6 @@
 - name: 큉
   match: ["큉"]
   initial: 큉
+- name: 정약용
+  match: ["정약용"]
+  initial: 정
