@@ -18,7 +18,7 @@
 //     - type: notes             # label, lines(번호 붙은 짧은 문단 2~4개) — 프로젝트 썸원식 글 카드
 //     - type: underline         # 책 글: lines(밑줄 문장 1~2개), page
 //     - type: book              # 책 글: 표지(작게)·책 이름·지은이. 표지 출처를 함께 적는다.
-//     - type: lesson            # 수업 연계(2026-11-14부터 end 바로 앞에 고정): subjects(교과·단원·쪽, 없으면 글의 subjects), questions(탐구 질문 2개)
+//     - type: lesson            # 수업 연계(2026-11-14부터 end 바로 앞에 고정): subjects(교과·단원, 없으면 글의 subjects), cites(인용한 교과서와 쪽, '인용' 머리 아래), questions(탐구 질문 2개)
 //     - type: pull              # 인용 전용(2026-11-14부터 한 장): text(사상가 문장이나 글의 결론, 2~3줄·60자 안팎), who(선택), source(짧게). 진한 단색 바탕. 스토리용 <이름>-pull-story.jpg도 만든다
 //     - type: end               # '이번 주 질문'으로 질문을 다시 보여 주고 댓글을 청한다(ask로 문구 바꾸기)
 // 바탕색: 시사 글은 연한 녹색(#eef1ec), 책 글은 종이색(#f4ece0), 편집자 노트는 흰 종이(#fbfaf7)에 남색. 모든 카드 왼쪽 위에 같은 분류 표시.
@@ -132,12 +132,12 @@ body{width:1080px;height:1350px;background:var(--bg);font-family:"IBM Plex Sans 
 .nc-sub{font-size:34px;line-height:1.6;color:var(--sub);margin-top:44px;word-break:keep-all}
 .nc-by{font-family:"Gowun Batang",serif;font-size:32px;margin-top:auto;margin-bottom:40px}
 /* 수업 연계 */
-.ls-h{font-size:28px;font-weight:700;color:var(--ac);letter-spacing:.06em;margin-top:52px}
+.ls-h{font-size:28px;font-weight:700;color:var(--ac);letter-spacing:.06em;margin-top:40px}
 .ls-sub{list-style:none;padding:0;margin:18px 0 0}
-.ls-sub li{font-size:32px;line-height:1.5;padding:14px 0;border-bottom:1px solid var(--line);word-break:keep-all}
+.ls-sub li{font-size:30px;line-height:1.45;padding:10px 0;border-bottom:1px solid var(--line);word-break:keep-all}
 .ls-q{padding:0;margin:20px 0 0;counter-reset:q;list-style:none}
-.ls-q li{position:relative;padding:26px 30px 26px 92px;margin-bottom:20px;background:var(--card);border:1px solid var(--line);border-radius:14px;font-family:"Gowun Batang",serif;font-weight:700;font-size:36px;line-height:1.5;word-break:keep-all}
-.ls-q li:before{counter-increment:q;content:counter(q);position:absolute;left:30px;top:26px;width:44px;height:44px;border-radius:50%;background:var(--deep);color:#fff;font-family:"IBM Plex Mono",monospace;font-size:26px;display:grid;place-items:center}
+.ls-q li{position:relative;padding:20px 28px 20px 88px;margin-bottom:16px;background:var(--card);border:1px solid var(--line);border-radius:14px;font-family:"Gowun Batang",serif;font-weight:700;font-size:36px;line-height:1.5;word-break:keep-all}
+.ls-q li:before{counter-increment:q;content:counter(q);position:absolute;left:28px;top:22px;width:44px;height:44px;border-radius:50%;background:var(--deep);color:#fff;font-family:"IBM Plex Mono",monospace;font-size:26px;display:grid;place-items:center}
 /* 인용 전용: 단색 바탕에 2~3줄 */
 body.pull{background:var(--deep)}
 .pull .top .cat{background:rgba(255,255,255,.14)} .pull .top .page,.pull .foot{color:rgba(255,255,255,.75)} .pull .foot{border-top-color:rgba(255,255,255,.25)} .pull .foot .url{color:rgba(255,255,255,.9)}
@@ -157,6 +157,8 @@ const head = i => `<div class="top"><span class="cat">${esc(corner)}</span><span
 function page(i, inner, footLeft) {
   return `<div class="wrap">${head(i)}${inner}<div class="foot"><span>${esc(footLeft || '')}</span><span class="url">ethink.kr</span></div></div>`;
 }
+// 출처가 둘(예: 원전 · 교과서)이면 두 줄로 나눈다(2026-11-16 재형 님 지시)
+const srcLines = src => String(src).replace(/^출처:\s*/, '').split(/\s+·\s+(?=『)/).map(esc).join('<br>');
 function render(c, i) {
   const t = c.type;
   if (t === 'cover') {
@@ -171,7 +173,7 @@ function render(c, i) {
   const rich = l => esc(l).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>'); // **굵게**
   if (t === 'text') return page(i, `<p class="label">${esc(c.label)}</p>${pic}<div class="body">${c.big ? `<div><p class="big">${esc(c.big)}</p>${c.big_note ? `<p class="bignote">${esc(c.big_note)}</p>` : ''}</div>` : ''}${(c.lines || []).map(l => `<p class="line">${rich(l)}</p>`).join('')}</div>`);
   if (t === 'notes') return page(i, `<p class="label">${esc(c.label)}</p>${pic}<ol class="notes">${(c.lines || []).map(l => `<li>${rich(l)}</li>`).join('')}</ol>`);
-  if (t === 'quote') return page(i, `<p class="label">${esc(c.label || '사상가의 문장')}</p><div class="quote"><p class="t"${String(c.text).length > 150 ? ' style="font-size:32px"' : String(c.text).length > 95 ? ' style="font-size:35px"' : ''}>${esc(c.text)}</p>${c.who ? `<div class="who">${face(c.who)}<b>${esc(c.who)}</b></div>` : ''}${c.source ? `<p class="from">출처: ${esc(String(c.source).replace(/^출처:\s*/, ''))}</p>` : ''}</div>${c.note ? `<p class="qnote">${rich(c.note)}</p>` : ''}`);
+  if (t === 'quote') return page(i, `<p class="label">${esc(c.label || '사상가의 문장')}</p><div class="quote"><p class="t"${String(c.text).length > 150 ? ' style="font-size:32px"' : String(c.text).length > 95 ? ' style="font-size:35px"' : ''}>${esc(c.text)}</p>${c.who ? `<div class="who">${face(c.who)}<b>${esc(c.who)}</b></div>` : ''}${c.source ? `<p class="from">출처: ${srcLines(c.source)}</p>` : ''}</div>${c.note ? `<p class="qnote">${rich(c.note)}</p>` : ''}`);
   if (t === 'flow') return page(i, `<p class="label">${esc(c.label || '수업 흐름')}</p><ol class="flow">${(c.steps || []).slice(0, 4).map(([a, b]) => `<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join('')}</ol>`);
   if (t === 'compare') {
     const cell = (x, strong) => `<div class="cell${strong ? ' strong' : ''}"><h3>${esc(x.head)}</h3><p>${esc(x.text)}</p>${x.note ? `<p class="note">${esc(x.note)}</p>` : ''}</div>`;
@@ -184,15 +186,15 @@ function render(c, i) {
   }
   if (t === 'lesson') {
     const subs = c.subjects || fm.subjects || [];
-    return page(i, `<p class="label">${esc(c.label || '수업 연계')}</p><p class="ls-h">교과 연계</p><ul class="ls-sub">${subs.map(x => `<li>${esc(x)}</li>`).join('')}</ul><p class="ls-h">탐구 질문</p><ol class="ls-q">${(c.questions || []).slice(0, 2).map(q => `<li>${esc(q)}</li>`).join('')}</ol>`);
+    return page(i, `<p class="label">${esc(c.label || '수업 연계')}</p><p class="ls-h">교과 연계</p><ul class="ls-sub">${subs.map(x => `<li>${esc(x)}</li>`).join('')}</ul>${(c.cites || []).length ? `<p class="ls-h">인용</p><ul class="ls-sub">${c.cites.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}<p class="ls-h">탐구 질문</p><ol class="ls-q">${(c.questions || []).slice(0, 2).map(q => `<li>${esc(q)}</li>`).join('')}</ol>`);
   }
   if (t === 'pull') {
     const by = c.source && c.who && String(c.source).startsWith(c.who) ? c.source : [c.who, c.source].filter(Boolean).join(' · ');
-    return page(i, `<div class="pq"><p class="mk">“</p><p class="t" style="font-size:${String(c.text).length <= 30 ? 72 : String(c.text).length <= 50 ? 62 : 56}px">${esc(c.text).replace(/\n/g, '<br>')}</p>${by ? `<p class="by">— ${esc(by)}</p>` : ''}</div>`);
+    return page(i, `<div class="pq"><p class="mk">“</p><p class="t" style="font-size:${String(c.text).length <= 30 ? 72 : String(c.text).length <= 50 ? 62 : 56}px">${esc(c.text).replace(/\n/g, '<br>')}”</p>${by ? `<p class="by">— ${esc(by)}</p>` : ''}</div>`);
   }
   if (t === 'end') {
     const q = c.question || fm.question;
-    return page(i, `<p class="wk">이번 주 질문</p><p class="endq"><span class="hl">${esc(q)}</span></p><p class="ask">${esc(c.ask || '여러분의 생각을 댓글로 남겨 주세요. 한 줄이어도 좋습니다.')}</p><p class="cta">${c.cta ? esc(c.cta).replace(/\n/g, '<br>') : '전문과 수업 활동 예시는<br><b>프로필 링크 · ethink.kr</b>에서 읽을 수 있습니다.'}</p>`, '저장해 두고 다시 읽어 보세요');
+    return page(i, `<p class="wk">이번 주 질문</p><p class="endq"><span class="hl">${esc(q)}</span></p><p class="ask">${esc(c.ask || '여러분의 생각을 댓글로 남겨 주세요.')}</p><p class="cta">${c.cta ? esc(c.cta).replace(/\n/g, '<br>') : '전문과 수업 활동 예시는<br><b>프로필 링크 · ethink.kr</b>에서 읽을 수 있습니다.'}</p>`, '저장해 두고 다시 읽어 보세요');
   }
   throw new Error('알 수 없는 카드 종류: ' + t);
 }
