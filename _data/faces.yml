@@ -100,6 +100,9 @@
 - name: 강영안
   match: ["강영안"]
   initial: 강
+- name: 센
+  match: ["센", "아마티아 센", "아마르티아 센"]
+  initial: 센
 - name: 싱어
   match: ["싱어"]
   img: /assets/faces/singer.jpg
