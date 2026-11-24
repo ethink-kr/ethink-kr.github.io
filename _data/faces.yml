@@ -158,3 +158,9 @@
 - name: 정약용
   match: ["정약용"]
   initial: 정
+- name: 공자
+  match: ["공자"]
+  img: /assets/faces/confucius.jpg
+  credit: 「공자 행교상」, 전 오도자 그림(탁본)
+  license: 퍼블릭 도메인
+  url: https://commons.wikimedia.org/wiki/File:Confucius_Tang_Dynasty.jpg
